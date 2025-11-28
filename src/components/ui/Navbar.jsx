@@ -387,15 +387,27 @@ const Navbar = () => {
   const girl_New_IN = [
     { name: "All", path: "/Girl/NewIn/All", color: "text-gray-700" },
     { name: "Casual", path: "/Girl/NewIn/Lifestyle", color: "text-gray-700" },
-    { name: "New In Top", path: "/Girl/NewIn/NewInTop", color: "text-gray-700" },
+    {
+      name: "New In Top",
+      path: "/Girl/NewIn/NewInTop",
+      color: "text-gray-700",
+    },
   ];
   const girl_Clothing = [
     { name: "All", path: "/Girl/Clothing/All", color: "text-gray-700" },
     { name: "Shirts", path: "/Girl/Clothing/Tops", color: "text-gray-700" },
     { name: "Trousers", path: "/Girl/Clothing/Bras", color: "text-gray-700" },
     { name: "T-Shirts", path: "/Girl/Clothing/Shirts", color: "text-gray-700" },
-    { name: "Jackets", path: "/Girl/Clothing/T-Shirts", color: "text-gray-700" },
-    { name: "Shorts", path: "/Girl/Clothing/Cardigans", color: "text-gray-700" },
+    {
+      name: "Jackets",
+      path: "/Girl/Clothing/T-Shirts",
+      color: "text-gray-700",
+    },
+    {
+      name: "Shorts",
+      path: "/Girl/Clothing/Cardigans",
+      color: "text-gray-700",
+    },
   ];
   const girl_Shoes = [
     { name: "All", path: "/Girl/Shoes/All", color: "text-gray-700" },
@@ -413,7 +425,7 @@ const Navbar = () => {
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <div className="hidden lg:flex items-center gap-6">
           <NavigationMenu>
-            <NavigationMenuList className="flex gap-6 text-lg font-bold">
+            <NavigationMenuList className="flex gap-2 mr-3 text-lg font-bold">
               <NavigationMenuItem
                 className="relative group"
                 onMouseEnter={handleMouseEnter}

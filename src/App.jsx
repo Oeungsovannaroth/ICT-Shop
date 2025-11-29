@@ -1,17 +1,17 @@
-import { Route, Routes } from "react";
+import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/ui/Navbar";
-
+import Home from "./pages/Home"
 const App = () => {
   return (
     <>
       <nav>
         <Navbar />
       </nav>
-      {/* <main>
+      <main>
       <Routes>
-        <Route path="/" element={<Boy/>}></Route>
+        <Route path="/" element={<Home />}></Route>
       </Routes>
-    </main> */}
+    </main>
     </>
   );
 };

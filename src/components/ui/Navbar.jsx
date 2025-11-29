@@ -5,7 +5,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@radix-ui/react-navigation-menu";
-import { Link } from "react-router-dom";
+import { Link, Links } from "react-router-dom";
 import { MdOutlineSearch } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
 import { FiBell, FiMenu, FiX, FiChevronDown } from "react-icons/fi";
@@ -422,7 +422,7 @@ const Navbar = () => {
 
   return (
     <div className="w-full border-b bg-white">
-      <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <nav className="w-full max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <div className="hidden lg:flex items-center gap-6">
           <NavigationMenu>
             <NavigationMenuList className="flex gap-2 mr-3 text-lg font-bold">
@@ -683,7 +683,7 @@ const Navbar = () => {
                 </NavigationMenuLink>
                 <div className="absolute left-0 mt-8 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-opacity duration-2000 z-10 ">
                   {open && (
-                    <div className="grid grid-cols-6 gap-16 px-5 py-8 w-[1000px] transition-all duration-3000 z-10">
+                    <div className="grid grid-cols-4 gap-16 px-5 py-8 w-[1000px] transition-all duration-3000 z-10">
                       <div>
                         <h3 className="font-bold mb-3 text-xl">New In</h3>
                         <ul className="space-y-2 font-medium text-gray-700">
@@ -769,7 +769,7 @@ const Navbar = () => {
                 </NavigationMenuLink>
                 <div className="absolute left-0 mt-8 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-opacity duration-2000 z-10 ">
                   {open && (
-                    <div className="grid grid-cols-6 gap-25 px-5 py-8 w-[900px] transition-all duration-3000 z-10">
+                    <div className="grid grid-cols-4 gap-16 px-5 py-8 w-[900px] transition-all duration-3000 z-10">
                       <div>
                         <h3 className="font-bold mb-3 text-xl">New In</h3>
                         <ul className="space-y-2 font-medium text-gray-700">

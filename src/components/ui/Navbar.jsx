@@ -419,6 +419,7 @@ const Navbar = () => {
     { name: "Clothing", path: "/Girl/Sale/Shoes", color: "text-red-700" },
     { name: "Shoes", path: "/Girl/Sale/Shoes", color: "text-red-700" },
   ];
+ 
 
   return (
     <div className="w-full border-b bg-white">
@@ -930,6 +931,8 @@ const Navbar = () => {
           ))}
         </div>
       )}
+
+      
     </div>
   );
 };

@@ -1,6 +1,142 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 const Home = () => {
+  const banners = [
+    {
+      id: 1,
+      img: "https://as2.ftcdn.net/jpg/05/79/60/93/1000_F_579609325_n1w8k6pj47I3TMkcY0A6tGdIjLSoHEep.jpg",
+      title: "Summer Sale",
+      subtitle: "Up to 50% off",
+    },
+    {
+      id: 2,
+      img: "https://t3.ftcdn.net/jpg/05/75/66/88/360_F_575668898_05nhhqdSNoUtbnNcupJyRcDONlibzSHr.jpg",
+      title: "New Arrivals",
+      subtitle: "Check out our latest products",
+    },
+    {
+      id: 3,
+      img: "https://cdn.vectorstock.com/i/1000v/78/66/free-shipping-day-banner-vector-28077866.jpg",
+      title: "Limited Offer",
+      subtitle: "Hurry before it's gone!",
+    },
+    {
+      id: 4,
+      img: "https://www.mbaazar.in/wp-content/uploads/2024/12/10-Dec-blog-02-banner.png",
+      title: "Winter Collection",
+      subtitle: "Stay cozy and stylish",
+    },
+  ];
+
+  const [current, setCurrent] = useState(0);
+  const length = banners.length;
+
+  // Auto Slide
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev === length - 1 ? 0 : prev + 1));
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [length]);
+  const nextSlide = () => setCurrent(current === length - 1 ? 0 : current + 1);
+  const prevSlide = () => setCurrent(current === 0 ? length - 1 : current - 1);
+
+  const products = [
+    {
+      name: "Nike Odyssey React Shield",
+      price: 130,
+      frontImg:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01a.png",
+      backImg:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01b.png",
+    },
+    {
+      name: "LeBron 16",
+      price: 185,
+      frontImg:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02a.png",
+      backImg:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02b.png",
+    },
+    {
+      name: "Nike Epic React Flyknit",
+      price: 150,
+      frontImg:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03a.png",
+      backImg:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03b.png",
+    },
+    {
+      name: "Nike Air Max 97 Premium",
+      price: 180,
+      frontImg:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04a.png",
+      backImg:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04b.png",
+    },
+    {
+      name: "Nike Free RN Motion Flyknit 2018",
+      price: 150,
+      frontImg:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05a.png",
+      backImg:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05b.png",
+    },
+    {
+      name: "Nike Free RN Flyknit 2018",
+      price: 120,
+      frontImg:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06a.png",
+      backImg:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06b.png",
+    },
+  ];
+  // const shoes = [
+  //   {
+  //     name: "Nike Odyssey React Shield",
+  //     price: 130,
+  //     discount: 12,
+  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01a.png",
+  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01b.png",
+  //   },
+  //   {
+  //     name: "LeBron 16",
+  //     price: 185,
+  //     discount: 12,
+  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02a.png",
+  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02b.png",
+  //   },
+  //   {
+  //     name: "Nike Epic React Flyknit",
+  //     price: 150,
+  //     discount: 12,
+  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03a.png",
+  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03b.png",
+  //   },
+  //   {
+  //     name: "Nike Air Max 97 Premium",
+  //     price: 180,
+  //     discount: 12,
+  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04a.png",
+  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04b.png",
+  //   },
+  //   {
+  //     name: "Nike Free RN Motion Flyknit 2018",
+  //     price: 150,
+  //     discount: 12,
+  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05a.png",
+  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05b.png",
+  //   },
+  //   {
+  //     name: "Nike Free RN Flyknit 2018",
+  //     price: 120,
+  //     discount: 12,
+  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06a.png",
+  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06b.png",
+  //   },
+  // ];
+
   return (
     <div className="pt-2">
       <section className="relative w-full">
@@ -28,47 +164,172 @@ const Home = () => {
       </section>
 
       <section className="w-full bg-white py-8">
-  <div
-    className="
+        <div
+          className="
       max-w-7xl mx-auto 
       flex flex-wrap 
       items-center 
       justify-center md:justify-between
       gap-6
     "
-  >
-    <button className="text-xl hover:bg-gray-200 px-2 py-4 md:text-2xl lg:text-3xl font-semibold tracking-wide hover:opacity-70">
-      <Link to="/zando">ZANDO.</Link>
-    </button>
+        >
+          <button className="text-xl hover:bg-gray-200 px-2 py-4 md:text-2xl lg:text-3xl font-semibold tracking-wide hover:opacity-70">
+            <Link to="/zando">ZANDO.</Link>
+          </button>
 
-    <button className="text-xl hover:bg-gray-200 px-2 py-4 md:text-2xl lg:text-3xl font-bold tracking-wide hover:opacity-70">
-      <Link to="/ten11">TEN ELEVEN</Link>
-    </button>
+          <button className="text-xl hover:bg-gray-200 px-2 py-4 md:text-2xl lg:text-3xl font-bold tracking-wide hover:opacity-70">
+            <Link to="/ten11">TEN ELEVEN</Link>
+          </button>
 
-    <button className="text-xl hover:bg-gray-200 px-2 py-4 md:text-2xl lg:text-3xl font-semibold hover:opacity-70">
-      <Link to="/routine">ROUTINE</Link>
-    </button>
+          <button className="text-xl hover:bg-gray-200 px-2 py-4 md:text-2xl lg:text-3xl font-semibold hover:opacity-70">
+            <Link to="/routine">ROUTINE</Link>
+          </button>
 
-    <button className="text-xl hover:bg-gray-200 px-2 py-4 md:text-2xl lg:text-3xl font-semibold hover:opacity-70">
-      <Link to="/gatoni">GATONI</Link>
-    </button>
+          <button className="text-xl hover:bg-gray-200 px-2 py-4 md:text-2xl lg:text-3xl font-semibold hover:opacity-70">
+            <Link to="/gatoni">GATONI</Link>
+          </button>
 
-    <button className="text-xl hover:bg-gray-200 px-2 py-4 md:text-2xl lg:text-3xl font-semibold hover:opacity-70">
-      <Link to="/361-sport">
-        361<sup>°</sup>
-      </Link>
-    </button>
+          <button className="text-xl hover:bg-gray-200 px-2 py-4 md:text-2xl lg:text-3xl font-semibold hover:opacity-70">
+            <Link to="/361-sport">
+              361<sup>°</sup>
+            </Link>
+          </button>
 
-    <button className="text-xl hover:bg-gray-200 px-2 py-4 md:text-2xl lg:text-3xl hover:opacity-70">
-      <Link to="/sisburma">SISBURMA</Link>
-    </button>
+          <button className="text-xl hover:bg-gray-200 px-2 py-4 md:text-2xl lg:text-3xl hover:opacity-70">
+            <Link to="/sisburma">SISBURMA</Link>
+          </button>
 
-    <button className="text-xl hover:bg-gray-200 px-2 py-4 md:text-2xl lg:text-3xl font-semibold font-serif hover:opacity-70">
-      <Link to="/pomelo">POMELO.</Link>
-    </button>
-  </div>
-</section>
+          <button className="text-xl hover:bg-gray-200 px-2 py-4 md:text-2xl lg:text-3xl font-semibold font-serif hover:opacity-70">
+            <Link to="/pomelo">POMELO.</Link>
+          </button>
+        </div>
+      </section>
+      {/* SlideSHow */}
+      <section className="my-8">
+        <div className="relative w-full max-w-8xl mx-auto overflow-hidden rounded-lg h-64 md:h-160">
+          {banners.map((banner, index) => (
+            <div
+              key={banner.id}
+              className={`absolute inset-0 transition-opacity duration-700 ${
+                index === current
+                  ? "opacity-100 z-10"
+                  : "opacity-0 z-0 pointer-events-none"
+              }`}
+            >
+              <img
+                src={banner.img}
+                alt={banner.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-white">
+                <h2 className="text-2xl md:text-4xl font-bold">
+                  {banner.title}
+                </h2>
+                <p className="text-sm md:text-lg mt-2">{banner.subtitle}</p>
+              </div>
+            </div>
+          ))}
 
+          <button
+            onClick={prevSlide}
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 text-black p-2 rounded-full hover:bg-white z-20"
+          >
+            &#10094;
+          </button>
+
+          <button
+            onClick={nextSlide}
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 text-black p-2 rounded-full hover:bg-white z-20"
+          >
+            &#10095;
+          </button>
+        </div>
+      </section>
+
+      {/* big card */}
+      <section>
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {products.map((item, index) => (
+            <div key={index} className="flex flex-col items-center w-full">
+              <div
+                className="w-full bg-whiteshadow-lg rounded-xl p-4 flex flex-col items-center
+                        block md:block lg:hidden"
+              >
+                <img src={item.frontImg} className="w-40 mb-4" />
+                <h2 className="font-semibold text-lg text-center">
+                  {item.name}
+                </h2>
+                <p className="text-gray-600 text-sm">${item.price}</p>
+                <button className="mt-4 px-4 py-2 bg-black text-white rounded-full w-full">
+                  Buy Now
+                </button>
+              </div>
+
+              <div className="hidden md:flex w-full group perspective cursor-pointer mt-4 lg:flex">
+                <div className="relative w-full h-80 transition-transform duration-500 transform-style-preserve-3d group-hover:rotate-y-180">
+                  <div className="absolute inset-0 bg-white shadow-lg rounded-xl flex flex-col items-center justify-center p-4 backface-hidden">
+                    <img src={item.frontImg} className="w-40 mb-4" />
+                    <h2 className="font-semibold text-lg text-center">
+                      {item.name}
+                    </h2>
+                    <p className="text-gray-600 text-sm">${item.price}</p>
+                  </div>
+
+                  <div className="absolute inset-0 bg-white shadow-xl rounded-xl flex flex-col items-center justify-center p-4 rotate-y-180 backface-hidden">
+                    <img src={item.backImg} className="w-44 mb-4" />
+                    <button className="mt-4 px-4 py-2 bg-black text-white rounded-full">
+                      Buy Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      
+      {/* shoes */}
+      {/* <section>
+        <div className="w-full min-h-screen bg-neutral-100 py-10 px-6">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+            {shoes.map((shoe, index) => (
+              <li
+                key={index}
+                className="relative group h-80 bg-gray-200 rounded-2xl shadow-xl overflow-hidden hover:z-10 transition-all"
+              >
+                <div className="absolute inset-0 bg-[#DADDDF] rounded-2xl shadow-inner border border-gray-200 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 -translate-x-1/2 top-1/2 -translate-y-1/2 rotate-[-45deg"></div>
+
+                <h2 className="absolute w-full text-center left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 rotate-[-45deg] bg-white px-3 py-1 text-lg font-semibold transition-all duration-300 group-hover:top-[65%]">
+                  {shoe.name}
+                </h2>
+
+                <p className="absolute top-3 left-3 bg-white px-2 py-1 text-sm font-medium">
+                  ${shoe.price}
+                </p>
+
+                <p className="absolute bottom-3 right-3 text-red-700  bg-white px-2 py-1 text-sm font-semibold rotate-0">
+                  ${shoe.discount}
+                </p>
+
+                <img
+                  src={shoe.img1}
+                  alt=""
+                  className="absolute w-[80%] top-1/2 left-1/2 -translate-x-[70%] -translate-y-[105%] rotate-[-45deg] 
+                         transition-all duration-300 group-hover:w-[120%] group-hover:-translate-y-[75%]"
+                />
+
+                <img
+                  src={shoe.img2}
+                  alt=""
+                  className="absolute w-[80%] top-1/2 left-1/2 translate-x-[-30%] translate-y-[5%] rotate-[135deg]
+                         transition-all duration-300 group-hover:w-[60%] group-hover:translate-x-[-15%] group-hover:translate-y-[60%]"
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section> */}
     </div>
   );
 };

@@ -4,26 +4,26 @@ const Home = () => {
   const banners = [
     {
       id: 1,
-      img: "https://as2.ftcdn.net/jpg/05/79/60/93/1000_F_579609325_n1w8k6pj47I3TMkcY0A6tGdIjLSoHEep.jpg",
-      title: "Summer Sale",
-      subtitle: "Up to 50% off",
+      img: "https://d3jmn01ri1fzgl.cloudfront.net/photoadking/webp_thumbnail/shark-new-collection-sale-clothing-banner-template-p3ztild89dffd0.webp",
+      title: "NEW COLLECTION",
+      subtitle: "Up to 7x0% off",
     },
     {
       id: 2,
-      img: "https://t3.ftcdn.net/jpg/05/75/66/88/360_F_575668898_05nhhqdSNoUtbnNcupJyRcDONlibzSHr.jpg",
-      title: "New Arrivals",
+      img: "https://cdn.venngage.com/template/thumbnail/full/4a4561e3-bada-4f2b-898f-60f8fdb0c8c3.webp",
+      title: "NEW ARRIVALS",
       subtitle: "Check out our latest products",
     },
     {
       id: 3,
-      img: "https://cdn.vectorstock.com/i/1000v/78/66/free-shipping-day-banner-vector-28077866.jpg",
-      title: "Limited Offer",
+      img: "https://cdn.venngage.com/template/thumbnail/small/01b644bd-e75b-4e70-b476-3a786261f066.webp",
+      title: "LIMITED OFFER",
       subtitle: "Hurry before it's gone!",
     },
     {
       id: 4,
       img: "https://www.mbaazar.in/wp-content/uploads/2024/12/10-Dec-blog-02-banner.png",
-      title: "Winter Collection",
+      title: "WINTER COLLECTION",
       subtitle: "Stay cozy and stylish",
     },
   ];
@@ -44,54 +44,68 @@ const Home = () => {
 
   const products = [
     {
-      name: "Nike Odyssey React Shield",
-      price: 130,
+      name: "LIFESTYLE",
+     
       frontImg:
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01a.png",
+        "https://i.pinimg.com/736x/bf/da/4a/bfda4aee91c4273984ca28d1f87116c8.jpg",
       backImg:
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01b.png",
+        "https://i.pinimg.com/736x/24/f2/00/24f200348979523116dc3b7f4d0e5a0c.jpg",
     },
     {
-      name: "LeBron 16",
-      price: 185,
+      name: "SPORTLIFE",
+     
       frontImg:
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02a.png",
+        "https://i.pinimg.com/736x/5a/54/ae/5a54aede23a2cd869d9d93b3cf4a4d68.jpg",
       backImg:
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02b.png",
+        "https://i.pinimg.com/736x/4b/45/b3/4b45b32417b475a47d4e60dc7aa4a082.jpg",
     },
     {
-      name: "Nike Epic React Flyknit",
-      price: 150,
+      name: "SMART CASUAL",
+     
       frontImg:
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03a.png",
+        "https://i.pinimg.com/736x/4d/6c/eb/4d6ceb25ed5e5653319f5d58150575e4.jpg",
       backImg:
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03b.png",
+        "https://i.pinimg.com/736x/20/90/9a/20909a88c6adc72e3c745519ffd2f61c.jpg",
     },
     {
-      name: "Nike Air Max 97 Premium",
-      price: 180,
+      name: "TOPS",
+    
       frontImg:
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04a.png",
+        "https://koreanstyle-shop.com/cdn/shop/products/korean-outfit-suit-jacket-and-skirt_1080x.jpg?v=1627279686",
       backImg:
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04b.png",
+        "https://koreanstyle-shop.com/cdn/shop/products/korean-outfit-plaid-suit_480x480.jpg?v=1627279578",
     },
     {
-      name: "Nike Free RN Motion Flyknit 2018",
-      price: 150,
+      name: "BOTTOMS",
+     
       frontImg:
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05a.png",
+        "https://ae-pic-a1.aliexpress-media.com/kf/S2a9c35e6869c4a8db64b81d2cfc8404cH/Summer-Mini-Dress-for-Women-Girl-Korean-Fashion-Short-Clothes-Clothing-Japanese-Preppy-Style-Student-Short.jpg_640x640Q90.jpg_.webp",
       backImg:
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05b.png",
+        "https://i.pinimg.com/736x/f9/a9/38/f9a9386345e6ecd420db7b404f478bdf.jpg",
     },
     {
-      name: "Nike Free RN Flyknit 2018",
-      price: 120,
+      name: "DRIFT-HALF",
+     
       frontImg:
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06a.png",
+        "https://i.pinimg.com/736x/50/80/cb/5080cbaa91f6451601401e7147e9360d.jpg",
       backImg:
-        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06b.png",
+        "https://cdn.shopify.com/s/files/1/0767/5032/3991/files/Softboy7_480x480.jpg?v=1736066369",
     },
   ];
+  useEffect(() => {
+    const elements = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target); // animate only once
+        }
+      });
+    });
+
+    elements.forEach((el) => observer.observe(el));
+  }, []);
   // const shoes = [
   //   {
   //     name: "Nike Odyssey React Shield",
@@ -206,7 +220,7 @@ const Home = () => {
       </section>
       {/* SlideSHow */}
       <section className="my-8">
-        <div className="relative w-full max-w-8xl mx-auto overflow-hidden rounded-lg h-64 md:h-160">
+        <div className="relative w-full max-w-7xl mx-auto overflow-hidden rounded-lg h-64 md:h-90">
           {banners.map((banner, index) => (
             <div
               key={banner.id}
@@ -221,7 +235,7 @@ const Home = () => {
                 alt={banner.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-white">
+              <div className="absolute inset-0 bg-black/25 flex flex-col items-center justify-center text-white">
                 <h2 className="text-2xl md:text-4xl font-bold">
                   {banner.title}
                 </h2>
@@ -251,32 +265,44 @@ const Home = () => {
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {products.map((item, index) => (
             <div key={index} className="flex flex-col items-center w-full">
+              {/* MOBILE CARD */}
               <div
-                className="w-full bg-whiteshadow-lg rounded-xl p-4 flex flex-col items-center
-                        block md:block lg:hidden"
+                className="
+            reveal opacity-0 translate-y-10 transition-all duration-700 ease-out
+            w-full bg-white shadow-lg rounded-xl p-4 flex flex-col items-center
+            block md:block lg:hidden
+          "
               >
-                <img src={item.frontImg} className="w-40 mb-4" />
+                <img src={item.frontImg} className="rounded-lg mb-4" />
                 <h2 className="font-semibold text-lg text-center">
                   {item.name}
                 </h2>
-                <p className="text-gray-600 text-sm">${item.price}</p>
+
                 <button className="mt-4 px-4 py-2 bg-black text-white rounded-full w-full">
                   Buy Now
                 </button>
               </div>
 
-              <div className="hidden md:flex w-full group perspective cursor-pointer mt-4 lg:flex">
-                <div className="relative w-full h-80 transition-transform duration-500 transform-style-preserve-3d group-hover:rotate-y-180">
-                  <div className="absolute inset-0 bg-white shadow-lg rounded-xl flex flex-col items-center justify-center p-4 backface-hidden">
-                    <img src={item.frontImg} className="w-40 mb-4" />
-                    <h2 className="font-semibold text-lg text-center">
+              {/* DESKTOP FLIP CARD */}
+              <div
+                className="
+            reveal opacity-0 translate-y-10 transition-all duration-700 ease-out
+            hidden md:flex w-full group perspective cursor-pointer mt-4 lg:flex
+          "
+              >
+                <div className="relative w-full h-150 transition-transform duration-500 transform-style-preserve-3d group-hover:rotate-y-180">
+                  <div className="absolute inset-0  flex flex-col items-center justify-center p-4 backface-hidden">
+                    <img
+                      src={item.frontImg}
+                      className="w-100 h-150 rounded-lg mb-4"
+                    />
+                    <h2 className="absolute font-bold text-2xl bottom-25 bg-black px-2 py-3 text-white border-4 text-center">
                       {item.name}
                     </h2>
-                    <p className="text-gray-600 text-sm">${item.price}</p>
                   </div>
 
-                  <div className="absolute inset-0 bg-white shadow-xl rounded-xl flex flex-col items-center justify-center p-4 rotate-y-180 backface-hidden">
-                    <img src={item.backImg} className="w-44 mb-4" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4 rotate-y-180 backface-hidden">
+                    <img src={item.backImg} className="w-100 h-150 rounded-lg mb-4" />
                     <button className="mt-4 px-4 py-2 bg-black text-white rounded-full">
                       Buy Now
                     </button>
@@ -288,7 +314,6 @@ const Home = () => {
         </div>
       </section>
 
-      
       {/* shoes */}
       {/* <section>
         <div className="w-full min-h-screen bg-neutral-100 py-10 px-6">
@@ -309,7 +334,7 @@ const Home = () => {
                 </p>
 
                 <p className="absolute bottom-3 right-3 text-red-700  bg-white px-2 py-1 text-sm font-semibold rotate-0">
-                  ${shoe.discount}
+                  {shoe.discount} %
                 </p>
 
                 <img

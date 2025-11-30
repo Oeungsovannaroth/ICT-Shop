@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
     content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+    safelist: [
+        "opacity-100",
+        "translate-y-0"
+    ],
     theme: {
         extend: {
             rotate: {

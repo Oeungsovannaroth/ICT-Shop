@@ -16,10 +16,10 @@ const Footer = () => {
     <div>
       <footer className="w-full bg-white border-t pt-10 pb-6 text-gray-800">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10 px-4">
-          {/* ZANDO APP */}
+          {/* ict APP */}
           <div>
-            <h3 className="font-bold mb-3">ICT APP</h3>
-            <img src="/qr-code.png" alt="QR Code" className="w-28 h-28" />
+            <h3 className="font-bold mb-3"></h3>
+            <img src="/public/icon.png" alt="QR Code" className="w-28 h-28" />
           </div>
 
           {/* LOYALTY */}
@@ -28,7 +28,7 @@ const Footer = () => {
             <p className="flex items-center gap-2">
               <span>
                 <MdCardMembership />
-              </span>{" "}
+              </span>
               Membership & Benefits
             </p>
           </div>
@@ -89,14 +89,14 @@ const Footer = () => {
           <h3 className="font-bold mb-3">WE ACCEPT</h3>
           <div className="flex flex-wrap items-center gap-4">
             {/* Replace with your actual payment images */}
-            <img src="/pay-aba.png" className="h-8" alt="ABA Pay" />
-            <img src="/visa.png" className="h-8" alt="Visa" />
-            <img src="/mastercard.png" className="h-8" alt="MasterCard" />
-            <img src="/unionpay.png" className="h-8" alt="UnionPay" />
-            <img src="/jcb.png" className="h-8" alt="JCB" />
-            <img src="/wing.png" className="h-8" alt="Wing Bank" />
-            <img src="/bank.png" className="h-8" alt="Bank Transfer" />
-            <img src="/cash.png" className="h-8" alt="Cash on Delivery" />
+            <img src="https://super-duper.biz/wp-content/uploads/Untitled-1.jpg" className="h-8" alt="ABA Pay" />
+            <img src="https://m.eyeofriyadh.com/news_images/2020/07/1c58492c218f6.jpg" className="h-8" alt="Visa" />
+            <img src="https://p7.hiclipart.com/preview/130/79/694/mastercard-credit-card-mastercard-logo-png.jpg" className="h-8" alt="MasterCard" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UnionPay_logo.svg/1200px-UnionPay_logo.svg.png" className="h-8" alt="UnionPay" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/JCB_logo.svg/1200px-JCB_logo.svg.png" className="h-8" alt="JCB" />
+            <img src="https://hrincjobs-pro.s3.amazonaws.com/media/public/filer_public/b2/44/b2445f30-f856-4958-8b21-c76754717a1a/wing.png" className="h-8" alt="Wing Bank" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSOYT7e94q9uJr9eaV4bXs0VJEWkhgpSA4bpdlrirzBpXZJkEIPstB5Nbe_4LtmMQ0Z9g&usqp=CAU" className="h-8" alt="Bank Transfer" />
+            <img src="https://support.sitegiant.com/wp-content/uploads/2022/08/cash-on-delivery-banner.png" className="h-8" alt="Cash on Delivery" />
           </div>
         </div>
 

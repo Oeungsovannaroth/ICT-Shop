@@ -19,7 +19,7 @@ const Footer = () => {
           {/* ict APP */}
           <div>
             <h3 className="font-bold mb-3"></h3>
-            <img src="/public/icon.png" alt="QR Code" className="w-28 h-28" />
+            <img src="https://scontent.fpnh18-3.fna.fbcdn.net/v/t39.30808-6/386337110_122114809652041828_7604319868514101642_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=5DnGvGQO3soQ7kNvwFEckIx&_nc_oc=AdkM36p9GLgk5SVam0XufNHqB42518ppgvnbVeeQu6Q_9O7LQNKZOHHWRJYnQ6a-T2w&_nc_zt=23&_nc_ht=scontent.fpnh18-3.fna&_nc_gid=yat-j2ek7d_xRX19KubdCA&oh=00_Afg4UsGDDkivKaE5btLUnQ3_Pp9IPQxh-LgYNtMAGbeT3g&oe=6933861F" alt="QR Code" className="w-28 h-28" />
           </div>
 
           {/* LOYALTY */}

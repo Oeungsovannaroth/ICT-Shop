@@ -39,13 +39,13 @@ const Home = () => {
 
     return () => clearInterval(interval);
   }, [length]);
-  const nextSlide = () => setCurrent(current === length - 1 ? 0 : current + 1);
-  const prevSlide = () => setCurrent(current === 0 ? length - 1 : current - 1);
+  // const nextSlide = () => setCurrent(current === length - 1 ? 0 : current + 1);
+  // const prevSlide = () => setCurrent(current === 0 ? length - 1 : current - 1);
 
   const products = [
     {
       name: "LIFESTYLE",
-     
+
       frontImg:
         "https://i.pinimg.com/736x/bf/da/4a/bfda4aee91c4273984ca28d1f87116c8.jpg",
       backImg:
@@ -53,7 +53,7 @@ const Home = () => {
     },
     {
       name: "SPORTLIFE",
-     
+
       frontImg:
         "https://i.pinimg.com/736x/5a/54/ae/5a54aede23a2cd869d9d93b3cf4a4d68.jpg",
       backImg:
@@ -61,7 +61,7 @@ const Home = () => {
     },
     {
       name: "SMART CASUAL",
-     
+
       frontImg:
         "https://i.pinimg.com/736x/4d/6c/eb/4d6ceb25ed5e5653319f5d58150575e4.jpg",
       backImg:
@@ -69,7 +69,7 @@ const Home = () => {
     },
     {
       name: "TOPS",
-    
+
       frontImg:
         "https://koreanstyle-shop.com/cdn/shop/products/korean-outfit-suit-jacket-and-skirt_1080x.jpg?v=1627279686",
       backImg:
@@ -77,7 +77,7 @@ const Home = () => {
     },
     {
       name: "BOTTOMS",
-     
+
       frontImg:
         "https://ae-pic-a1.aliexpress-media.com/kf/S2a9c35e6869c4a8db64b81d2cfc8404cH/Summer-Mini-Dress-for-Women-Girl-Korean-Fashion-Short-Clothes-Clothing-Japanese-Preppy-Style-Student-Short.jpg_640x640Q90.jpg_.webp",
       backImg:
@@ -85,7 +85,7 @@ const Home = () => {
     },
     {
       name: "DRIFT-HALF",
-     
+
       frontImg:
         "https://i.pinimg.com/736x/50/80/cb/5080cbaa91f6451601401e7147e9360d.jpg",
       backImg:
@@ -106,50 +106,124 @@ const Home = () => {
 
     elements.forEach((el) => observer.observe(el));
   }, []);
-  // const shoes = [
-  //   {
-  //     name: "Nike Odyssey React Shield",
-  //     price: 130,
-  //     discount: 12,
-  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01a.png",
-  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01b.png",
-  //   },
-  //   {
-  //     name: "LeBron 16",
-  //     price: 185,
-  //     discount: 12,
-  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02a.png",
-  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02b.png",
-  //   },
-  //   {
-  //     name: "Nike Epic React Flyknit",
-  //     price: 150,
-  //     discount: 12,
-  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03a.png",
-  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03b.png",
-  //   },
-  //   {
-  //     name: "Nike Air Max 97 Premium",
-  //     price: 180,
-  //     discount: 12,
-  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04a.png",
-  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04b.png",
-  //   },
-  //   {
-  //     name: "Nike Free RN Motion Flyknit 2018",
-  //     price: 150,
-  //     discount: 12,
-  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05a.png",
-  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05b.png",
-  //   },
-  //   {
-  //     name: "Nike Free RN Flyknit 2018",
-  //     price: 120,
-  //     discount: 12,
-  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06a.png",
-  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06b.png",
-  //   },
-  // ];
+  const shoes = [
+    {
+      name: "Nike Odyssey React Shield",
+      price: 130,
+      discount: 35,
+      description: "TEN11/NEW IN",
+      img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01a.png",
+      img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01b.png",
+    },
+    {
+      name: "LeBron 16",
+      price: 185,
+      discount: 35,
+      description: "TEN11/NEW IN",
+      img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02a.png",
+      img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02b.png",
+    },
+    {
+      name: "Nike Epic React Flyknit",
+      price: 150,
+      discount: 35,
+      description: "TEN11/NEW IN",
+      img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03a.png",
+      img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03b.png",
+    },
+    {
+      name: "Nike Air Max 97 Premium",
+      price: 180,
+      discount: 35,
+      description: "TEN11/NEW IN",
+      img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04a.png",
+      img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04b.png",
+    },
+    {
+      name: "Nike Free RN Motion Flyknit 2018",
+      price: 150,
+      discount: 35,
+      description: "TEN11/NEW IN",
+      img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05a.png",
+      img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05b.png",
+    },
+    {
+      name: "Nike Free RN Flyknit 2018",
+      price: 120,
+      discount: 35,
+      description: "361 SPORT",
+      img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06a.png",
+      img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06b.png",
+    },
+  ];
+  const productsLiftStyle = [
+    {
+      id: 1,
+      img: "https://zandokh.com/image/catalog/products/2025-07/22225031216/Untitled%20Session1152.jpg",
+      name: "Lace Trim Tops",
+      price: 8.97,
+      oldPrice: 14.95,
+      discount: "-40%",
+    },
+    {
+      id: 2,
+      img: "https://thechicsavvy.com/wp-content/uploads/2024/12/Lace-skirt-outfits3-765x1024.webp",
+      name: "Mexi Lace Skirt",
+      price: 11.15,
+      oldPrice: 18.59,
+      discount: "-40%",
+    },
+    {
+      id: 3,
+      img: "https://zandokh.com/image/catalog/products/2025-09/21225061350/SR__1143.jpg",
+      name: "Regular T-Shirts With Printed",
+      price: 8.75,
+      oldPrice: 14.59,
+      discount: "-40%",
+    },
+    {
+      id: 4,
+      img: "https://www.alcott.eu/dw/image/v2/BDJZ_PRD/on/demandware.static/-/Sites-catalog-alcott-master/default/dw2a6dd878/hi-res/5T3583DOY12_C272_001.jpg?sw=1000&sh=1350&q=90&strip=false",
+      name: "Balloon Denim Jean",
+      price: 13.77,
+      oldPrice: 22.95,
+      discount: "-40%",
+    },
+  ];
+  const Q_Drift=[
+     {
+      id: 1,
+      img: "https://zandokh.com/image/catalog/products/2025-07/22225031216/Untitled%20Session1152.jpg",
+      name: "Lace Trim Tops",
+      price: 8.97,
+      oldPrice: 14.95,
+      discount: "-40%",
+    },
+    {
+      id: 2,
+      img: "https://thechicsavvy.com/wp-content/uploads/2024/12/Lace-skirt-outfits3-765x1024.webp",
+      name: "Mexi Lace Skirt",
+      price: 11.15,
+      oldPrice: 18.59,
+      discount: "-40%",
+    },
+    {
+      id: 3,
+      img: "https://zandokh.com/image/catalog/products/2025-09/21225061350/SR__1143.jpg",
+      name: "Regular T-Shirts With Printed",
+      price: 8.75,
+      oldPrice: 14.59,
+      discount: "-40%",
+    },
+    {
+      id: 4,
+      img: "https://www.alcott.eu/dw/image/v2/BDJZ_PRD/on/demandware.static/-/Sites-catalog-alcott-master/default/dw2a6dd878/hi-res/5T3583DOY12_C272_001.jpg?sw=1000&sh=1350&q=90&strip=false",
+      name: "Balloon Denim Jean",
+      price: 13.77,
+      oldPrice: 22.95,
+      discount: "-40%",
+    },
+  ]
 
   return (
     <div className="pt-2">
@@ -244,7 +318,7 @@ const Home = () => {
             </div>
           ))}
 
-          <button
+          {/* <button
             onClick={prevSlide}
             className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 text-black p-2 rounded-full hover:bg-white z-20"
           >
@@ -256,7 +330,7 @@ const Home = () => {
             className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 text-black p-2 rounded-full hover:bg-white z-20"
           >
             &#10095;
-          </button>
+          </button> */}
         </div>
       </section>
 
@@ -302,7 +376,10 @@ const Home = () => {
                   </div>
 
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-4 rotate-y-180 backface-hidden">
-                    <img src={item.backImg} className="w-100 h-150 rounded-lg mb-4" />
+                    <img
+                      src={item.backImg}
+                      className="w-100 h-150 rounded-lg mb-4"
+                    />
                     <button className="mt-4 px-4 py-2 bg-black text-white rounded-full">
                       Buy Now
                     </button>
@@ -315,15 +392,25 @@ const Home = () => {
       </section>
 
       {/* shoes */}
-      {/* <section>
-        <div className="w-full min-h-screen bg-neutral-100 py-10 px-6">
-          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+      <section className="mt-25 max-w-7xl mx-auto">
+        <div className="flex justify-between font-bold mb-5">
+          <span className="lg:text-4xl sm:text-sm lg:ml-5">
+            Daily Shoe Essentials
+          </span>
+          <span>
+            <button className="cursor-pointer hover:bg-gray-100 lg:px-3 lg:py-4 sm:text-sm text-sm text-blue-500 font-semibold hover:underline hover:text-pink-500">
+              SHOP MORE
+            </button>
+          </span>
+        </div>
+        <div className="w-full min-h-screen py-10 px-6">
+          <ul className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {shoes.map((shoe, index) => (
               <li
                 key={index}
-                className="relative group h-80 bg-gray-200 rounded-2xl shadow-xl overflow-hidden hover:z-10 transition-all"
+                className="relative group h-120 bg-gray-100 rounded-2xl shadow-xl overflow-hidden hover:z-10 transition-all"
               >
-                <div className="absolute inset-0 bg-[#DADDDF] rounded-2xl shadow-inner border border-gray-200 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 -translate-x-1/2 top-1/2 -translate-y-1/2 rotate-[-45deg"></div>
+                <div className="absolute inset-0 bg-[#e8ebee] rounded-2xl shadow-inner border border-gray-200 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 -translate-x-1/2 top-1/2 -translate-y-1/2 rotate-[-45deg"></div>
 
                 <h2 className="absolute w-full text-center left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 rotate-[-45deg] bg-white px-3 py-1 text-lg font-semibold transition-all duration-300 group-hover:top-[65%]">
                   {shoe.name}
@@ -333,8 +420,11 @@ const Home = () => {
                   ${shoe.price}
                 </p>
 
-                <p className="absolute bottom-3 right-3 text-red-700  bg-white px-2 py-1 text-sm font-semibold rotate-0">
-                  {shoe.discount} %
+                <p className="absolute top-3 right-3 text-red-700  bg-white px-2 py-1 text-sm font-semibold rotate-0">
+                  -{shoe.discount} %
+                </p>
+                <p className="absolute bottom-3 right-5 text-red-800 rounded-md bg-white px-2 py-1 text-sm font-bold">
+                  {shoe.description}
                 </p>
 
                 <img
@@ -354,7 +444,105 @@ const Home = () => {
             ))}
           </ul>
         </div>
-      </section> */}
+      </section>
+      {/* productLifeStyle */}
+      <section className="w-full py-10">
+        {/* Header */}
+        <div className="flex justify-between items-center max-w-7xl mx-auto px-4">
+          <h2 className="text-4xl font-bold flex items-center gap-2">
+            Lifestyle Must-Haves ✨
+          </h2>
+          <a
+            href="#"
+            className="cursor-pointer hover:bg-gray-100 lg:px-3 lg:py-4 sm:text-sm text-sm text-blue-500 font-semibold hover:underline hover:text-pink-500"
+          >
+            Shop More
+          </a>
+        </div>
+
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto px-4 mt-6">
+          {productsLiftStyle.map((item, index) => (
+            <div key={index} className="flex flex-col">
+              {/* Image Container */}
+              <div className="relative w-full overflow-hidden rounded-xl cursor-pointer">
+                {/* Discount Badge */}
+                <span className="absolute top-3 left-3 bg-red-500 text-white text-sm px-2 py-1 rounded-md">
+                  {item.discount}
+                </span>
+
+                <img
+                  src={item.img}
+                  alt={item.name}
+                  className="w-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+
+              {/* Product Info */}
+              <div className="mt-3 text-left">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg font-semibold text-red-500">
+                    US ${item.price}
+                  </span>
+                  <span className="text-sm line-through text-gray-400">
+                    US ${item.oldPrice}
+                  </span>
+                </div>
+                <p className="text-sm mt-1 text-gray-700">{item.name}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+      {/* product-Q-Drift */}
+       <section className="w-full py-10">
+        {/* Header */}
+        <div className="flex justify-between items-center max-w-7xl mx-auto px-4">
+          <h2 className="text-4xl font-bold flex items-center gap-2">
+            Q-Drift Urban Motion
+          </h2>
+          <a
+            href="#"
+            className="cursor-pointer hover:bg-gray-100 lg:px-3 lg:py-4 sm:text-sm text-sm text-blue-500 font-semibold hover:underline hover:text-pink-500"
+          >
+            Shop More
+          </a>
+        </div>
+
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto px-4 mt-6">
+          {Q_Drift.map((item, index) => (
+            <div key={index} className="flex flex-col">
+              {/* Image Container */}
+              <div className="relative w-full overflow-hidden rounded-xl cursor-pointer">
+                {/* Discount Badge */}
+                <span className="absolute top-3 left-3 bg-red-500 text-white text-sm px-2 py-1 rounded-md">
+                  {item.discount}
+                </span>
+
+                <img
+                  src={item.img}
+                  alt={item.name}
+                  className="w-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+
+              {/* Product Info */}
+              <div className="mt-3 text-left">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg font-semibold text-red-500">
+                    US ${item.price}
+                  </span>
+                  <span className="text-sm line-through text-gray-400">
+                    US ${item.oldPrice}
+                  </span>
+                </div>
+                <p className="text-sm mt-1 text-gray-700">{item.name}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

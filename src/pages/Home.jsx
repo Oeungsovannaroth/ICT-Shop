@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import NewsTicker from "../components/NewsTicker";
+import { IoCart } from "react-icons/io5";
 const Home = () => {
   const banners = [
     {
@@ -39,8 +41,6 @@ const Home = () => {
 
     return () => clearInterval(interval);
   }, [length]);
-  // const nextSlide = () => setCurrent(current === length - 1 ? 0 : current + 1);
-  // const prevSlide = () => setCurrent(current === 0 ? length - 1 : current - 1);
 
   const products = [
     {
@@ -111,7 +111,7 @@ const Home = () => {
       name: "Nike Odyssey React Shield",
       price: 130,
       discount: 35,
-      description: "TEN11/NEW IN",
+      addcart: "ADD TO CART",
       img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01a.png",
       img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01b.png",
     },
@@ -119,7 +119,7 @@ const Home = () => {
       name: "LeBron 16",
       price: 185,
       discount: 35,
-      description: "TEN11/NEW IN",
+      addcart: "ADD TO CART",
       img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02a.png",
       img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02b.png",
     },
@@ -127,7 +127,7 @@ const Home = () => {
       name: "Nike Epic React Flyknit",
       price: 150,
       discount: 35,
-      description: "TEN11/NEW IN",
+      addcart: "ADD TO CART",
       img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03a.png",
       img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03b.png",
     },
@@ -135,7 +135,7 @@ const Home = () => {
       name: "Nike Air Max 97 Premium",
       price: 180,
       discount: 35,
-      description: "TEN11/NEW IN",
+      addcart: "ADD TO CART",
       img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04a.png",
       img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04b.png",
     },
@@ -143,7 +143,7 @@ const Home = () => {
       name: "Nike Free RN Motion Flyknit 2018",
       price: 150,
       discount: 35,
-      description: "TEN11/NEW IN",
+      addcart: "ADD TO CART",
       img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05a.png",
       img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05b.png",
     },
@@ -151,7 +151,7 @@ const Home = () => {
       name: "Nike Free RN Flyknit 2018",
       price: 120,
       discount: 35,
-      description: "361 SPORT",
+      addcart: "ADD TO CART",
       img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06a.png",
       img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06b.png",
     },
@@ -190,10 +190,10 @@ const Home = () => {
       discount: "-40%",
     },
   ];
-  const Q_Drift=[
-     {
+  const Q_Drift = [
+    {
       id: 1,
-      img: "https://zandokh.com/image/catalog/products/2025-07/22225031216/Untitled%20Session1152.jpg",
+      img: "https://zandokh.com/image/cache/catalog/products/2025-11/11225081310/TAKK0169-cr-450x672.jpg",
       name: "Lace Trim Tops",
       price: 8.97,
       oldPrice: 14.95,
@@ -201,7 +201,7 @@ const Home = () => {
     },
     {
       id: 2,
-      img: "https://thechicsavvy.com/wp-content/uploads/2024/12/Lace-skirt-outfits3-765x1024.webp",
+      img: "https://zandokh.com/image/cache/catalog/products/2025-10/12225081756/ZD__0691-cr-450x672.jpg",
       name: "Mexi Lace Skirt",
       price: 11.15,
       oldPrice: 18.59,
@@ -209,7 +209,7 @@ const Home = () => {
     },
     {
       id: 3,
-      img: "https://zandokh.com/image/catalog/products/2025-09/21225061350/SR__1143.jpg",
+      img: "https://zandokh.com/image/cache/catalog/products/2025-10/12225081806/ZD__2329-cr-450x672.jpg",
       name: "Regular T-Shirts With Printed",
       price: 8.75,
       oldPrice: 14.59,
@@ -217,16 +217,16 @@ const Home = () => {
     },
     {
       id: 4,
-      img: "https://www.alcott.eu/dw/image/v2/BDJZ_PRD/on/demandware.static/-/Sites-catalog-alcott-master/default/dw2a6dd878/hi-res/5T3583DOY12_C272_001.jpg?sw=1000&sh=1350&q=90&strip=false",
+      img: "https://zandokh.com/image/cache/catalog/products/2025-10/12225081760/ZD__2785-cr-450x672.jpg",
       name: "Balloon Denim Jean",
       price: 13.77,
       oldPrice: 22.95,
       discount: "-40%",
     },
-  ]
+  ];
 
   return (
-    <div className="pt-2">
+    <div className="mt-1">
       <section className="relative w-full">
         <div className="absolute inset-x-0 bottom-6 flex justify-center gap-8 text-sm lg:bottom-40 lg:left-[570px] lg:text-2xl lg:justify-start">
           <button
@@ -293,7 +293,7 @@ const Home = () => {
         </div>
       </section>
       {/* SlideSHow */}
-      <section className="my-8">
+      <section className="my-15">
         <div className="relative w-full max-w-7xl mx-auto overflow-hidden rounded-lg h-64 md:h-90">
           {banners.map((banner, index) => (
             <div
@@ -317,32 +317,23 @@ const Home = () => {
               </div>
             </div>
           ))}
-
-          {/* <button
-            onClick={prevSlide}
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 text-black p-2 rounded-full hover:bg-white z-20"
-          >
-            &#10094;
-          </button>
-
-          <button
-            onClick={nextSlide}
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 text-black p-2 rounded-full hover:bg-white z-20"
-          >
-            &#10095;
-          </button> */}
         </div>
       </section>
 
+      {/* LED */}
+      <section className="mb-8 max-w-7xl w-auto mx-auto ">
+        <NewsTicker text="NEW ARRIVALS EVERY DAY — BIG SALE UP TO 50% OFF — LIMITED STOCK — BEST PRICE GUARANTEED — TRENDY OUTFITS — SHOP NOW BEFORE IT'S GONE — FRESH FASHION JUST ARRIVED" />
+      </section>
+
       {/* big card */}
-      <section>
+      <section className="mb-35 mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {products.map((item, index) => (
             <div key={index} className="flex flex-col items-center w-full">
               {/* MOBILE CARD */}
               <div
                 className="
-            reveal opacity-0 translate-y-10 transition-all duration-700 ease-out
+            reveal opacity-0 translate-y-10 transition-all duration-1300 ease-out
             w-full bg-white shadow-lg rounded-xl p-4 flex flex-col items-center
             block md:block lg:hidden
           "
@@ -352,15 +343,17 @@ const Home = () => {
                   {item.name}
                 </h2>
 
-                <button className="mt-4 px-4 py-2 bg-black text-white rounded-full w-full">
-                  Buy Now
+                <button className="mt-4 px-4 py-2 bg-black text-white rounded-full w-full cursor-pointer">
+                  <Link to="#" className="cursor-pointer">
+                    Buy Now
+                  </Link>
                 </button>
               </div>
 
               {/* DESKTOP FLIP CARD */}
               <div
                 className="
-            reveal opacity-0 translate-y-10 transition-all duration-700 ease-out
+            reveal opacity-0 translate-y-10 transition-all duration-1500 ease-out
             hidden md:flex w-full group perspective cursor-pointer mt-4 lg:flex
           "
               >
@@ -381,7 +374,9 @@ const Home = () => {
                       className="w-100 h-150 rounded-lg mb-4"
                     />
                     <button className="mt-4 px-4 py-2 bg-black text-white rounded-full">
-                      Buy Now
+                      <Link to="/#" className="cursor-pointer">
+                        Buy Now
+                      </Link>
                     </button>
                   </div>
                 </div>
@@ -395,7 +390,7 @@ const Home = () => {
       <section className="mt-25 max-w-7xl mx-auto">
         <div className="flex justify-between font-bold mb-5">
           <span className="lg:text-4xl sm:text-sm lg:ml-5">
-            Daily Shoe Essentials
+            DAILY SHOES ESSENTIALS
           </span>
           <span>
             <button className="cursor-pointer hover:bg-gray-100 lg:px-3 lg:py-4 sm:text-sm text-sm text-blue-500 font-semibold hover:underline hover:text-pink-500">
@@ -408,7 +403,7 @@ const Home = () => {
             {shoes.map((shoe, index) => (
               <li
                 key={index}
-                className="relative group h-120 bg-gray-100 rounded-2xl shadow-xl overflow-hidden hover:z-10 transition-all"
+                className="relative group h-120 bg-gray-100 rounded-2xl shadow-xl overflow-hidden hover:z-10 reveal opacity-0 translate-y-10 transition-all duration-2500 ease-in"
               >
                 <div className="absolute inset-0 bg-[#e8ebee] rounded-2xl shadow-inner border border-gray-200 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 -translate-x-1/2 top-1/2 -translate-y-1/2 rotate-[-45deg"></div>
 
@@ -423,8 +418,9 @@ const Home = () => {
                 <p className="absolute top-3 right-3 text-red-700  bg-white px-2 py-1 text-sm font-semibold rotate-0">
                   -{shoe.discount} %
                 </p>
-                <p className="absolute bottom-3 right-5 text-red-800 rounded-md bg-white px-2 py-1 text-sm font-bold">
-                  {shoe.description}
+                <p className="absolute bottom-3 right-3 text-red-800 rounded-md bg-white px-2 py-1 text-sm font-medium flex items-center gap-2 hover:bg-gray-200 cursor-pointer">
+                  {shoe.addcart}
+                  <IoCart />
                 </p>
 
                 <img
@@ -450,7 +446,7 @@ const Home = () => {
         {/* Header */}
         <div className="flex justify-between items-center max-w-7xl mx-auto px-4">
           <h2 className="text-4xl font-bold flex items-center gap-2">
-            Lifestyle Must-Haves ✨
+            LIFESTYLE MUST-HAVES
           </h2>
           <a
             href="#"
@@ -465,7 +461,7 @@ const Home = () => {
           {productsLiftStyle.map((item, index) => (
             <div key={index} className="flex flex-col">
               {/* Image Container */}
-              <div className="relative w-full overflow-hidden rounded-xl cursor-pointer">
+              <div className="relative w-full overflow-hidden rounded-xl cursor-pointer reveal opacity-0 translate-y-10 transition-all duration-2500 ease-out">
                 {/* Discount Badge */}
                 <span className="absolute top-3 left-3 bg-red-500 text-white text-sm px-2 py-1 rounded-md">
                   {item.discount}
@@ -495,11 +491,11 @@ const Home = () => {
         </div>
       </section>
       {/* product-Q-Drift */}
-       <section className="w-full py-10">
+      <section className="w-full py-10">
         {/* Header */}
         <div className="flex justify-between items-center max-w-7xl mx-auto px-4">
           <h2 className="text-4xl font-bold flex items-center gap-2">
-            Q-Drift Urban Motion
+            Q-DRIFT URBAN MOTION
           </h2>
           <a
             href="#"
@@ -514,7 +510,7 @@ const Home = () => {
           {Q_Drift.map((item, index) => (
             <div key={index} className="flex flex-col">
               {/* Image Container */}
-              <div className="relative w-full overflow-hidden rounded-xl cursor-pointer">
+              <div className="relative w-full overflow-hidden rounded-xl cursor-pointer reveal opacity-0 translate-y-10 transition-all duration-2500 ease-in">
                 {/* Discount Badge */}
                 <span className="absolute top-3 left-3 bg-red-500 text-white text-sm px-2 py-1 rounded-md">
                   {item.discount}

@@ -1,4 +1,46 @@
 @import "tailwindcss";
+.ticker-text {
+    @apply text-black font-bold text-lg mr-10;
+    animation: ledFlicker 2s infinite alternate;
+}
+
+
+/* Flicker like real LED lights */
+
+@keyframes ledFlicker {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.85;
+    }
+    60% {
+        opacity: 0.75;
+    }
+}
+
+
+/* Track moves continuously */
+
+.ticker-track {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: tickerMove 15s linear infinite;
+}
+
+
+/* Smooth infinite scrolling */
+
+@keyframes tickerMove {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-33.33%);
+    }
+}
+
 .perspective {
     perspective: 1200px;
 }

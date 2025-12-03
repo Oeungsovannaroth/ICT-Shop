@@ -226,7 +226,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="mt-1">
+    <div className="">
       <section className="relative w-full">
         <div className="absolute inset-x-0 bottom-6 flex justify-center gap-8 text-sm lg:bottom-40 lg:left-[570px] lg:text-2xl lg:justify-start">
           <button

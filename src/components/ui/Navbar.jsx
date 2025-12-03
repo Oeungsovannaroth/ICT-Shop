@@ -10,6 +10,7 @@ import { MdOutlineSearch } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
 import { FiBell, FiMenu, FiX, FiChevronDown } from "react-icons/fi";
 import { IoBagHandleOutline } from "react-icons/io5";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -17,6 +18,14 @@ const Navbar = () => {
   const [menOpen, setMenOpen] = useState(false);
   const [boyOpen, setBoyOpen] = useState(false);
   const [girlOpen, setGirlOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const handScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handScroll);
+    return () => window.removeEventListener("scroll", handScroll);
+  }, []);
 
   const [open, setOpen] = useState(false);
 
@@ -419,11 +428,17 @@ const Navbar = () => {
     { name: "Clothing", path: "/Girl/Sale/Shoes", color: "text-red-700" },
     { name: "Shoes", path: "/Girl/Sale/Shoes", color: "text-red-700" },
   ];
- 
 
   return (
     <div className="w-full border-b bg-white">
-      <nav className="w-full max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 w-full max-w-full mx-auto px-6 py-1 flex items-center justify-between
+        ${
+          scrolled
+            ? 'bg-white/50 backdrop-blur-lg shadow-md'
+            : 'bg-white/20 backdrop-blur-md border-b border-white/20'
+        }`}
+      >
         <div className="hidden lg:flex items-center gap-6">
           <NavigationMenu>
             <NavigationMenuList className="flex gap-2 mr-3 text-lg font-bold">
@@ -890,7 +905,7 @@ const Navbar = () => {
       </nav>
 
       {mobileOpen && (
-        <div className="lg:hidden px-6 pb-4">
+        <div className="lg:hidden px-6 pb-4 mt-15">
           {categories.map((cat) => (
             <div key={cat.title}>
               <div className="w-full">
@@ -931,8 +946,6 @@ const Navbar = () => {
           ))}
         </div>
       )}
-
-      
     </div>
   );
 };

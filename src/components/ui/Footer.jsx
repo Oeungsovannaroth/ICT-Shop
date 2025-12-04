@@ -101,7 +101,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom copyright */}
-        <div className="max-w-7xl mx-auto mt-12 px-4 border-t pt-4 text-sm text-gray-600">
+        <div className="max-w-7xl mx-auto mt-12 px-4 border-t justify-center flex pt-4 text-sm text-gray-600">
           © 2015 - 2025 ICT SHOP. All rights reserved.
         </div>
       </footer>

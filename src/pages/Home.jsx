@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import NewsTicker from "../components/NewsTicker";
 import { IoCart } from "react-icons/io5";
+
 const Home = () => {
+  
   const banners = [
     {
       id: 1,
@@ -392,11 +394,12 @@ const Home = () => {
           <span className="lg:text-4xl sm:text-sm lg:ml-5">
             DAILY SHOES ESSENTIALS
           </span>
-          <span>
-            <button className="cursor-pointer hover:bg-gray-100 lg:px-3 lg:py-4 sm:text-sm text-sm text-blue-500 font-semibold hover:underline hover:text-pink-500">
-              SHOP MORE
-            </button>
-          </span>
+          <Link
+            to="#"
+            className="cursor-pointer hover:bg-gray-100 lg:px-3 lg:py-4 sm:text-sm text-sm text-blue-500 font-semibold hover:underline hover:text-pink-500"
+          >
+            Shop More
+          </Link>
         </div>
         <div className="w-full min-h-screen py-10 px-6">
           <ul className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -406,15 +409,12 @@ const Home = () => {
                 className="relative group h-120 bg-gray-100 rounded-2xl shadow-xl overflow-hidden hover:z-10 reveal opacity-0 translate-y-10 transition-all duration-2500 ease-in"
               >
                 <div className="absolute inset-0 bg-[#e8ebee] rounded-2xl shadow-inner border border-gray-200 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 -translate-x-1/2 top-1/2 -translate-y-1/2 rotate-[-45deg"></div>
-
                 <h2 className="absolute w-full text-center left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 rotate-[-45deg] bg-white px-3 py-1 text-lg font-semibold transition-all duration-300 group-hover:top-[65%]">
                   {shoe.name}
                 </h2>
-
                 <p className="absolute top-3 left-3 bg-white px-2 py-1 text-sm font-medium">
                   ${shoe.price}
                 </p>
-
                 <p className="absolute top-3 right-3 text-red-700  bg-white px-2 py-1 text-sm font-semibold rotate-0">
                   -{shoe.discount} %
                 </p>
@@ -422,14 +422,12 @@ const Home = () => {
                   {shoe.addcart}
                   <IoCart />
                 </p>
-
                 <img
                   src={shoe.img1}
                   alt=""
                   className="absolute w-[80%] top-1/2 left-1/2 -translate-x-[70%] -translate-y-[105%] rotate-[-45deg] 
                          transition-all duration-300 group-hover:w-[120%] group-hover:-translate-y-[75%]"
                 />
-
                 <img
                   src={shoe.img2}
                   alt=""
@@ -448,12 +446,12 @@ const Home = () => {
           <h2 className="text-4xl font-bold flex items-center gap-2">
             LIFESTYLE MUST-HAVES
           </h2>
-          <a
-            href="#"
+          <Link
+            to="#"
             className="cursor-pointer hover:bg-gray-100 lg:px-3 lg:py-4 sm:text-sm text-sm text-blue-500 font-semibold hover:underline hover:text-pink-500"
           >
             Shop More
-          </a>
+          </Link>
         </div>
 
         {/* Products Grid */}
@@ -475,7 +473,7 @@ const Home = () => {
               </div>
 
               {/* Product Info */}
-              <div className="mt-3 text-left">
+              <div className="mt-10 text-left">
                 <div className="flex items-center gap-2">
                   <span className="text-lg font-semibold text-red-500">
                     US ${item.price}
@@ -497,12 +495,12 @@ const Home = () => {
           <h2 className="text-4xl font-bold flex items-center gap-2">
             Q-DRIFT URBAN MOTION
           </h2>
-          <a
-            href="#"
+          <Link
+            to="#"
             className="cursor-pointer hover:bg-gray-100 lg:px-3 lg:py-4 sm:text-sm text-sm text-blue-500 font-semibold hover:underline hover:text-pink-500"
           >
             Shop More
-          </a>
+          </Link>
         </div>
 
         {/* Products Grid */}
@@ -524,7 +522,7 @@ const Home = () => {
               </div>
 
               {/* Product Info */}
-              <div className="mt-3 text-left">
+              <div className="mt-10 text-left">
                 <div className="flex items-center gap-2">
                   <span className="text-lg font-semibold text-red-500">
                     US ${item.price}

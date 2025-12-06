@@ -5,6 +5,7 @@ import Footer from "./components/ui/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
 import { CartProvider } from "./context/CartContext";
+
 const App = () => {
   return (
     <CartProvider>
@@ -16,7 +17,7 @@ const App = () => {
         <main className="pt-20">
           <Routes>
             <Route path="/" element={<Home />} />
-          </Routes>{" "}
+          </Routes>
           <ScrollToTop />
         </main>
         <footer>

@@ -3,6 +3,181 @@ import NewsTicker from "../components/NewsTicker";
 import { IoCart } from "react-icons/io5";
 import React, { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
+
+const shoes = [
+  {
+    id: 1,
+    name: "Nike Odyssey React Shield",
+    price: 130,
+    discount: 35,
+    addcart: "ADD TO CART",
+    img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01a.png",
+    img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01b.png",
+  },
+  {
+    id: 2,
+    name: "LeBron 16",
+    price: 185,
+    discount: 35,
+    addcart: "ADD TO CART",
+    img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02a.png",
+    img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02b.png",
+  },
+  {
+    id: 3,
+    name: "Nike Epic React Flyknit",
+    price: 150,
+    discount: 35,
+    addcart: "ADD TO CART",
+    img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03a.png",
+    img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03b.png",
+  },
+  {
+    id: 4,
+    name: "Nike Air Max 97 Premium",
+    price: 180,
+    discount: 35,
+    addcart: "ADD TO CART",
+    img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04a.png",
+    img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04b.png",
+  },
+  {
+    id: 5,
+    name: "Nike Free RN Motion Flyknit 2018",
+    price: 150,
+    discount: 35,
+    addcart: "ADD TO CART",
+    img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05a.png",
+    img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05b.png",
+  },
+  {
+    id: 6,
+    name: "Nike Free RN Flyknit 2018",
+    price: 120,
+    discount: 35,
+    addcart: "ADD TO CART",
+    img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06a.png",
+    img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06b.png",
+  },
+];
+const productsLiftStyle = [
+  {
+    id: 1,
+    img: "https://zandokh.com/image/catalog/products/2025-07/22225031216/Untitled%20Session1152.jpg",
+    name: "Lace Trim Tops",
+    price: 8.97,
+    oldPrice: 14.95,
+    discount: "-40%",
+  },
+  {
+    id: 2,
+    img: "https://thechicsavvy.com/wp-content/uploads/2024/12/Lace-skirt-outfits3-765x1024.webp",
+    name: "Mexi Lace Skirt",
+    price: 11.15,
+    oldPrice: 18.59,
+    discount: "-40%",
+  },
+  {
+    id: 3,
+    img: "https://zandokh.com/image/catalog/products/2025-09/21225061350/SR__1143.jpg",
+    name: "Regular T-Shirts With Printed",
+    price: 8.75,
+    oldPrice: 14.59,
+    discount: "-40%",
+  },
+  {
+    id: 4,
+    img: "https://www.alcott.eu/dw/image/v2/BDJZ_PRD/on/demandware.static/-/Sites-catalog-alcott-master/default/dw2a6dd878/hi-res/5T3583DOY12_C272_001.jpg?sw=1000&sh=1350&q=90&strip=false",
+    name: "Balloon Denim Jean",
+    price: 13.77,
+    oldPrice: 22.95,
+    discount: "-40%",
+  },
+];
+const Q_Drift = [
+  {
+    id: 1,
+    img: "https://zandokh.com/image/cache/catalog/products/2025-11/11225081310/TAKK0169-cr-450x672.jpg",
+    name: "Lace Trim Tops",
+    price: 8.97,
+    oldPrice: 14.95,
+    discount: "-40%",
+  },
+  {
+    id: 2,
+    img: "https://zandokh.com/image/cache/catalog/products/2025-10/12225081756/ZD__0691-cr-450x672.jpg",
+    name: "Mexi Lace Skirt",
+    price: 11.15,
+    oldPrice: 18.59,
+    discount: "-40%",
+  },
+  {
+    id: 3,
+    img: "https://zandokh.com/image/cache/catalog/products/2025-10/12225081806/ZD__2329-cr-450x672.jpg",
+    name: "Regular T-Shirts With Printed",
+    price: 8.75,
+    oldPrice: 14.59,
+    discount: "-40%",
+  },
+  {
+    id: 4,
+    img: "https://zandokh.com/image/cache/catalog/products/2025-10/12225081760/ZD__2785-cr-450x672.jpg",
+    name: "Balloon Denim Jean",
+    price: 13.77,
+    oldPrice: 22.95,
+    discount: "-40%",
+  },
+];
+const products = [
+  {
+    name: "LIFESTYLE",
+
+    frontImg:
+      "https://i.pinimg.com/736x/bf/da/4a/bfda4aee91c4273984ca28d1f87116c8.jpg",
+    backImg:
+      "https://i.pinimg.com/736x/24/f2/00/24f200348979523116dc3b7f4d0e5a0c.jpg",
+  },
+  {
+    name: "SPORTLIFE",
+
+    frontImg:
+      "https://i.pinimg.com/736x/5a/54/ae/5a54aede23a2cd869d9d93b3cf4a4d68.jpg",
+    backImg:
+      "https://i.pinimg.com/736x/4b/45/b3/4b45b32417b475a47d4e60dc7aa4a082.jpg",
+  },
+  {
+    name: "SMART CASUAL",
+
+    frontImg:
+      "https://i.pinimg.com/736x/4d/6c/eb/4d6ceb25ed5e5653319f5d58150575e4.jpg",
+    backImg:
+      "https://i.pinimg.com/736x/20/90/9a/20909a88c6adc72e3c745519ffd2f61c.jpg",
+  },
+  {
+    name: "TOPS",
+
+    frontImg:
+      "https://koreanstyle-shop.com/cdn/shop/products/korean-outfit-suit-jacket-and-skirt_1080x.jpg?v=1627279686",
+    backImg:
+      "https://koreanstyle-shop.com/cdn/shop/products/korean-outfit-plaid-suit_480x480.jpg?v=1627279578",
+  },
+  {
+    name: "BOTTOMS",
+
+    frontImg:
+      "https://ae-pic-a1.aliexpress-media.com/kf/S2a9c35e6869c4a8db64b81d2cfc8404cH/Summer-Mini-Dress-for-Women-Girl-Korean-Fashion-Short-Clothes-Clothing-Japanese-Preppy-Style-Student-Short.jpg_640x640Q90.jpg_.webp",
+    backImg:
+      "https://i.pinimg.com/736x/f9/a9/38/f9a9386345e6ecd420db7b404f478bdf.jpg",
+  },
+  {
+    name: "DRIFT-HALF",
+
+    frontImg:
+      "https://i.pinimg.com/736x/50/80/cb/5080cbaa91f6451601401e7147e9360d.jpg",
+    backImg:
+      "https://cdn.shopify.com/s/files/1/0767/5032/3991/files/Softboy7_480x480.jpg?v=1736066369",
+  },
+];
 const Home = () => {
   const { addToCart } = useCart();
   const banners = [
@@ -44,56 +219,56 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [length]);
 
-  const products = [
-    {
-      name: "LIFESTYLE",
+  //  const products = [
+  //     {
+  //       name: "LIFESTYLE",
 
-      frontImg:
-        "https://i.pinimg.com/736x/bf/da/4a/bfda4aee91c4273984ca28d1f87116c8.jpg",
-      backImg:
-        "https://i.pinimg.com/736x/24/f2/00/24f200348979523116dc3b7f4d0e5a0c.jpg",
-    },
-    {
-      name: "SPORTLIFE",
+  //       frontImg:
+  //         "https://i.pinimg.com/736x/bf/da/4a/bfda4aee91c4273984ca28d1f87116c8.jpg",
+  //       backImg:
+  //         "https://i.pinimg.com/736x/24/f2/00/24f200348979523116dc3b7f4d0e5a0c.jpg",
+  //     },
+  //     {
+  //       name: "SPORTLIFE",
 
-      frontImg:
-        "https://i.pinimg.com/736x/5a/54/ae/5a54aede23a2cd869d9d93b3cf4a4d68.jpg",
-      backImg:
-        "https://i.pinimg.com/736x/4b/45/b3/4b45b32417b475a47d4e60dc7aa4a082.jpg",
-    },
-    {
-      name: "SMART CASUAL",
+  //       frontImg:
+  //         "https://i.pinimg.com/736x/5a/54/ae/5a54aede23a2cd869d9d93b3cf4a4d68.jpg",
+  //       backImg:
+  //         "https://i.pinimg.com/736x/4b/45/b3/4b45b32417b475a47d4e60dc7aa4a082.jpg",
+  //     },
+  //     {
+  //       name: "SMART CASUAL",
 
-      frontImg:
-        "https://i.pinimg.com/736x/4d/6c/eb/4d6ceb25ed5e5653319f5d58150575e4.jpg",
-      backImg:
-        "https://i.pinimg.com/736x/20/90/9a/20909a88c6adc72e3c745519ffd2f61c.jpg",
-    },
-    {
-      name: "TOPS",
+  //       frontImg:
+  //         "https://i.pinimg.com/736x/4d/6c/eb/4d6ceb25ed5e5653319f5d58150575e4.jpg",
+  //       backImg:
+  //         "https://i.pinimg.com/736x/20/90/9a/20909a88c6adc72e3c745519ffd2f61c.jpg",
+  //     },
+  //     {
+  //       name: "TOPS",
 
-      frontImg:
-        "https://koreanstyle-shop.com/cdn/shop/products/korean-outfit-suit-jacket-and-skirt_1080x.jpg?v=1627279686",
-      backImg:
-        "https://koreanstyle-shop.com/cdn/shop/products/korean-outfit-plaid-suit_480x480.jpg?v=1627279578",
-    },
-    {
-      name: "BOTTOMS",
+  //       frontImg:
+  //         "https://koreanstyle-shop.com/cdn/shop/products/korean-outfit-suit-jacket-and-skirt_1080x.jpg?v=1627279686",
+  //       backImg:
+  //         "https://koreanstyle-shop.com/cdn/shop/products/korean-outfit-plaid-suit_480x480.jpg?v=1627279578",
+  //     },
+  //     {
+  //       name: "BOTTOMS",
 
-      frontImg:
-        "https://ae-pic-a1.aliexpress-media.com/kf/S2a9c35e6869c4a8db64b81d2cfc8404cH/Summer-Mini-Dress-for-Women-Girl-Korean-Fashion-Short-Clothes-Clothing-Japanese-Preppy-Style-Student-Short.jpg_640x640Q90.jpg_.webp",
-      backImg:
-        "https://i.pinimg.com/736x/f9/a9/38/f9a9386345e6ecd420db7b404f478bdf.jpg",
-    },
-    {
-      name: "DRIFT-HALF",
+  //       frontImg:
+  //         "https://ae-pic-a1.aliexpress-media.com/kf/S2a9c35e6869c4a8db64b81d2cfc8404cH/Summer-Mini-Dress-for-Women-Girl-Korean-Fashion-Short-Clothes-Clothing-Japanese-Preppy-Style-Student-Short.jpg_640x640Q90.jpg_.webp",
+  //       backImg:
+  //         "https://i.pinimg.com/736x/f9/a9/38/f9a9386345e6ecd420db7b404f478bdf.jpg",
+  //     },
+  //     {
+  //       name: "DRIFT-HALF",
 
-      frontImg:
-        "https://i.pinimg.com/736x/50/80/cb/5080cbaa91f6451601401e7147e9360d.jpg",
-      backImg:
-        "https://cdn.shopify.com/s/files/1/0767/5032/3991/files/Softboy7_480x480.jpg?v=1736066369",
-    },
-  ];
+  //       frontImg:
+  //         "https://i.pinimg.com/736x/50/80/cb/5080cbaa91f6451601401e7147e9360d.jpg",
+  //       backImg:
+  //         "https://cdn.shopify.com/s/files/1/0767/5032/3991/files/Softboy7_480x480.jpg?v=1736066369",
+  //     },
+  //   ];
   useEffect(() => {
     const elements = document.querySelectorAll(".reveal");
 
@@ -108,130 +283,130 @@ const Home = () => {
 
     elements.forEach((el) => observer.observe(el));
   }, []);
-  const shoes = [
-    {
-      id: 1,
-      name: "Nike Odyssey React Shield",
-      price: 130,
-      discount: 35,
-      addcart: "ADD TO CART",
-      img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01a.png",
-      img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01b.png",
-    },
-    {
-      id: 2,
-      name: "LeBron 16",
-      price: 185,
-      discount: 35,
-      addcart: "ADD TO CART",
-      img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02a.png",
-      img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02b.png",
-    },
-    {
-      id: 3,
-      name: "Nike Epic React Flyknit",
-      price: 150,
-      discount: 35,
-      addcart: "ADD TO CART",
-      img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03a.png",
-      img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03b.png",
-    },
-    {
-      id: 4,
-      name: "Nike Air Max 97 Premium",
-      price: 180,
-      discount: 35,
-      addcart: "ADD TO CART",
-      img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04a.png",
-      img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04b.png",
-    },
-    {
-      id: 5,
-      name: "Nike Free RN Motion Flyknit 2018",
-      price: 150,
-      discount: 35,
-      addcart: "ADD TO CART",
-      img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05a.png",
-      img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05b.png",
-    },
-    {
-      id: 6,
-      name: "Nike Free RN Flyknit 2018",
-      price: 120,
-      discount: 35,
-      addcart: "ADD TO CART",
-      img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06a.png",
-      img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06b.png",
-    },
-  ];
-  const productsLiftStyle = [
-    {
-      id: 1,
-      img: "https://zandokh.com/image/catalog/products/2025-07/22225031216/Untitled%20Session1152.jpg",
-      name: "Lace Trim Tops",
-      price: 8.97,
-      oldPrice: 14.95,
-      discount: "-40%",
-    },
-    {
-      id: 2,
-      img: "https://thechicsavvy.com/wp-content/uploads/2024/12/Lace-skirt-outfits3-765x1024.webp",
-      name: "Mexi Lace Skirt",
-      price: 11.15,
-      oldPrice: 18.59,
-      discount: "-40%",
-    },
-    {
-      id: 3,
-      img: "https://zandokh.com/image/catalog/products/2025-09/21225061350/SR__1143.jpg",
-      name: "Regular T-Shirts With Printed",
-      price: 8.75,
-      oldPrice: 14.59,
-      discount: "-40%",
-    },
-    {
-      id: 4,
-      img: "https://www.alcott.eu/dw/image/v2/BDJZ_PRD/on/demandware.static/-/Sites-catalog-alcott-master/default/dw2a6dd878/hi-res/5T3583DOY12_C272_001.jpg?sw=1000&sh=1350&q=90&strip=false",
-      name: "Balloon Denim Jean",
-      price: 13.77,
-      oldPrice: 22.95,
-      discount: "-40%",
-    },
-  ];
-  const Q_Drift = [
-    {
-      id: 1,
-      img: "https://zandokh.com/image/cache/catalog/products/2025-11/11225081310/TAKK0169-cr-450x672.jpg",
-      name: "Lace Trim Tops",
-      price: 8.97,
-      oldPrice: 14.95,
-      discount: "-40%",
-    },
-    {
-      id: 2,
-      img: "https://zandokh.com/image/cache/catalog/products/2025-10/12225081756/ZD__0691-cr-450x672.jpg",
-      name: "Mexi Lace Skirt",
-      price: 11.15,
-      oldPrice: 18.59,
-      discount: "-40%",
-    },
-    {
-      id: 3,
-      img: "https://zandokh.com/image/cache/catalog/products/2025-10/12225081806/ZD__2329-cr-450x672.jpg",
-      name: "Regular T-Shirts With Printed",
-      price: 8.75,
-      oldPrice: 14.59,
-      discount: "-40%",
-    },
-    {
-      id: 4,
-      img: "https://zandokh.com/image/cache/catalog/products/2025-10/12225081760/ZD__2785-cr-450x672.jpg",
-      name: "Balloon Denim Jean",
-      price: 13.77,
-      oldPrice: 22.95,
-      discount: "-40%",
-    },
-  ];
+  // const shoes = [
+  //   {
+  //     id: 1,
+  //     name: "Nike Odyssey React Shield",
+  //     price: 130,
+  //     discount: 35,
+  //     addcart: "ADD TO CART",
+  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01a.png",
+  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01b.png",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "LeBron 16",
+  //     price: 185,
+  //     discount: 35,
+  //     addcart: "ADD TO CART",
+  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02a.png",
+  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02b.png",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Nike Epic React Flyknit",
+  //     price: 150,
+  //     discount: 35,
+  //     addcart: "ADD TO CART",
+  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03a.png",
+  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03b.png",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Nike Air Max 97 Premium",
+  //     price: 180,
+  //     discount: 35,
+  //     addcart: "ADD TO CART",
+  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04a.png",
+  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04b.png",
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Nike Free RN Motion Flyknit 2018",
+  //     price: 150,
+  //     discount: 35,
+  //     addcart: "ADD TO CART",
+  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05a.png",
+  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05b.png",
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "Nike Free RN Flyknit 2018",
+  //     price: 120,
+  //     discount: 35,
+  //     addcart: "ADD TO CART",
+  //     img1: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06a.png",
+  //     img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06b.png",
+  //   },
+  // ];
+  // const productsLiftStyle = [
+  //   {
+  //     id: 1,
+  //     img: "https://zandokh.com/image/catalog/products/2025-07/22225031216/Untitled%20Session1152.jpg",
+  //     name: "Lace Trim Tops",
+  //     price: 8.97,
+  //     oldPrice: 14.95,
+  //     discount: "-40%",
+  //   },
+  //   {
+  //     id: 2,
+  //     img: "https://thechicsavvy.com/wp-content/uploads/2024/12/Lace-skirt-outfits3-765x1024.webp",
+  //     name: "Mexi Lace Skirt",
+  //     price: 11.15,
+  //     oldPrice: 18.59,
+  //     discount: "-40%",
+  //   },
+  //   {
+  //     id: 3,
+  //     img: "https://zandokh.com/image/catalog/products/2025-09/21225061350/SR__1143.jpg",
+  //     name: "Regular T-Shirts With Printed",
+  //     price: 8.75,
+  //     oldPrice: 14.59,
+  //     discount: "-40%",
+  //   },
+  //   {
+  //     id: 4,
+  //     img: "https://www.alcott.eu/dw/image/v2/BDJZ_PRD/on/demandware.static/-/Sites-catalog-alcott-master/default/dw2a6dd878/hi-res/5T3583DOY12_C272_001.jpg?sw=1000&sh=1350&q=90&strip=false",
+  //     name: "Balloon Denim Jean",
+  //     price: 13.77,
+  //     oldPrice: 22.95,
+  //     discount: "-40%",
+  //   },
+  // ];
+  // const Q_Drift = [
+  //   {
+  //     id: 1,
+  //     img: "https://zandokh.com/image/cache/catalog/products/2025-11/11225081310/TAKK0169-cr-450x672.jpg",
+  //     name: "Lace Trim Tops",
+  //     price: 8.97,
+  //     oldPrice: 14.95,
+  //     discount: "-40%",
+  //   },
+  //   {
+  //     id: 2,
+  //     img: "https://zandokh.com/image/cache/catalog/products/2025-10/12225081756/ZD__0691-cr-450x672.jpg",
+  //     name: "Mexi Lace Skirt",
+  //     price: 11.15,
+  //     oldPrice: 18.59,
+  //     discount: "-40%",
+  //   },
+  //   {
+  //     id: 3,
+  //     img: "https://zandokh.com/image/cache/catalog/products/2025-10/12225081806/ZD__2329-cr-450x672.jpg",
+  //     name: "Regular T-Shirts With Printed",
+  //     price: 8.75,
+  //     oldPrice: 14.59,
+  //     discount: "-40%",
+  //   },
+  //   {
+  //     id: 4,
+  //     img: "https://zandokh.com/image/cache/catalog/products/2025-10/12225081760/ZD__2785-cr-450x672.jpg",
+  //     name: "Balloon Denim Jean",
+  //     price: 13.77,
+  //     oldPrice: 22.95,
+  //     discount: "-40%",
+  //   },
+  // ];
 
   return (
     <div className="">

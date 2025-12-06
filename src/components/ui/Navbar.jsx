@@ -12,6 +12,7 @@ import { FiBell, FiMenu, FiX, FiChevronDown } from "react-icons/fi";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { useEffect } from "react";
 import { useCart } from "../../context/CartContext";
+
 const Navbar = () => {
   const { cart, cartCount, cartTotal, removeFromCart, updateQuantity } =
     useCart();

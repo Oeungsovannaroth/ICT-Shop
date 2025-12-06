@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import NewsTicker from "../components/NewsTicker";
 import { IoCart } from "react-icons/io5";
-
+import React, { useEffect, useState } from "react";
+import { useCart } from "../context/CartContext";
 const Home = () => {
-  
+  const { addToCart } = useCart();
   const banners = [
     {
       id: 1,
@@ -110,6 +110,7 @@ const Home = () => {
   }, []);
   const shoes = [
     {
+      id: 1,
       name: "Nike Odyssey React Shield",
       price: 130,
       discount: 35,
@@ -118,6 +119,7 @@ const Home = () => {
       img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike01b.png",
     },
     {
+      id: 2,
       name: "LeBron 16",
       price: 185,
       discount: 35,
@@ -126,6 +128,7 @@ const Home = () => {
       img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02b.png",
     },
     {
+      id: 3,
       name: "Nike Epic React Flyknit",
       price: 150,
       discount: 35,
@@ -134,6 +137,7 @@ const Home = () => {
       img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03b.png",
     },
     {
+      id: 4,
       name: "Nike Air Max 97 Premium",
       price: 180,
       discount: 35,
@@ -142,6 +146,7 @@ const Home = () => {
       img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04b.png",
     },
     {
+      id: 5,
       name: "Nike Free RN Motion Flyknit 2018",
       price: 150,
       discount: 35,
@@ -150,6 +155,7 @@ const Home = () => {
       img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05b.png",
     },
     {
+      id: 6,
       name: "Nike Free RN Flyknit 2018",
       price: 120,
       discount: 35,
@@ -418,7 +424,12 @@ const Home = () => {
                 <p className="absolute top-3 right-3 text-red-700  bg-white px-2 py-1 text-sm font-semibold rotate-0">
                   -{shoe.discount} %
                 </p>
-                <p className="absolute bottom-3 right-3 text-red-800 rounded-md bg-white px-2 py-1 text-sm font-medium flex items-center gap-2 hover:bg-gray-200 cursor-pointer">
+                <p
+                  onClick={() => {
+                    addToCart(shoe);
+                  }}
+                  className="absolute bottom-3 right-3 text-red-800 rounded-md bg-white px-2 py-1 text-sm font-medium flex items-center gap-2 hover:bg-gray-200 cursor-pointer"
+                >
                   {shoe.addcart}
                   <IoCart />
                 </p>

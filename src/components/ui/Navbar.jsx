@@ -11,14 +11,23 @@ import { CiHeart } from "react-icons/ci";
 import { FiBell, FiMenu, FiX, FiChevronDown } from "react-icons/fi";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { useEffect } from "react";
-
+import { useCart } from "../../context/CartContext";
 const Navbar = () => {
+  const { cart, cartCount, cartTotal, removeFromCart, updateQuantity } =
+    useCart();
+  // 🟩 SAVE cart every time you update it
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [womenOpen, setWomenOpen] = useState(false);
   const [menOpen, setMenOpen] = useState(false);
   const [boyOpen, setBoyOpen] = useState(false);
   const [girlOpen, setGirlOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
     const handScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -26,9 +35,11 @@ const Navbar = () => {
     window.addEventListener("scroll", handScroll);
     return () => window.removeEventListener("scroll", handScroll);
   }, []);
+  useEffect(() => {
+    if (!scrolled) return; // Do nothing at top
+  }, [scrolled]);
 
   const [open, setOpen] = useState(false);
-
   const timeoutRef = useRef(null);
 
   const handleMouseEnter = () => {
@@ -435,8 +446,8 @@ const Navbar = () => {
         className={`fixed top-0 left-0 right-0 z-50 w-full max-w-full mx-auto px-6 py-1 flex items-center justify-between
         ${
           scrolled
-            ? 'bg-white/50 backdrop-blur-lg shadow-md'
-            : 'bg-white/20 backdrop-blur-md border-b border-white/20'
+            ? "bg-white/50 backdrop-blur-lg shadow-md"
+            : "bg-white/20 backdrop-blur-md border-b border-white/20"
         }`}
       >
         <div className="hidden lg:flex items-center gap-6">
@@ -859,7 +870,7 @@ const Navbar = () => {
           </NavigationMenu>
         </div>
 
-        <h1 className="text-xl lg:text-3xl font-extrabold tracking-[2px]">
+        <h1 className="text-sm lg:text-3xl font-extrabold tracking-[1px]">
           ICT SHOP.
         </h1>
 
@@ -876,12 +887,19 @@ const Navbar = () => {
 
           <FiBell className="text-xl cursor-pointer" />
           <CiHeart className="text-2xl cursor-pointer" />
+          {/* 🛒 CART COMPONENT */}
+          <div
+            className="relative cursor-pointer"
+            onClick={() => setIsCartOpen(!isCartOpen)}
+          >
+            <IoBagHandleOutline className="text-3xl hover:text-gray-700 transition" />
 
-          <div className="relative cursor-pointer">
-            <IoBagHandleOutline className="text-2xl" />
-            <span className="absolute -top-1 -right-2 bg-red-600 text-white text-xs px-1 rounded-full">
-              0
-            </span>
+            {/* Cart item count badge */}
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
+                {cartCount}
+              </span>
+            )}
           </div>
 
           <h1 className="font-bold cursor-pointer text-md hover:bg-gray-100 px-3 py-4 hover:text-blue-500">
@@ -891,9 +909,132 @@ const Navbar = () => {
             REGISTER
           </h1>
         </div>
+        <div className="relative">
+          {/* Cart Dropdown */}
+          {isCartOpen && (
+            <div
+              className="fixed inset-0 z-50"
+              onClick={() => setIsCartOpen(false)}
+            >
+              <div
+                className="absolute right-0 top-16 w-96 max-h-[80vh] bg-white rounded-2xl shadow-2xl border overflow-hidden"
+                onClick={(e) => e.stopPropagation()} // prevents closing when clicking inside
+              >
+                <div className="p-6 bg-linear-to-b from-gray-50 to-white">
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-2xl font-bold flex items-center gap-2">
+                      <IoBagHandleOutline /> My Cart
+                    </h3>
+                    <button
+                      onClick={() => setIsCartOpen(false)}
+                      className="text-gray-500 hover:text-black text-2xl"
+                    >
+                      ×
+                    </button>
+                  </div>
+
+                  {cart.length === 0 ? (
+                    <p className="text-center text-gray-500 py-12 text-2xl font-bold">
+                      Your cart is empty
+                    </p>
+                  ) : (
+                    <>
+                      <div className="space-y-4 max-h-96 overflow-y-auto">
+                        {cart.map((item) => (
+                          <div
+                            key={item.id}
+                            className="flex gap-4 pb-4 border-b"
+                          >
+                            <img
+                              src={item.img1}
+                              alt={item.name}
+                              className="w-20 h-20 object-cover rounded-xl shadow-md"
+                            />
+                            <div className="flex-1">
+                              <h4 className="font-semibold">{item.name}</h4>
+                              <p className="text-gray-600">
+                                ${item.price} × {item.quantity}
+                              </p>
+
+                              <div className="flex items-center gap-2 mt-2">
+                                <button
+                                  onClick={() =>
+                                    updateQuantity(item.id, item.quantity - 1)
+                                  }
+                                  className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-lg"
+                                >
+                                  -
+                                </button>
+                                <span className="w-10 text-center font-medium">
+                                  {item.quantity}
+                                </span>
+                                <button
+                                  onClick={() =>
+                                    updateQuantity(item.id, item.quantity + 1)
+                                  }
+                                  className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-lg"
+                                >
+                                  +
+                                </button>
+
+                                <button
+                                  onClick={() => removeFromCart(item.id)}
+                                  className="ml-auto text-red-500 hover:text-red-700 font-medium"
+                                >
+                                  Remove
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t">
+                        <div className="flex justify-between text-xl font-bold mb-4">
+                          <span>Total</span>
+                          <span className="text-pink-600">
+                            ${cartTotal.toFixed(2)}
+                          </span>
+                        </div>
+                        <button className="w-full bg-black text-white py-4 rounded-xl font-semibold hover:bg-gray-900 transition">
+                          Proceed to Checkout
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
 
         {/* MOBILE + MD MENU BUTTON */}
-        <div className="lg:hidden flex items-center">
+        <div className="lg:hidden flex items-center gap-4">
+          <div className="relative flex items-center">
+            <MdOutlineSearch className="left-3 text-gray-500 text-lg cursor-pointer" />
+          </div>
+
+          <FiBell className="text-lg cursor-pointer" />
+          <CiHeart className="text-lg cursor-pointer" />
+          <div
+            className="relative cursor-pointer"
+            onClick={() => setIsCartOpen(!isCartOpen)}
+          >
+            <IoBagHandleOutline className="text-lg hover:text-gray-700 transition" />
+
+            {/* Cart item count badge */}
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
+                {cartCount}
+              </span>
+            )}
+          </div>
+          <h1 className="font-medium cursor-pointer text-sm hover:bg-gray-100 px-2 py-2 hover:text-blue-500">
+            LOGIN
+          </h1>
+          <h1 className="font-medium cursor-pointer text-sm hover:bg-gray-100 px-2 py-2 hover:text-blue-500">
+            REGISTER
+          </h1>
           <button onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? (
               <FiX className="text-3xl cursor-pointer hover:text-blue-500" />
@@ -924,8 +1065,6 @@ const Navbar = () => {
                   </span>
                 </Link>
               </div>
-
-              {/* Dropdown Items */}
               <div
                 className={`bg-white shadow-md rounded-md mt-2 overflow-hidden transition-all duration-1000 z-10
             ${cat.open ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}`}

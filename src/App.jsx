@@ -17,6 +17,7 @@ const App = () => {
         <main className="pt-20">
           <Routes>
             <Route path="/" element={<Home />} />
+          
           </Routes>
           <ScrollToTop />
         </main>

@@ -12,15 +12,31 @@ import { FiBell, FiMenu, FiX, FiChevronDown } from "react-icons/fi";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { useEffect } from "react";
 import { useCart } from "../../context/CartContext";
-
+import { useNavigate } from "react-router-dom";
+import SearchBox from "../../components/SearchBox";
 const Navbar = () => {
+  const [Searchopen, setSearchOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const [recent, setRecent] = useState(() => {
+    return JSON.parse(localStorage.getItem("recentSearches")) || [];
+  });
+
+  // Load products from localStorage / API
+  const [products] = useState(() => {
+    return JSON.parse(localStorage.getItem("allProducts")) || [];
+  });
+
+  const results = products.filter((p) =>
+    p.name.toLowerCase().includes(query.toLowerCase())
+  );
+
   const { cart, cartCount, cartTotal, removeFromCart, updateQuantity } =
     useCart();
   // 🟩 SAVE cart every time you update it
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
-
+  const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [womenOpen, setWomenOpen] = useState(false);
@@ -883,7 +899,18 @@ const Navbar = () => {
               type="text"
               placeholder="Search"
               className="border rounded-lg pl-10 pr-4 py-2 w-52 hover:bg-gray-100"
+              onClick={() => setSearchOpen(true)}
             />
+            {Searchopen && (
+              <SearchBox
+                query={query}
+                setQuery={setQuery}
+                recent={recent}
+                setRecent={setRecent}
+                results={results}
+                close={() => setOpen(false)}
+              />
+            )}
           </div>
 
           <FiBell className="text-xl cursor-pointer" />
@@ -1012,7 +1039,10 @@ const Navbar = () => {
         {/* MOBILE + MD MENU BUTTON */}
         <div className="lg:hidden flex items-center gap-4">
           <div className="relative flex items-center">
-            <MdOutlineSearch className="left-3 text-gray-500 text-lg cursor-pointer" />
+            <MdOutlineSearch
+              className="left-3 text-gray-500 text-lg cursor-pointer"
+              onClick={() => navigate("/search")}
+            />
           </div>
 
           <FiBell className="text-lg cursor-pointer" />

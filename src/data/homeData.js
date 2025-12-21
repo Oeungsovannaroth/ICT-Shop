@@ -26,37 +26,54 @@ const homeData = {
     ],
 
     categories: [{
+            id: "cat-1",
             name: "LIFESTYLE",
+            price: 89.99,
+            img1: "https://i.pinimg.com/736x/bf/da/4a/bfda4aee91c4273984ca28d1f87116c8.jpg", // front as main cart image
             frontImg: "https://i.pinimg.com/736x/bf/da/4a/bfda4aee91c4273984ca28d1f87116c8.jpg",
             backImg: "https://i.pinimg.com/736x/24/f2/00/24f200348979523116dc3b7f4d0e5a0c.jpg",
         },
         {
+            id: "cat-2",
             name: "SPORTLIFE",
+            price: 119.99,
+            img1: "https://i.pinimg.com/736x/5a/54/ae/5a54aede23a2cd869d9d93b3cf4a4d68.jpg",
             frontImg: "https://i.pinimg.com/736x/5a/54/ae/5a54aede23a2cd869d9d93b3cf4a4d68.jpg",
             backImg: "https://i.pinimg.com/736x/4b/45/b3/4b45b32417b475a47d4e60dc7aa4a082.jpg",
         },
         {
+            id: "cat-3",
             name: "SMART CASUAL",
+            price: 149.99,
+            img1: "https://i.pinimg.com/736x/4d/6c/eb/4d6ceb25ed5e5653319f5d58150575e4.jpg",
             frontImg: "https://i.pinimg.com/736x/4d/6c/eb/4d6ceb25ed5e5653319f5d58150575e4.jpg",
             backImg: "https://i.pinimg.com/736x/20/90/9a/20909a88c6adc72e3c745519ffd2f61c.jpg",
         },
         {
+            id: "cat-4",
             name: "TOPS",
+            price: 79.99,
+            img1: "https://koreanstyle-shop.com/cdn/shop/products/korean-outfit-suit-jacket-and-skirt_1080x.jpg?v=1627279686",
             frontImg: "https://koreanstyle-shop.com/cdn/shop/products/korean-outfit-suit-jacket-and-skirt_1080x.jpg?v=1627279686",
             backImg: "https://koreanstyle-shop.com/cdn/shop/products/korean-outfit-plaid-suit_480x480.jpg?v=1627279578",
         },
         {
+            id: "cat-5",
             name: "BOTTOMS",
+            price: 69.99,
+            img1: "https://i.pinimg.com/736x/f9/a9/38/f9a9386345e6ecd420db7b404f478bdf.jpg",
             frontImg: "https://ae-pic-a1.aliexpress-media.com/kf/S2a9c35e6869c4a8db64b81d2cfc8404cH/Summer-Mini-Dress-for-Women-Girl-Korean-Fashion-Short-Clothes-Clothing-Japanese-Preppy-Style-Student-Short.jpg_640x640Q90.jpg_.webp",
             backImg: "https://i.pinimg.com/736x/f9/a9/38/f9a9386345e6ecd420db7b404f478bdf.jpg",
         },
         {
+            id: "cat-6",
             name: "DRIFT-HALF",
+            price: 109.99,
+            img1: "https://i.pinimg.com/736x/50/80/cb/5080cbaa91f6451601401e7147e9360d.jpg",
             frontImg: "https://i.pinimg.com/736x/50/80/cb/5080cbaa91f6451601401e7147e9360d.jpg",
             backImg: "https://cdn.shopify.com/s/files/1/0767/5032/3991/files/Softboy7_480x480.jpg?v=1736066369",
         },
     ],
-
     shoes: [{
             id: 1,
             name: "Nike Odyssey React Shield",

@@ -113,16 +113,21 @@ const Navbar = () => {
             <NavigationMenuList className="flex gap-2 mr-3 text-lg font-bold">
               {categories.map((category) => {
                 const { mainLink, dropdown } = menuData[category];
-                const colCount =
-                  category === "WOMEN" || category === "MEN" ? 6 : 4;
-                const width =
+
+                // Define columns and width per category (static for Tailwind)
+                const gridColsClass =
+                  category === "WOMEN" || category === "MEN"
+                    ? "grid-cols-6"
+                    : "grid-cols-4";
+
+                const widthClass =
                   category === "WOMEN"
                     ? "w-[1250px]"
                     : category === "MEN"
                     ? "w-[1200px]"
                     : category === "BOYS"
                     ? "w-[1000px]"
-                    : "w-[900px]";
+                    : "w-[900px]"; // fallback for GIRLS or others
 
                 return (
                   <NavigationMenuItem
@@ -143,7 +148,7 @@ const Navbar = () => {
                     <div className="absolute left-0 mt-8 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-20">
                       {open && (
                         <div
-                          className={`grid grid-cols-${colCount} gap-8 px-5 py-8 ${width} transition-all duration-300 z-10`}
+                          className={`grid ${gridColsClass} gap-8 px-5 py-8 ${widthClass} transition-all duration-300 z-10`}
                         >
                           {Object.entries(dropdown).map(
                             ([sectionTitle, items]) => (

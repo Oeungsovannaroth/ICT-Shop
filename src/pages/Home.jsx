@@ -4,7 +4,7 @@ import NewsTicker from "../components/NewsTicker";
 import { IoCart } from "react-icons/io5";
 import { useCart } from "../context/CartContext";
 import homeData from "../data/homeData";
-
+import ProductDetails from "./ProductDetails";
 const Home = () => {
   const { addToCart } = useCart();
 
@@ -48,7 +48,11 @@ const Home = () => {
             <Link to="/Women">SHOP WOMEN</Link>
           </button>
         </div>
-        <img className="w-full h-auto" src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xvdGhpbmclMjBicmFuZHxlbnwwfHwwfHx8MA%3D%3D" alt="cover" />
+        <img
+          className="w-full h-auto"
+          src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xvdGhpbmclMjBicmFuZHxlbnwwfHwwfHx8MA%3D%3D"
+          alt="cover"
+        />
       </section>
 
       {/* Brand Links */}
@@ -115,21 +119,23 @@ const Home = () => {
       {/* Big Flip Cards - ONLY THIS SECTION FIXED */}
       <section className="mb-35 mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {categories.map((item, index) => (
+          {homeData.categories.map((item, index) => (
             <div key={index} className="flex flex-col items-center w-full">
               {/* Mobile */}
               <div className="reveal opacity-0 translate-y-10 transition-all duration-1300 ease-out w-full bg-white shadow-lg rounded-xl p-4 flex flex-col items-center block lg:hidden">
-                <img
-                  src={item.frontImg}
-                  alt={item.name}
-                  className="rounded-lg mb-4"
-                />
+                <Link to={`ProductDetails/${item.id}`}>
+                  <img
+                    src={item.frontImg}
+                    alt={item.name}
+                    className="rounded-lg mb-4"
+                  />
+                </Link>
                 <h2 className="font-semibold text-lg text-center">
                   {item.name}
                 </h2>
-                <button 
+                <button
                   onClick={() => addToCart(item)}
-                  className="mt-4 px-4 py-2 bg-black text-white rounded-full w-full"
+                  className="mt-4 px-4 py-2 bg-black text-white rounded-full w-full cursor-pointer"
                 >
                   Buy Now
                 </button>
@@ -149,14 +155,19 @@ const Home = () => {
                     </h2>
                   </div>
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-4 rotate-y-180 backface-hidden">
-                    <img
-                      src={item.backImg}
-                      alt={item.name}
+                    <Link
+                      to={`ProductDetails/${item.id}`}
                       className="w-full h-full rounded-lg mb-4 object-cover"
-                    />
-                    <button 
+                    >
+                      <img
+                        src={item.backImg}
+                        alt={item.name}
+                        className="w-full h-full rounded-lg mb-4 object-cover"
+                      />
+                    </Link>
+                    <button
                       onClick={() => addToCart(item)}
-                      className="mt-4 px-4 py-2 bg-black text-white rounded-full"
+                      className="mt-4 px-4 py-2 bg-black text-white rounded-full cursor-pointer"
                     >
                       Buy Now
                     </button>
@@ -180,7 +191,7 @@ const Home = () => {
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {shoes.map((shoe) => (
+          {homeData.shoes.map((shoe) => (
             <li
               key={shoe.id}
               className="relative group h-120 bg-gray-100 rounded-2xl shadow-xl overflow-hidden reveal opacity-0 translate-y-10 transition-all duration-2500 ease-in"
@@ -197,18 +208,20 @@ const Home = () => {
               </p>
               <p
                 onClick={() => addToCart(shoe)}
-                className="absolute bottom-3 right-3 bg-white px-2 py-1 text-sm font-medium flex items-center gap-2 hover:bg-gray-200 cursor-pointer rounded-md"
-              >
+                className="absolute bottom-3 right-3 text-pink-800 bg-white px-2 py-1 text-sm font-medium flex items-center gap-2 hover:bg-gray-200 cursor-pointer rounded-md"
+              >Add To Cart
                 {shoe.addcart} <IoCart />
               </p>
-              <img
-                src={shoe.img1}
-                alt=""
-                className="absolute w-[80%] top-1/2 left-1/2 -translate-x-[70%] -translate-y-[105%] rotate-[-45deg] transition-all duration-300 group-hover:w-[120%] group-hover:-translate-y-[75%]"
-              />
+              <Link to={`ProdcutDetails/${shoe.id}`}>
+                <img
+                  src={shoe.img1}
+                  alt={shoe.img1}
+                  className="absolute cursor-pointer w-[80%] top-1/2 left-1/2 -translate-x-[70%] -translate-y-[105%] rotate-[-45deg] transition-all duration-300 group-hover:w-[120%] group-hover:-translate-y-[75%]"
+                />
+              </Link>
               <img
                 src={shoe.img2}
-                alt=""
+                alt={shoe.img2}
                 className="absolute w-[80%] top-1/2 left-1/2 translate-x-[-30%] translate-y-[5%] rotate-[135deg] transition-all duration-300 group-hover:w-[60%] group-hover:translate-x-[-15%] group-hover:translate-y-[60%]"
               />
             </li>
@@ -228,17 +241,19 @@ const Home = () => {
           </Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto px-4 mt-6">
-          {lifestyleProducts.map((item) => (
+          {homeData.lifestyleProducts.map((item) => (
             <div key={item.id} className="flex flex-col">
               <div className="relative w-full overflow-hidden rounded-xl cursor-pointer reveal opacity-0 translate-y-10 transition-all duration-2500 ease-out">
                 <span className="absolute top-3 left-3 bg-red-500 text-white text-sm px-2 py-1 rounded-md">
                   {item.discount}
                 </span>
-                <img
-                  src={item.img}
-                  alt={item.name}
-                  className="w-full object-cover hover:scale-105 transition-transform duration-300"
-                />
+                <Link to={`ProductDetails/${item.id}`}>
+                  <img
+                    src={item.img}
+                    alt={item.name}
+                    className="w-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </Link>
               </div>
               <div className="mt-10 text-left">
                 <div className="flex items-center gap-2">
@@ -268,17 +283,19 @@ const Home = () => {
           </Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto px-4 mt-6">
-          {driftProducts.map((item) => (
+          {homeData.driftProducts.map((item) => (
             <div key={item.id} className="flex flex-col">
               <div className="relative w-full overflow-hidden rounded-xl cursor-pointer reveal opacity-0 translate-y-10 transition-all duration-2500 ease-out">
                 <span className="absolute top-3 left-3 bg-red-500 text-white text-sm px-2 py-1 rounded-md">
                   {item.discount}
                 </span>
-                <img
-                  src={item.img}
-                  alt={item.name}
-                  className="w-full object-cover hover:scale-105 transition-transform duration-300"
-                />
+                <Link to={`ProductDetails/${item.id}`}>
+                  <img
+                    src={item.img}
+                    alt={item.name}
+                    className="w-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </Link>
               </div>
               <div className="mt-10 text-left">
                 <div className="flex items-center gap-2">

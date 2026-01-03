@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import {
-  Star,
-  Heart,
-  Minus,
-  Plus,
-  X,
-} from "lucide-react";
+import { useState} from "react";
+import { Star, Heart, Minus, Plus, X } from "lucide-react";
+import { IoCart } from "react-icons/io5"; // ← Added
 import { useParams, Link } from "react-router-dom";
+import { useCart } from "../context/CartContext"; // ← Added
 import homeData from "../data/homeData";
+import { useWishlist } from "../context/WishlistContext";
 
 export default function ProductDetails() {
   const { id } = useParams();
+  const { addToCart } = useCart(); // ← Get addToCart from context
 
   let product = null;
 
@@ -30,7 +28,9 @@ export default function ProductDetails() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-light text-gray-800 mb-4">Product Not Found</h1>
+          <h1 className="text-2xl font-light text-gray-800 mb-4">
+            Product Not Found
+          </h1>
           <Link to="/" className="text-blue-600 hover:underline">
             ← Back to Home
           </Link>
@@ -44,7 +44,7 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [isFullView, setIsFullView] = useState(false);
-
+const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   const images = [];
   if (product.frontImg) images.push(product.frontImg);
   if (product.backImg) images.push(product.backImg);
@@ -53,7 +53,9 @@ export default function ProductDetails() {
   if (product.img) images.push(product.img);
 
   if (images.length === 0) {
-    images.push("https://via.placeholder.com/800x1000/f5f5f5/cccccc?text=No+Image");
+    images.push(
+      "https://via.placeholder.com/800x1000/f5f5f5/cccccc?text=No+Image"
+    );
   }
 
   const colors = [
@@ -65,17 +67,16 @@ export default function ProductDetails() {
 
   const sizes = ["XXS", "XS", "S", "M", "L", "XL"];
 
-  const currentPrice = product.price?.toFixed(2);
-  const oldPrice = product.oldPrice || null;
-  const discount = product.discount || null;
+  const totalPrice = product.price
+    ? (product.price * quantity).toFixed(2)
+    : "0.00";
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-6xl mx-auto px-6 py-10 lg:px-10 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-          {/* Image Gallery - Compact */}
+          {/* Image Gallery */}
           <div className="space-y-4">
-            {/* Main Image */}
             <div
               className="relative aspect-[4/5] bg-white rounded-xl overflow-hidden shadow-md cursor-zoom-in"
               onClick={() => setIsFullView(true)}
@@ -87,7 +88,6 @@ export default function ProductDetails() {
               />
             </div>
 
-            {/* Thumbnails - Small & Horizontal */}
             {images.length > 1 && (
               <div className="grid grid-cols-6 gap-3">
                 {images.map((img, index) => (
@@ -100,31 +100,48 @@ export default function ProductDetails() {
                         : "border-gray-200 hover:border-gray-400"
                     }`}
                   >
-                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    <img
+                      src={img}
+                      alt=""
+                      className="w-full h-full object-cover"
+                    />
                   </button>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Product Info - Compact & Clean */}
+          {/* Product Info */}
           <div className="space-y-8">
-            {/* Breadcrumb */}
             <nav className="text-sm text-gray-500">
-              <Link to="/" className="hover:underline">Home</Link> / {product.name}
+              <Link to="/" className="hover:underline">
+                Home
+              </Link>{" "}
+              / {product.name}
             </nav>
 
-            {/* Title + Heart */}
             <div className="flex justify-between items-start">
               <h1 className="text-3xl lg:text-4xl font-light leading-tight">
                 {product.name || "Product Name"}
               </h1>
-              <button className="p-2 hover:bg-gray-100 rounded-full transition">
-                <Heart className="w-6 h-6" />
+              <button
+                className="p-3 hover:bg-gray-100 rounded-full transition"
+                onClick={() => {
+                  if (isInWishlist(product.id)) {  
+                    removeFromWishlist(product.id);
+                  } else {
+                    addToWishlist(product);
+                  }
+                }}
+              >
+                <Heart
+                  className="w-7 h-7"
+                  fill={isInWishlist(product.id) ? "red" : "none"}
+                  strokeWidth={2}
+                />
               </button>
             </div>
 
-            {/* Rating */}
             <div className="flex items-center gap-3">
               <div className="flex">
                 {[1, 2, 3, 4, 5].map((i) => (
@@ -134,22 +151,22 @@ export default function ProductDetails() {
               <span className="text-sm underline">122 reviews</span>
             </div>
 
-            {/* Price */}
             <div className="flex items-center gap-4">
-              {oldPrice && (
+              {product.oldPrice && (
                 <span className="text-xl text-gray-500 line-through">
-                  ${oldPrice.toFixed(2)}
+                  ${product.oldPrice.toFixed(2)}
                 </span>
               )}
-              <span className="text-3xl font-medium">${currentPrice}</span>
-              {discount && (
+              <span className="text-3xl font-medium">
+                ${product.price?.toFixed(2)}
+              </span>
+              {product.discount && (
                 <span className="bg-red-600 text-white px-3 py-1 rounded text-sm font-semibold">
-                  {discount}
+                  {product.discount}
                 </span>
               )}
             </div>
 
-            {/* Color */}
             <div className="space-y-3">
               <p className="text-sm">
                 Color: <span className="font-medium">{selectedColor}</span>
@@ -159,7 +176,9 @@ export default function ProductDetails() {
                   <button
                     key={color.name}
                     onClick={() => setSelectedColor(color.name)}
-                    className={`w-10 h-10 rounded-full ${color.hex} ring-2 ring-offset-2 transition-all ${
+                    className={`w-10 h-10 rounded-full ${
+                      color.hex
+                    } ring-2 ring-offset-2 transition-all ${
                       selectedColor === color.name
                         ? "ring-black"
                         : "ring-transparent hover:ring-gray-400"
@@ -169,7 +188,6 @@ export default function ProductDetails() {
               </div>
             </div>
 
-            {/* Size */}
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span>Size</span>
@@ -212,16 +230,34 @@ export default function ProductDetails() {
                 </button>
               </div>
 
-              <button className="flex-1 bg-black text-white py-4 rounded font-medium hover:bg-gray-800 transition">
-                ADD TO CART
+              <button
+                className="flex-1 bg-black text-white py-4 rounded font-medium hover:bg-gray-800 transition flex items-center justify-center gap-2"
+                onClick={() => {
+                  const itemToAdd = {
+                    ...product,
+                    quantity,
+                    selectedSize,
+                    selectedColor,
+                  };
+                  addToCart(itemToAdd);
+                  // alert(`${quantity} × ${product.name} added to cart!`);
+                }}
+              >
+                <span className="flex items-center gap-2">
+                  ADD TO CART
+                  {product.addcart && <IoCart className="text-lg" />}
+                </span>
+                <span className="text-sm opacity-80 mt-1 block">
+                  ${totalPrice}
+                </span>
               </button>
             </div>
 
-            {/* Description */}
             <div className="pt-8 border-t border-gray-200">
               <h3 className="font-medium mb-3">Description</h3>
               <p className="text-gray-700 text-sm leading-relaxed">
-                Premium quality garment crafted with attention to detail. Designed for comfort and style.
+                Premium quality garment crafted with attention to detail.
+                Designed for comfort and style.
               </p>
             </div>
           </div>

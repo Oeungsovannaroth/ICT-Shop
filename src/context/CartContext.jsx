@@ -1,65 +1,89 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import toast from "react-hot-toast"; // optional, for nice alerts
+import toast from "react-hot-toast";
 
 const CartContext = createContext();
 
-export const useCart = () => useContext(CartContext);
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
+};
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-  // Load cart from localStorage when app starts (runs only once)
+  // Load cart from localStorage on initial load
   useEffect(() => {
     try {
       const savedCart = localStorage.getItem("shoeStoreCart");
       if (savedCart) {
-        setCart(JSON.parse(savedCart));
-        // toast.success("Cart restored!");
+        const parsed = JSON.parse(savedCart);
+        setCart(parsed);
+        // Optional: nice feedback when cart is restored
+        // toast.success("Your cart has been restored!");
       }
     } catch (error) {
-      console.error("Failed to load cart:", error);
+      console.error("Failed to load cart from localStorage:", error);
+      // Optional: fallback to empty cart
+      setCart([]);
     }
-  }, []);
+  }, []); // Empty dependency → runs only once on mount
 
-  // Save cart to localStorage every time it changes
+  // Save cart to localStorage whenever it changes
   useEffect(() => {
     try {
       localStorage.setItem("shoeStoreCart", JSON.stringify(cart));
     } catch (error) {
-      console.error("Failed to save cart:", error);
+      console.error("Failed to save cart to localStorage:", error);
+      toast.error("Could not save cart");
     }
   }, [cart]);
 
-  const addToCart = (shoe) => {
+  const addToCart = (product) => {
     setCart((prev) => {
-      const existing = prev.find((item) => item.id === shoe.id);
+      const existing = prev.find((item) => item.id === product.id);
       if (existing) {
-        toast.success(`+1 ${shoe.name}`);
+        toast.success(`+1 ${product.name}`);
         return prev.map((item) =>
-          item.id === shoe.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + (product.quantity || 1) }
+            : item
         );
       }
-      toast.success(`${shoe.name} added to cart!`);
-      return [...prev, { ...shoe, quantity: 1 }];
+      toast.success(`${product.name} added to cart!`);
+      return [...prev, { ...product, quantity: product.quantity || 1 }];
     });
   };
 
   const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
-    toast.error("Item removed");
+    setCart((prev) => {
+      const removedItem = prev.find((item) => item.id === id);
+      const newCart = prev.filter((item) => item.id !== id);
+      if (removedItem) {
+        toast.error(`${removedItem.name} removed from cart`);
+      }
+      return newCart;
+    });
   };
 
-  const updateQuantity = (id, quantity) => {
-    if (quantity <= 0) {
+  const updateQuantity = (id, newQuantity) => {
+    if (newQuantity <= 0) {
       removeFromCart(id);
       return;
     }
     setCart((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, quantity } : item))
+      prev.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
     );
   };
 
-  const clearCart = () => setCart([]);
+  const clearCart = () => {
+    setCart([]);
+    toast.success("Cart cleared");
+  };
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const cartTotal = cart.reduce(

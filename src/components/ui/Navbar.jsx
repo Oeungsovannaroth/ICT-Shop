@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -8,12 +8,16 @@ import {
 import { Link } from "react-router-dom";
 import { MdOutlineSearch } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
+import { Heart } from "lucide-react"; // filled + outline in one
+import { useWishlist } from "../../context/WishlistContext";
 import { FiBell, FiMenu, FiX } from "react-icons/fi";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { useCart } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import menuData from "../../data/menuData";
 import homeData from "../../data/homeData";
+import { ShoppingBag } from "lucide-react";
+import ProductDetails from "../../pages/ProductDetails";
 
 const Navbar = () => {
   const [Searchopen, setSearchOpen] = useState(false);
@@ -22,7 +26,8 @@ const Navbar = () => {
     const saved = localStorage.getItem("recentSearches");
     return saved ? JSON.parse(saved) : [];
   });
-
+  const [openCategories, setOpenCategories] = useState({});
+  // Example: { women: true, men: false, boys: false }
   const { cart, cartCount, cartTotal, removeFromCart, updateQuantity } =
     useCart();
   const navigate = useNavigate();
@@ -31,31 +36,28 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const timeoutRef = useRef(null);
-
+  const { wishlistCount, addToWishlist, removeFromWishlist, isInWishlist } =
+    useWishlist();
   // === ALL PRODUCTS FROM HOME PAGE FOR SEARCH ===
   const allHomeProducts = useMemo(() => {
     const { shoes, lifestyleProducts, driftProducts } = homeData;
-    const products = [
+    return [
       ...shoes.map((item) => ({
         ...item,
-        id: `shoe-${item.id}`,
         category: "Shoes",
-        img: item.img1,
+        img: item.img1 || item.img,
       })),
       ...lifestyleProducts.map((item) => ({
         ...item,
-        id: `lifestyle-${item.id}`,
         category: "Lifestyle",
         img: item.img,
       })),
       ...driftProducts.map((item) => ({
         ...item,
-        id: `drift-${item.id}`,
         category: "Q-Drift",
         img: item.img,
       })),
     ];
-    return products;
   }, []);
 
   const results = useMemo(() => {
@@ -93,7 +95,8 @@ const Navbar = () => {
   // === SAVE CART ===
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+  }, [cart]);// In your Navbar component
+const [isWishlistOpen, setIsWishlistOpen] = useState(false);
 
   const categories = Object.keys(menuData);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -191,7 +194,7 @@ const Navbar = () => {
 
         {/* Logo */}
         <h1 className="text-sm lg:text-3xl font-extrabold tracking-[1px]">
-          ICT SHOP.
+          <Link to="/">ICT SHOP</Link>
         </h1>
 
         {/* Desktop Icons */}
@@ -207,9 +210,35 @@ const Navbar = () => {
             />
           </div>
 
-          <FiBell className="text-xl cursor-pointer" />
-          <CiHeart className="text-2xl cursor-pointer" />
+          <div className="relative cursor-pointer">
+            <Heart
+              className="text-3xl hover:text-gray-700 transition"
+              fill={
+                typeof product !== "undefined" &&
+                isInWishlist(ProductDetails.id)
+                  ? "red"
+                  : "none"
+              }
+              strokeWidth={2}
+              onClick={() => {
+                // Always toggle wishlist (never navigate)
+                if (typeof product !== "undefined") {
+                  if (isInWishlist(ProductDetails.id)) {
+                    removeFromWishlist(ProductDetails.id);
+                  } else {
+                    addToWishlist(ProductDetails);
+                  }
+                }
+              }}
+            />
+            {wishlistCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
+                {wishlistCount}
+              </span>
+            )}
+          </div>
 
+          {/* Your cart icon - unchanged */}
           <div
             className="relative cursor-pointer"
             onClick={() => setIsCartOpen(!isCartOpen)}
@@ -248,8 +277,36 @@ const Navbar = () => {
             className="text-lg cursor-pointer"
             onClick={() => setSearchOpen(true)}
           />
-          <FiBell className="text-lg cursor-pointer" />
-          <CiHeart className="text-lg cursor-pointer" />
+
+          <div className="relative cursor-pointer">
+            <Heart
+              className="w-7 h-7 hover:text-red-500 transition"
+              fill={
+                typeof product !== "undefined" && isInWishlist(product.id)
+                  ? "red"
+                  : "none"
+              }
+              strokeWidth={2}
+              onClick={() => {
+                if (typeof product === "undefined") {
+                  // If on navbar without product context → go to wishlist page
+                  navigate("/wishlist");
+                } else {
+                  // Toggle wishlist
+                  if (isInWishlist(product.id)) {
+                    removeFromWishlist(product.id);
+                  } else {
+                    addToWishlist(product);
+                  }
+                }
+              }}
+            />
+            {wishlistCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {wishlistCount}
+              </span>
+            )}
+          </div>
           <div
             className="relative cursor-pointer"
             onClick={() => setIsCartOpen(!isCartOpen)}
@@ -354,7 +411,7 @@ const Navbar = () => {
                   {results.map((product) => (
                     <Link
                       key={product.id}
-                      to={`/product/${product.id}`}
+                      to={`ProductDetails/${product.id}`}
                       onClick={() => {
                         addToRecent(product.name);
                         setSearchOpen(false);
@@ -441,9 +498,35 @@ const Navbar = () => {
               </div>
 
               {cart.length === 0 ? (
-                <p className="text-center text-gray-500 py-12 text-2xl font-bold">
-                  Your cart is empty
-                </p>
+                <div className="flex flex-col items-center justify-center py-20 px-6 text-center">
+                  {/* Simple icon */}
+                  <ShoppingBag className="w-24 h-24 text-gray-300 mb-8" />
+
+                  {/* Clear message */}
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                    Your bag is empty
+                  </h2>
+                  <p className="text-gray-600 mb-10 max-w-sm">
+                    Looks like you haven't added anything yet. Start exploring
+                    our latest styles!
+                  </p>
+
+                  {/* Simple buttons */}
+                  <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xs">
+                    <Link
+                      to="/men"
+                      className="px-8 py-4 bg-black text-white rounded-lg font-medium hover:bg-gray-800 transition"
+                    >
+                      Shop Men
+                    </Link>
+                    <Link
+                      to="/women"
+                      className="px-8 py-4 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-700 transition"
+                    >
+                      Shop Women
+                    </Link>
+                  </div>
+                </div>
               ) : (
                 <>
                   <div className="space-y-4 max-h-96 overflow-y-auto">
@@ -511,47 +594,70 @@ const Navbar = () => {
 
       {/* MOBILE MENU */}
       {mobileOpen && (
-        <div className="lg:hidden px-6 pb-4 mt-16 bg-white shadow-lg">
+        <div className="lg:hidden fixed inset-x-0 top-16 bg-white shadow-lg z-50 overflow-y-auto max-h-[calc(100vh-4rem)]">
+          {/* Use a single state object to track which category is open */}
           {categories.map((category) => {
             const { mainLink, dropdown } = menuData[category];
-            const [isOpen, setIsOpen] = useState(false);
+
+            // Unique key for each category
+            const categoryKey = category.toLowerCase();
 
             return (
-              <div key={category} className="border-b">
-                <Link
-                  to={mainLink}
-                  onClick={() => setIsOpen(!isOpen)}
-                  className="w-full flex justify-between items-center py-3 font-bold text-xl hover:text-blue-500"
+              <div key={category} className="border-b border-gray-200">
+                <button
+                  onClick={() => {
+                    // Toggle this specific category
+                    setOpenCategories((prev) => ({
+                      ...prev,
+                      [categoryKey]: !prev[categoryKey],
+                    }));
+                  }}
+                  className="w-full flex justify-between items-center py-4 px-6 font-bold text-xl hover:text-blue-500 transition"
                 >
-                  {category}
-                  <span>
-                    {isOpen ? <FiX /> : <FiMenu className="text-lg" />}
+                  <Link
+                    to={mainLink}
+                    className="flex-1 text-left"
+                    onClick={(e) => e.stopPropagation()} // Prevent toggle when clicking link
+                  >
+                    {category}
+                  </Link>
+                  <span className="ml-4">
+                    {openCategories[categoryKey] ? (
+                      <FiX className="text-2xl" />
+                    ) : (
+                      <FiMenu className="text-2xl" />
+                    )}
                   </span>
-                </Link>
+                </button>
 
-                {isOpen && (
-                  <div className="pl-4 py-2 space-y-4">
-                    {Object.entries(dropdown).map(([section, items]) => (
-                      <div key={section}>
+                {/* Dropdown content */}
+                {openCategories[categoryKey] && dropdown && (
+                  <div className="px-6 pb-4 pl-10 space-y-6">
+                    {Object.entries(dropdown).map(([sectionTitle, items]) => (
+                      <div key={sectionTitle}>
                         <h4
-                          className={`font-semibold mb-2 ${
-                            section === "Sale" ? "text-red-700" : ""
+                          className={`font-semibold mb-3 text-lg ${
+                            sectionTitle === "Sale"
+                              ? "text-red-700"
+                              : "text-gray-800"
                           }`}
                         >
-                          {section}
+                          {sectionTitle}
                         </h4>
-                        {items.map((item) => (
-                          <Link
-                            key={item.name}
-                            to={item.path}
-                            className={`block py-1 text-gray-700 hover:text-pink-600 ${
-                              item.color || ""
-                            }`}
-                            onClick={() => setMobileOpen(false)}
-                          >
-                            {item.name}
-                          </Link>
-                        ))}
+                        <div className="space-y-2">
+                          {items.map((item) => (
+                            <Link
+                              key={item.name}
+                              to={item.path}
+                              className={`block py-2 text-gray-700 hover:text-pink-600 transition ${
+                                item.color || ""
+                              }`}
+                              onClick={() => setMobileOpen(false)} // Close menu on item click
+                            >
+                              {item.name}
+                            </Link>
+                          ))}
+                        </div>
                       </div>
                     ))}
                   </div>

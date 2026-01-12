@@ -29,7 +29,7 @@ const menuData = {
                 { name: "Shorts", path: "/Women/Clothing/Shorts" },
                 {
                     name: "Hoodies & Sweatshirts",
-                    path: "/Women/Clothing/HoodiesSweatshirts"
+                    path: "/Women/Clothing/HoodiesSweat"
                 }
             ],
             Shoes: [

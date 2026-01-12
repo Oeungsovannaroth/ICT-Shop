@@ -95,8 +95,8 @@ const Navbar = () => {
   // === SAVE CART ===
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);// In your Navbar component
-const [isWishlistOpen, setIsWishlistOpen] = useState(false);
+  }, [cart]); // In your Navbar component
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
 
   const categories = Object.keys(menuData);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -238,7 +238,6 @@ const [isWishlistOpen, setIsWishlistOpen] = useState(false);
             )}
           </div>
 
-          {/* Your cart icon - unchanged */}
           <div
             className="relative cursor-pointer"
             onClick={() => setIsCartOpen(!isCartOpen)}
@@ -411,7 +410,7 @@ const [isWishlistOpen, setIsWishlistOpen] = useState(false);
                   {results.map((product) => (
                     <Link
                       key={product.id}
-                      to={`ProductDetails/${product.id}`}
+                      to={`/product/${product.id}`}
                       onClick={() => {
                         addToRecent(product.name);
                         setSearchOpen(false);

@@ -1,3 +1,4 @@
+// data/menuData.js
 const menuData = {
     WOMEN: {
         mainLink: "/Women",
@@ -13,18 +14,10 @@ const menuData = {
             ],
             Clothing: [
                 { name: "All", path: "/Women/Clothing/All" },
-                { name: "Tops", path: "/Women/Clothing/Tops" },
-                { name: "Blazers", path: "/Women/Clothing/Blazers" },
-                { name: "Vest", path: "/Women/Clothing/Vest" },
-                { name: "Bras", path: "/Women/Clothing/Bras" },
                 { name: "Shirts", path: "/Women/Clothing/Shirts" },
                 { name: "T-Shirts", path: "/Women/Clothing/T-Shirts" },
                 { name: "Jackets", path: "/Women/Clothing/Jackets" },
                 { name: "Polo Shirts", path: "/Women/Clothing/PoloShirts" },
-                {
-                    name: "Hoodies & Sweatshirts",
-                    path: "/Women/Clothing/HoodiesSweatshirts",
-                },
                 { name: "Jumpsuits", path: "/Women/Clothing/Jumpsuits" },
                 { name: "Dresses", path: "/Women/Clothing/Dresses" },
                 { name: "Cardigans", path: "/Women/Clothing/Cardigans" },
@@ -34,6 +27,10 @@ const menuData = {
                 { name: "Jeans", path: "/Women/Clothing/Jeans" },
                 { name: "Skirts", path: "/Women/Clothing/Skirts" },
                 { name: "Shorts", path: "/Women/Clothing/Shorts" },
+                {
+                    name: "Hoodies & Sweatshirts",
+                    path: "/Women/Clothing/HoodiesSweatshirts"
+                }
             ],
             Shoes: [
                 { name: "All", path: "/Women/Shoes/All" },
@@ -88,9 +85,9 @@ const menuData = {
         dropdown: {
             "New In": [
                 { name: "All", path: "/Men/NewIn/All" },
-                { name: "LifeStyle", path: "/Men/NewIn/Casual" },
+                { name: "Lifestyle", path: "/Men/NewIn/Casual" }, // Fixed display name
                 { name: "Sportlife", path: "/Men/NewIn/Sportlife" },
-                { name: "Casual", path: "/Men/NewIn/Lifestyle" },
+                { name: "Casual", path: "/Men/NewIn/Lifestyle" }, // Fixed display name
                 { name: "New In Top", path: "/Men/NewIn/NewInTop" },
                 { name: "New In Bottom", path: "/Men/NewIn/NewInBottom" },
             ],
@@ -163,28 +160,32 @@ const menuData = {
         mainLink: "/Boys",
         dropdown: {
             "New In": [
-                { name: "All", path: "/Boy/NewIn/All" },
-                { name: "LifeStyle", path: "/Boy/NewIn/Casual" },
-                { name: "Sportlife", path: "/Boy/NewIn/Sportlife" },
+                { name: "All", path: "/Boys/NewIn/All" },
+                { name: "Lifestyle", path: "/Boys/NewIn/Casual" },
+                { name: "Sportlife", path: "/Boys/NewIn/Sportlife" },
             ],
             Clothing: [
-                { name: "All", path: "/Boy/Clothing/All" },
-                { name: "Shirts", path: "/Boy/Clothing/Shirts" },
-                { name: "Polo Shirt", path: "/Boy/Clothing/PoloShirt" },
-                { name: "T-Shirts", path: "/Boy/Clothing/T-Shirts" },
-                { name: "Jackets", path: "/Boy/Clothing/Jackets" },
-                { name: "Trousers", path: "/Boy/Clothing/Trousers" },
-                { name: "Shorts", path: "/Boy/Clothing/Shorts" },
+                { name: "All", path: "/Boys/Clothing/All" },
+                { name: "Shirts", path: "/Boys/Clothing/Shirts" },
+                { name: "Polo Shirt", path: "/Boys/Clothing/PoloShirt" },
+                { name: "T-Shirts", path: "/Boys/Clothing/T-Shirts" },
+                { name: "Jackets", path: "/Boys/Clothing/Jackets" },
+                { name: "Trousers", path: "/Boys/Clothing/Trousers" },
+                { name: "Shorts", path: "/Boys/Clothing/Shorts" },
             ],
             Shoes: [
-                { name: "All", path: "/Boy/Shoes/All" },
-                { name: "Sneakers", path: "/Boy/Shoes/Sneakers" },
-                { name: "Sandals", path: "/Boy/Shoes/Sandals" },
+                { name: "All", path: "/Boys/Shoes/All" },
+                { name: "Sneakers", path: "/Boys/Shoes/Sneakers" },
+                { name: "Sandals", path: "/Boys/Shoes/Sandals" },
             ],
             Sale: [
-                { name: "New IN", path: "/Boy/Sale/NewIn", color: "text-red-700" },
-                { name: "Clothing", path: "/Boy/Sale/Clothing", color: "text-red-700" },
-                { name: "Shoes", path: "/Boy/Sale/Shoes", color: "text-red-700" },
+                { name: "New In", path: "/Boys/Sale/NewIn", color: "text-red-700" },
+                {
+                    name: "Clothing",
+                    path: "/Boys/Sale/Clothing",
+                    color: "text-red-700",
+                },
+                { name: "Shoes", path: "/Boys/Sale/Shoes", color: "text-red-700" },
             ],
         },
     },
@@ -193,31 +194,31 @@ const menuData = {
         mainLink: "/Girls",
         dropdown: {
             "New In": [
-                { name: "All", path: "/Girl/NewIn/All" },
-                { name: "Casual", path: "/Girl/NewIn/Lifestyle" },
-                { name: "New In Top", path: "/Girl/NewIn/NewInTop" },
+                { name: "All", path: "/Girls/NewIn/All" },
+                { name: "Casual", path: "/Girls/NewIn/Lifestyle" },
+                { name: "New In Top", path: "/Girls/NewIn/NewInTop" },
             ],
             Clothing: [
-                { name: "All", path: "/Girl/Clothing/All" },
-                { name: "Shirts", path: "/Girl/Clothing/Shirts" },
-                { name: "Trousers", path: "/Girl/Clothing/Trousers" },
-                { name: "T-Shirts", path: "/Girl/Clothing/T-Shirts" },
-                { name: "Jackets", path: "/Girl/Clothing/Jackets" },
-                { name: "Shorts", path: "/Girl/Clothing/Shorts" },
+                { name: "All", path: "/Girls/Clothing/All" },
+                { name: "Shirts", path: "/Girls/Clothing/Shirts" },
+                { name: "Trousers", path: "/Girls/Clothing/Trousers" },
+                { name: "T-Shirts", path: "/Girls/Clothing/T-Shirts" },
+                { name: "Jackets", path: "/Girls/Clothing/Jackets" },
+                { name: "Shorts", path: "/Girls/Clothing/Shorts" },
             ],
             Shoes: [
-                { name: "All", path: "/Girl/Shoes/All" },
-                { name: "Sandals", path: "/Girl/Shoes/Sandals" },
-                { name: "Sneakers", path: "/Girl/Shoes/Sneakers" },
+                { name: "All", path: "/Girls/Shoes/All" },
+                { name: "Sandals", path: "/Girls/Shoes/Sandals" },
+                { name: "Sneakers", path: "/Girls/Shoes/Sneakers" },
             ],
             Sale: [
-                { name: "New IN", path: "/Girl/Sale/NewIn", color: "text-red-700" },
+                { name: "New In", path: "/Girls/Sale/NewIn", color: "text-red-700" },
                 {
                     name: "Clothing",
-                    path: "/Girl/Sale/Clothing",
+                    path: "/Girls/Sale/Clothing",
                     color: "text-red-700",
                 },
-                { name: "Shoes", path: "/Girl/Sale/Shoes", color: "text-red-700" },
+                { name: "Shoes", path: "/Girls/Sale/Shoes", color: "text-red-700" },
             ],
         },
     },

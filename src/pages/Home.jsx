@@ -4,7 +4,7 @@ import NewsTicker from "../components/NewsTicker";
 import { IoCart } from "react-icons/io5";
 import { useCart } from "../context/CartContext";
 import homeData from "../data/homeData";
-import ProductDetails from "./ProductDetails";
+
 const Home = () => {
   const { addToCart } = useCart();
 
@@ -123,7 +123,7 @@ const Home = () => {
             <div key={index} className="flex flex-col items-center w-full">
               {/* Mobile */}
               <div className="reveal opacity-0 translate-y-10 transition-all duration-1300 ease-out w-full bg-white shadow-lg rounded-xl p-4 flex flex-col items-center block lg:hidden">
-                <Link to={`ProductDetails/${item.id}`}>
+                <Link to={`product/${item.id}`}>
                   <img
                     src={item.frontImg}
                     alt={item.name}
@@ -156,7 +156,7 @@ const Home = () => {
                   </div>
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-4 rotate-y-180 backface-hidden">
                     <Link
-                      to={`ProductDetails/${item.id}`}
+                      to={`product/${item.id}`}
                       className="w-full h-full rounded-lg mb-4 object-cover"
                     >
                       <img
@@ -209,10 +209,11 @@ const Home = () => {
               <p
                 onClick={() => addToCart(shoe)}
                 className="absolute bottom-3 right-3 text-pink-800 bg-white px-2 py-1 text-sm font-medium flex items-center gap-2 hover:bg-gray-200 cursor-pointer rounded-md"
-              >Add To Cart
+              >
+                Add To Cart
                 {shoe.addcart} <IoCart />
               </p>
-              <Link to={`ProdcutDetails/${shoe.id}`}>
+              <Link to={`/product/${shoe.id}`}>
                 <img
                   src={shoe.img1}
                   alt={shoe.img1}
@@ -247,7 +248,7 @@ const Home = () => {
                 <span className="absolute top-3 left-3 bg-red-500 text-white text-sm px-2 py-1 rounded-md">
                   {item.discount}
                 </span>
-                <Link to={`ProductDetails/${item.id}`}>
+                <Link to={`product/${item.id}`}>
                   <img
                     src={item.img}
                     alt={item.name}
@@ -289,7 +290,7 @@ const Home = () => {
                 <span className="absolute top-3 left-3 bg-red-500 text-white text-sm px-2 py-1 rounded-md">
                   {item.discount}
                 </span>
-                <Link to={`ProductDetails/${item.id}`}>
+                <Link to={`product/${item.id}`}>
                   <img
                     src={item.img}
                     alt={item.name}

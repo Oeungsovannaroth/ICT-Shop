@@ -1,10 +1,9 @@
-// data/menuData.js
 const menuData = {
     WOMEN: {
         mainLink: "/Women",
         dropdown: {
             "New In": [
-                { name: "All", path: "/Women/NewIn/All" },
+                // { name: "All", path: "/Women/NewIn/All" },
                 { name: "Casual", path: "/Women/NewIn/Casual" },
                 { name: "Sportlife", path: "/Women/NewIn/Sportlife" },
                 { name: "Lifestyle", path: "/Women/NewIn/Lifestyle" },
@@ -22,18 +21,18 @@ const menuData = {
                 { name: "Dresses", path: "/Women/Clothing/Dresses" },
                 { name: "Cardigans", path: "/Women/Clothing/Cardigans" },
                 { name: "Blouses", path: "/Women/Clothing/Blouses" },
-                { name: "Sportswear", path: "/Women/Clothing/Sportswear" },
+
                 { name: "Trousers", path: "/Women/Clothing/Trousers" },
                 { name: "Jeans", path: "/Women/Clothing/Jeans" },
                 { name: "Skirts", path: "/Women/Clothing/Skirts" },
                 { name: "Shorts", path: "/Women/Clothing/Shorts" },
                 {
                     name: "Hoodies & Sweatshirts",
-                    path: "/Women/Clothing/HoodiesSweat"
-                }
+                    path: "/Women/Clothing/HoodiesSweat",
+                },
             ],
             Shoes: [
-                { name: "All", path: "/Women/Shoes/All" },
+                // { name: "All", path: "/Women/Shoes/All" },
                 { name: "Sneakers", path: "/Women/Shoes/Sneakers" },
                 { name: "Sandals", path: "/Women/Shoes/Sandals" },
                 { name: "Loafers", path: "/Women/Shoes/Loafers" },
@@ -49,7 +48,7 @@ const menuData = {
                 { name: "Sport Equipment", path: "/Women/Accessories/SportEquipment" },
             ],
             "Shop By Collection": [
-                { name: "All", path: "/Women/Collection/All" },
+                // { name: "All", path: "/Women/Collection/All" },
                 {
                     name: "Post Modern Academy",
                     path: "/Women/Collection/PostModernAcademy",

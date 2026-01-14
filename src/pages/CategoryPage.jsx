@@ -23,9 +23,8 @@ const CategoryPage = () => {
   const formatTitle = (str = "") => {
     if (!str) return "";
     return str
-      .replace(/([A-Z])/g, " $1")           // CamelCase → spaces
-      .replace(/NewIn([A-Za-z]+)/g, "New In $1")  // NewInTop → New In Top
-      .replace("New In", "New In")
+      .replace(/([A-Z])/g, " $1")
+      .replace(/NewIn([A-Za-z]+)/g, "New In $1")
       .replace("HoodiesSweatshirts", "Hoodies & Sweatshirts")
       .replace("PoloShirt", "Polo Shirts")
       .replace("PostModernAcademy", "Post Modern Academy")
@@ -41,92 +40,95 @@ const CategoryPage = () => {
   const displaySubcategory = formatTitle(subcategory);
 
   // ── Load products ─────────────────────────────────────────────────────────
-  let allProducts = getProductsByGender(gender);
+  let allProducts = getProductsByGender(gender) || getAllFallbackProducts() || [];
 
-  if (!allProducts?.length) {
-    allProducts = getAllFallbackProducts() || [];
-  }
-
-  // Base: gender match
+  // Base filter: only this gender
   let products = allProducts.filter(
     (p) => p?.gender?.toLowerCase() === gender.toLowerCase()
   );
 
-  // ── Apply filters ─────────────────────────────────────────────────────────
+  // ── Apply filters only when there's a section ─────────────────────────────
   if (section) {
     const sectionLower = section.toLowerCase().trim();
-    const subLower = subcategory ? subcategory.toLowerCase().trim() : "";
+    const subLower = (subcategory || "").toLowerCase().trim();
+
+    const isAll = subLower === "" || subLower === "all";
 
     // 1. New In
     if (sectionLower === "newin") {
-      products = products.filter((p) => p.isNew === true);
+      products = products.filter((p) => !!p.isNew);
 
-      if (subLower && subLower !== "all") {
-        products = products.filter((p) => {
-          const cat = (p.category || "").toLowerCase();
-          // direct match or contains (handles NewInTop, Sportlife, Lifestyle, Casual, etc.)
-          return cat === subLower || cat.includes(subLower);
-        });
+      if (!isAll && subLower) {
+        products = products.filter((p) =>
+          String(p.category || "").toLowerCase().includes(subLower)
+        );
       }
     }
 
     // 2. Sale
     else if (sectionLower === "sale") {
-      products = products.filter((p) =>
-        (p.oldPrice && Number(p.oldPrice) > Number(p.price || 0)) ||
-        p.isSale === true ||
-        String(p.badge || "").toUpperCase() === "SALE"
-      );
+      products = products.filter((p) => {
+        const price = Number(p.price) || 0;
+        const oldPrice = Number(p.oldPrice) || price;
+        return (
+          p.isSale === true ||
+          oldPrice > price ||
+          String(p.badge || "").toUpperCase() === "SALE"
+        );
+      });
 
-      
-      if (subLower && subLower !== "all") {
-        products = products.filter((p) => {
-          const cat = (p.category || "").toLowerCase();
-          // loose match – or allow "collection" to show everything on sale
-          return cat.includes(subLower) || subLower === "collection";
-        });
-      }
-    }
-
-    // 3. Collection
-    else if (sectionLower === "collection") {
-      if (subLower && subLower !== "all") {
-        const slugToName = {
-          postmodernacademy: "post modern academy",
-          fieryenergy: "fiery energy",
-          qdrift: "q-drift",
-          rhythmoftheriver: "rhythm of the river",
-        };
-
-        const target = slugToName[subLower] || subLower.replace(/-/g, " ");
-
+      if (!isAll && subLower) {
         products = products.filter((p) =>
-          String(p.collection || "").toLowerCase().includes(target)
+          String(p.category || "").toLowerCase().includes(subLower)
         );
       }
-      // if no subcategory → show all (or you can decide to show nothing / fallback)
     }
 
-    // 4. Clothing, Shoes, Accessories, etc.
-    else {
-      // Use subcategory when present – this is the key fix
-      const target = (subLower && subLower !== "all") ? subLower : sectionLower;
+    // 3. Collections
+    else if (sectionLower === "collection") {
+      if (!isAll && subLower) {
+        const slugToName = {
+          "postmodernacademy": "post modern academy",
+          "post-modern-academy": "post modern academy",
+          "fieryenergy": "fiery energy",
+          "qdrift": "q-drift",
+          "q-drift": "q-drift",
+          "rhythmoftheriver": "rhythm of the river",
+        };
 
-      products = products.filter((p) => {
-        const cat = String(p.category || "").toLowerCase();
-        return cat === target || cat.includes(target);
-      });
+        const targetCollection =
+          slugToName[subLower] || subLower.replace(/-/g, " ").trim();
+
+        products = products.filter((p) =>
+          String(p.collection || "").toLowerCase().includes(targetCollection)
+        );
+      }
+      // else → show all (no collection filter)
+    }
+
+    // 4. Regular categories (shoes, t-shirts, accessories, etc...)
+    else {
+      // Only apply category filter when NOT "all"
+      if (!isAll) {
+        const target = subLower || sectionLower;
+
+        products = products.filter((p) => {
+          const cat = String(p.category || "").toLowerCase();
+          return cat === target || cat.includes(target);
+        });
+      }
+      // else → keep all products of this gender
     }
   }
 
-  // Fallback: if filter removed everything (except intentional newin empty)
-  if (products.length === 0 && section?.toLowerCase() !== "newin") {
+  // Final safety net (avoid empty results except maybe real empty new-in)
+  const sectionIsNewIn = section?.toLowerCase() === "newin";
+  if (products.length === 0 && !sectionIsNewIn) {
     products = allProducts.filter(
       (p) => p?.gender?.toLowerCase() === gender.toLowerCase()
     );
   }
-
-  // ── Render ────────────────────────────────────────────────────────────────
+  
   return (
     <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-10 md:py-12 bg-gray-50 min-h-screen">
       {/* Breadcrumb */}

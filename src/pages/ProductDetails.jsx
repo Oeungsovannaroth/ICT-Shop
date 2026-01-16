@@ -6,7 +6,7 @@ import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import homeData from "../data/homeData";
 import GridDataWomen from "../data/GridDataWomen";
-
+import GridDataMen from "../data/GridDataMen";
 export default function ProductDetails() {
   const { id } = useParams();
   const { addToCart } = useCart();
@@ -19,6 +19,7 @@ export default function ProductDetails() {
   const numericId = parseInt(id, 10);
   if (!isNaN(numericId)) {
     product = GridDataWomen.All?.find((p) => p.id === numericId);
+    product = product || GridDataMen.All?.find((p) => p.id === numericId);
   }
 
   // 2. Fallback to homeData categories (string IDs like "cat-xxx")

@@ -66,7 +66,7 @@ const CategoryPage = () => {
     }
 
     // 2. Sale
-    else if (sectionLower === "sale") {
+    else if (sectionLower === "Sale") {
       products = products.filter((p) => {
         const price = Number(p.price) || 0;
         const oldPrice = Number(p.oldPrice) || price;

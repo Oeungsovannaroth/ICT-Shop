@@ -44,21 +44,10 @@ const menuData = {
                 { name: "Caps & Hats", path: "/Women/Accessories/CapsHats" },
                 { name: "Socks", path: "/Women/Accessories/Socks" },
                 { name: "Gloves", path: "/Women/Accessories/Gloves" },
-                { name: "UnderWear", path: "/Women/Accessories/UnderWear" },
+
                 { name: "Sport Equipment", path: "/Women/Accessories/SportEquipment" },
             ],
-            "Shop By Collection": [
-                // { name: "All", path: "/Women/Collection/All" },
-                {
-                    name: "Post Modern Academy",
-                    path: "/Women/Collection/PostModernAcademy",
-                },
-                {
-                    name: "Fiery Energy Collection",
-                    path: "/Women/Collection/FieryEnergy",
-                },
-                { name: "Q-Drift Collection", path: "/Women/Collection/QDrift" },
-            ],
+
             Sale: [{
                     name: "Clothing",
                     path: "/Women/Sale/Clothing",
@@ -70,11 +59,7 @@ const menuData = {
                     path: "/Women/Sale/Accessories",
                     color: "text-red-700",
                 },
-                {
-                    name: "Shop by collection",
-                    path: "/Women/Sale/Collection",
-                    color: "text-red-700",
-                },
+
             ],
         },
     },
@@ -83,10 +68,10 @@ const menuData = {
         mainLink: "/Men",
         dropdown: {
             "New In": [
-                { name: "All", path: "/Men/NewIn/All" },
-                { name: "Lifestyle", path: "/Men/NewIn/Casual" }, // Fixed display name
+                // { name: "All", path: "/Men/NewIn/All" },
+                { name: "Casual", path: "/Men/NewIn/Casual" },
                 { name: "Sportlife", path: "/Men/NewIn/Sportlife" },
-                { name: "Casual", path: "/Men/NewIn/Lifestyle" }, // Fixed display name
+                { name: "LifeStyle", path: "/Men/NewIn/LifeStyle" },
                 { name: "New In Top", path: "/Men/NewIn/NewInTop" },
                 { name: "New In Bottom", path: "/Men/NewIn/NewInBottom" },
             ],

@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 
 // Real product data sources
 import GridDataWomen from "../data/GridDataWomen";
-// Uncomment when you add other genders
-// import GridDataMen from "../data/GridDataMen";
+import GridDataMen from "../data/GridDataMen.js";
 // import GridDataBoys from "../data/GridDataBoys";
 // import GridDataGirls from "../data/GridDataGirls";
 
@@ -20,7 +19,7 @@ export default function SearchPage() {
   // Combine all products from real data files
   const allProducts = [
     ...(GridDataWomen || []),
-    // ...(GridDataMen || []),
+    ...(GridDataMen || []),
     // ...(GridDataBoys || []),
     // ...(GridDataGirls || []),
   ].filter((item) => item?.id && item?.name); // filter out invalid items
@@ -32,19 +31,21 @@ export default function SearchPage() {
     Object.entries(menuData).forEach(([genderKey, genderData]) => {
       const gender = genderKey.toLowerCase();
 
-      Object.entries(genderData.dropdown || {}).forEach(([section, subItems]) => {
-        subItems.forEach((item) => {
-          if (item?.name && item?.path) {
-            items.push({
-              type: "category",
-              name: item.name,
-              path: item.path,
-              gender,
-              section: section.toLowerCase().replace(/\s+/g, "-"),
-            });
-          }
-        });
-      });
+      Object.entries(genderData.dropdown || {}).forEach(
+        ([section, subItems]) => {
+          subItems.forEach((item) => {
+            if (item?.name && item?.path) {
+              items.push({
+                type: "category",
+                name: item.name,
+                path: item.path,
+                gender,
+                section: section.toLowerCase().replace(/\s+/g, "-"),
+              });
+            }
+          });
+        }
+      );
     });
 
     return items;
@@ -57,10 +58,12 @@ export default function SearchPage() {
 
   const productResults = lowerQuery
     ? allProducts
-        .filter((product) =>
-          product.name?.toLowerCase().includes(lowerQuery) ||
-          product.category?.toLowerCase()?.includes(lowerQuery) ||
-          (product.collection && product.collection.toLowerCase()?.includes(lowerQuery))
+        .filter(
+          (product) =>
+            product.name?.toLowerCase().includes(lowerQuery) ||
+            product.category?.toLowerCase()?.includes(lowerQuery) ||
+            (product.collection &&
+              product.collection.toLowerCase()?.includes(lowerQuery))
         )
         .map((p) => ({ type: "product", ...p }))
     : [];
@@ -75,7 +78,10 @@ export default function SearchPage() {
     const cleaned = query.trim();
     if (!cleaned) return;
 
-    const updated = [cleaned, ...recent.filter((r) => r !== cleaned)].slice(0, 10);
+    const updated = [cleaned, ...recent.filter((r) => r !== cleaned)].slice(
+      0,
+      10
+    );
     setRecent(updated);
     localStorage.setItem("recentSearches", JSON.stringify(updated));
   };
@@ -99,8 +105,18 @@ export default function SearchPage() {
             }}
           />
           <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-            <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <svg
+              className="h-6 w-6 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
             </svg>
           </div>
           {query && (
@@ -117,7 +133,9 @@ export default function SearchPage() {
         {query.length === 0 && recent.length > 0 && (
           <div className="mb-12">
             <div className="flex justify-between items-center mb-5">
-              <h2 className="text-xl font-semibold text-gray-900">Recent Searches</h2>
+              <h2 className="text-xl font-semibold text-gray-900">
+                Recent Searches
+              </h2>
               <button
                 className="text-sm text-gray-600 hover:text-black underline"
                 onClick={() => {
@@ -146,7 +164,10 @@ export default function SearchPage() {
                     onClick={() => {
                       const updated = recent.filter((r) => r !== item);
                       setRecent(updated);
-                      localStorage.setItem("recentSearches", JSON.stringify(updated));
+                      localStorage.setItem(
+                        "recentSearches",
+                        JSON.stringify(updated)
+                      );
                     }}
                   >
                     ×
@@ -161,14 +182,16 @@ export default function SearchPage() {
         {query.length > 0 && (
           <div>
             <h2 className="text-2xl font-semibold text-gray-900 mb-8">
-              {allResults.length} results for <span className="font-normal">"{query}"</span>
+              {allResults.length} results for{" "}
+              <span className="font-normal">"{query}"</span>
             </h2>
 
             {allResults.length === 0 ? (
               <div className="text-center py-24 text-gray-600">
                 <p className="text-2xl font-light mb-4">No results found</p>
                 <p className="text-lg">
-                  Try different keywords (e.g. "Grip Pro", "Gloves", "Street Haul")
+                  Try different keywords (e.g. "Grip Pro", "Gloves", "Street
+                  Haul")
                 </p>
               </div>
             ) : (
@@ -191,14 +214,23 @@ export default function SearchPage() {
                             }
                             alt={result.name}
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            onError={(e) => (e.target.src = "https://via.placeholder.com/400?text=Image+Error")}
+                            onError={(e) =>
+                              (e.target.src =
+                                "https://via.placeholder.com/400?text=Image+Error")
+                            }
                           />
-                          {result.oldPrice && result.oldPrice > result.price && (
-                            <span className="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
-                              -
-                              {Math.round(((result.oldPrice - result.price) / result.oldPrice) * 100)}%
-                            </span>
-                          )}
+                          {result.oldPrice &&
+                            result.oldPrice > result.price && (
+                              <span className="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                                -
+                                {Math.round(
+                                  ((result.oldPrice - result.price) /
+                                    result.oldPrice) *
+                                    100
+                                )}
+                                %
+                              </span>
+                            )}
                           {result.isNew && (
                             <span className="absolute top-3 left-3 bg-black text-white text-xs font-bold px-3 py-1 rounded-full shadow">
                               NEW
@@ -214,11 +246,12 @@ export default function SearchPage() {
                             <span className="font-semibold text-lg">
                               ${Number(result.price || 0).toFixed(2)}
                             </span>
-                            {result.oldPrice && result.oldPrice > result.price && (
-                              <span className="text-sm text-gray-400 line-through">
-                                ${Number(result.oldPrice).toFixed(2)}
-                              </span>
-                            )}
+                            {result.oldPrice &&
+                              result.oldPrice > result.price && (
+                                <span className="text-sm text-gray-400 line-through">
+                                  ${Number(result.oldPrice).toFixed(2)}
+                                </span>
+                              )}
                           </div>
                           <p className="text-sm text-gray-500 mt-1">
                             {result.gender} • {result.category}
@@ -236,7 +269,8 @@ export default function SearchPage() {
                       className="group bg-white rounded-xl p-5 shadow hover:shadow-xl transition-all flex flex-col h-full border border-gray-100"
                     >
                       <div className="text-sm text-gray-500 uppercase tracking-wide mb-2">
-                        {result.gender.toUpperCase()} / {result.section.replace(/-/g, " ")}
+                        {result.gender.toUpperCase()} /{" "}
+                        {result.section.replace(/-/g, " ")}
                       </div>
                       <h3 className="font-semibold text-lg group-hover:text-black">
                         {result.name}

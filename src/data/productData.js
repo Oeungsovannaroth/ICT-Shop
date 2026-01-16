@@ -1,19 +1,18 @@
 // src/data/productData.js
-import GridDataWomen from './GridDataWomen';
-// import GridDataMen from './GridDataMen';
+import GridDataWomen from "./GridDataWomen";
+import GridDataMen from "./GridDataMen";
 // import GridDataBoys from './GridDataBoys';
 // import GridDataGirls from './GridDataGirls';
-import homeData from './homeData';
+import homeData from "./homeData";
 
 // Map gender → corresponding GridData file
 const genderDataMap = {
     women: GridDataWomen,
-    // men: GridDataMen,
+    men: GridDataMen,
     // boys: GridDataBoys,
     // girls: GridDataGirls,
     // add more genders if needed in future
 };
-
 
 export const getProductsByGender = (gender) => {
     if (!gender) return [];
@@ -39,10 +38,10 @@ export const getAllFallbackProducts = () => [
  */
 export const getAllProducts = () => {
     return [
-        ...getProductsByGender('women'),
-        ...getProductsByGender('men'),
-        ...getProductsByGender('boys'),
-        ...getProductsByGender('girls'),
+        ...getProductsByGender("women"),
+        ...getProductsByGender("men"),
+        ...getProductsByGender("boys"),
+        ...getProductsByGender("girls"),
         ...getAllFallbackProducts(),
     ].filter(Boolean); // remove any undefined/null
 };

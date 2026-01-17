@@ -186,12 +186,10 @@ const menuData = {
                 { name: "All", path: "/Girls/Clothing/All" },
                 { name: "Shirts", path: "/Girls/Clothing/Shirts" },
                 { name: "Trousers", path: "/Girls/Clothing/Trousers" },
-                { name: "T-Shirts", path: "/Girls/Clothing/T-Shirts" },
-                { name: "Jackets", path: "/Girls/Clothing/Jackets" },
-                { name: "Shorts", path: "/Girls/Clothing/Shorts" },
+
             ],
             Shoes: [
-                { name: "All", path: "/Girls/Shoes/All" },
+                { name: "All", path: "/Girls/Shoes/Allshoes" },
                 { name: "Sandals", path: "/Girls/Shoes/Sandals" },
                 { name: "Sneakers", path: "/Girls/Shoes/Sneakers" },
             ],
@@ -202,7 +200,7 @@ const menuData = {
                     path: "/Girls/Sale/Clothing",
                     color: "text-red-700",
                 },
-                { name: "Shoes", path: "/Girls/Sale/Shoes", color: "text-red-700" },
+                { name: "Shoes", path: "/Girls/Sale/ShoesSale", color: "text-red-700" },
             ],
         },
     },

@@ -38,7 +38,7 @@ const menuData = {
                 { name: "Loafers", path: "/Women/Shoes/Loafers" },
             ],
             Accessories: [
-                { name: "All", path: "/Women/Accessories/All" },
+                // { name: "All", path: "/Women/Accessories/All" },
                 { name: "Bags", path: "/Women/Accessories/Bags" },
                 { name: "Belts", path: "/Women/Accessories/Belts" },
                 { name: "Caps & Hats", path: "/Women/Accessories/CapsHats" },
@@ -100,15 +100,15 @@ const menuData = {
                 { name: "Sandals", path: "/Men/Shoes/Sandals" },
             ],
             Accessories: [
-                { name: "All", path: "/Men/Accessories/All" },
+                // { name: "All", path: "/Men/Accessories/All" },
                 { name: "Bags", path: "/Men/Accessories/Bags" },
                 { name: "Belts", path: "/Men/Accessories/Belts" },
                 { name: "Caps & Hats", path: "/Men/Accessories/CapsHats" },
-                { name: "Socks", path: "/Men/Accessories/Socks" },
-                { name: "Gloves", path: "/Men/Accessories/Gloves" },
+                // { name: "Socks", path: "/Men/Accessories/Socks" },
+                // { name: "Gloves", path: "/Men/Accessories/Gloves" },
             ],
             "Shop By Collection": [
-                { name: "All", path: "/Men/Collection/All" },
+                // { name: "All", path: "/Men/Collection/All" },
                 {
                     name: "Post Modern Academy",
                     path: "/Men/Collection/PostModernAcademy",
@@ -117,26 +117,26 @@ const menuData = {
                     name: "Fiery Energy Collection",
                     path: "/Men/Collection/FieryEnergy",
                 },
-                { name: "Q-Drift Collection", path: "/Men/Collection/QDrift" },
-                {
-                    name: "Rhythm Of The River",
-                    path: "/Men/Collection/RhythmOfTheRiver",
-                },
+                // { name: "Q-Drift Collection", path: "/Men/Collection/QDrift" },
+                // {
+                //     name: "Rhythm Of The River",
+                //     path: "/Men/Collection/RhythmOfTheRiver",
+                // },
             ],
-            Sale: [
-                { name: "Clothing", path: "/Men/Sale/Clothing", color: "text-red-700" },
-                { name: "Shoes", path: "/Men/Sale/Shoes", color: "text-red-700" },
-                {
-                    name: "Accessories",
-                    path: "/Men/Sale/Accessories",
-                    color: "text-red-700",
-                },
-                {
-                    name: "Shop by collection",
-                    path: "/Men/Sale/Collection",
-                    color: "text-red-700",
-                },
-            ],
+            // Sale: [
+            //     { name: "Clothing", path: "/Men/Sale/Clothing", color: "text-red-700" },
+            //     { name: "Shoes", path: "/Men/Sale/Shoes", color: "text-red-700" },
+            //     {
+            //         name: "Accessories",
+            //         path: "/Men/Sale/Accessories",
+            //         color: "text-red-700",
+            //     },
+            //     {
+            //         name: "Shop by collection",
+            //         path: "/Men/Sale/Collection",
+            //         color: "text-red-700",
+            //     },
+            // ],
         },
     },
 
@@ -145,7 +145,7 @@ const menuData = {
         dropdown: {
             "New In": [
                 { name: "All", path: "/Boys/NewIn/All" },
-                { name: "Lifestyle", path: "/Boys/NewIn/Casual" },
+                { name: "Lifestyle", path: "/Boys/NewIn/LifeStyle" },
                 { name: "Sportlife", path: "/Boys/NewIn/Sportlife" },
             ],
             Clothing: [
@@ -158,7 +158,7 @@ const menuData = {
                 { name: "Shorts", path: "/Boys/Clothing/Shorts" },
             ],
             Shoes: [
-                { name: "All", path: "/Boys/Shoes/All" },
+                { name: "All", path: "/Boys/Shoes/AllShoes" },
                 { name: "Sneakers", path: "/Boys/Shoes/Sneakers" },
                 { name: "Sandals", path: "/Boys/Shoes/Sandals" },
             ],
@@ -169,7 +169,7 @@ const menuData = {
                     path: "/Boys/Sale/Clothing",
                     color: "text-red-700",
                 },
-                { name: "Shoes", path: "/Boys/Sale/Shoes", color: "text-red-700" },
+                { name: "Shoes", path: "/Boys/Sale/ShoesForSale", color: "text-red-700" },
             ],
         },
     },
@@ -179,7 +179,7 @@ const menuData = {
         dropdown: {
             "New In": [
                 { name: "All", path: "/Girls/NewIn/All" },
-                { name: "Casual", path: "/Girls/NewIn/Lifestyle" },
+                { name: "Casual", path: "/Girls/NewIn/Casual" },
                 { name: "New In Top", path: "/Girls/NewIn/NewInTop" },
             ],
             Clothing: [

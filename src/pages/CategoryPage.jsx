@@ -85,7 +85,7 @@ const CategoryPage = () => {
     }
 
     // 3. Collections
-    else if (sectionLower === "collection") {
+    else if (sectionLower === "Collection") {
       if (!isAll && subLower) {
         const slugToName = {
           "postmodernacademy": "post modern academy",

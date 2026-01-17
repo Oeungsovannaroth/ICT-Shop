@@ -7,6 +7,8 @@ import { useWishlist } from "../context/WishlistContext";
 import homeData from "../data/homeData";
 import GridDataWomen from "../data/GridDataWomen";
 import GridDataMen from "../data/GridDataMen";
+import GridDataBoys from "../data/GridDataBoys";
+import GridDataGirls from "../data/GridDataGirls";
 export default function ProductDetails() {
   const { id } = useParams();
   const { addToCart } = useCart();
@@ -20,6 +22,8 @@ export default function ProductDetails() {
   if (!isNaN(numericId)) {
     product = GridDataWomen.All?.find((p) => p.id === numericId);
     product = product || GridDataMen.All?.find((p) => p.id === numericId);
+    product = product || GridDataBoys.All?.find((p) => p.id === numericId);
+    product = product || GridDataGirls.All?.find((p) => p.id === numericId);
   }
 
   // 2. Fallback to homeData categories (string IDs like "cat-xxx")

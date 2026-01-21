@@ -18,6 +18,7 @@ import menuData from "../../data/menuData";
 import homeData from "../../data/homeData";
 import { ShoppingBag } from "lucide-react";
 import ProductDetails from "../../pages/ProductDetails";
+import Cart from "../../pages/Cart";
 
 const Navbar = () => {
   const [Searchopen, setSearchOpen] = useState(false);
@@ -36,8 +37,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const timeoutRef = useRef(null);
-  const { wishlistCount, addToWishlist, removeFromWishlist, isInWishlist } =
-    useWishlist();
+  const { wishlist, wishlistCount, removeFromWishlist } = useWishlist();
   // === ALL PRODUCTS FROM HOME PAGE FOR SEARCH ===
   const allHomeProducts = useMemo(() => {
     const { shoes, lifestyleProducts, driftProducts } = homeData;
@@ -63,7 +63,7 @@ const Navbar = () => {
   const results = useMemo(() => {
     if (!query.trim()) return [];
     return allHomeProducts.filter((product) =>
-      product.name.toLowerCase().includes(query.toLowerCase())
+      product.name.toLowerCase().includes(query.toLowerCase()),
     );
   }, [query, allHomeProducts]);
 
@@ -127,10 +127,10 @@ const Navbar = () => {
                   category === "WOMEN"
                     ? "w-[1250px]"
                     : category === "MEN"
-                    ? "w-[1200px]"
-                    : category === "BOYS"
-                    ? "w-[1000px]"
-                    : "w-[900px]"; // fallback for GIRLS or others
+                      ? "w-[1200px]"
+                      : category === "BOYS"
+                        ? "w-[1000px]"
+                        : "w-[900px]"; // fallback for GIRLS or others
 
                 return (
                   <NavigationMenuItem
@@ -180,7 +180,7 @@ const Navbar = () => {
                                   ))}
                                 </ul>
                               </div>
-                            )
+                            ),
                           )}
                         </div>
                       )}
@@ -199,18 +199,23 @@ const Navbar = () => {
 
         {/* Desktop Icons */}
         <div className="hidden lg:flex items-center gap-4">
-          <div className="relative">
-            <MdOutlineSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xl cursor-pointer" />
-            <input
-              type="text"
-              placeholder="Search"
-              className="border rounded-lg pl-10 pr-4 py-2 w-52 hover:bg-gray-100 cursor-pointer"
-              onClick={() => setSearchOpen(true)}
-              readOnly
+          <div
+            className="relative cursor-pointer"
+            onClick={() => setIsWishlistOpen(!isWishlistOpen)} // ← changed
+          >
+            <Heart
+              className="text-3xl hover:text-gray-700 transition"
+              fill={wishlistCount > 0 ? "red" : "none"} // optional: fill when has items
+              strokeWidth={2}
             />
+            {wishlistCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
+                {wishlistCount}
+              </span>
+            )}
           </div>
 
-          <div className="relative cursor-pointer">
+          {/* <div className="relative cursor-pointer">
             <Heart
               className="text-3xl hover:text-gray-700 transition"
               fill={
@@ -236,7 +241,7 @@ const Navbar = () => {
                 {wishlistCount}
               </span>
             )}
-          </div>
+          </div> */}
 
           <div
             className="relative cursor-pointer"
@@ -249,7 +254,6 @@ const Navbar = () => {
               </span>
             )}
           </div>
-
           <button
             onClick={() => {
               setAuthMode("login");
@@ -277,7 +281,7 @@ const Navbar = () => {
             onClick={() => setSearchOpen(true)}
           />
 
-          <div className="relative cursor-pointer">
+          {/* <div className="relative cursor-pointer">
             <Heart
               className="w-7 h-7 hover:text-red-500 transition"
               fill={
@@ -302,6 +306,21 @@ const Navbar = () => {
             />
             {wishlistCount > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {wishlistCount}
+              </span>
+            )}
+          </div> */}
+          <div
+            className="relative cursor-pointer"
+            onClick={() => setIsWishlistOpen(!isWishlistOpen)}
+          >
+            <Heart
+              className="text-3xl hover:text-gray-700 transition lg:w-auto w-7 h-7"
+              fill={wishlistCount > 0 ? "red" : "none"}
+              strokeWidth={2}
+            />
+            {wishlistCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
                 {wishlistCount}
               </span>
             )}
@@ -476,51 +495,53 @@ const Navbar = () => {
       {/* CART DROPDOWN */}
       {isCartOpen && (
         <div
-          className="fixed inset-0 z-50"
+          className="fixed inset-0 z-50 bg-black/20"
           onClick={() => setIsCartOpen(false)}
         >
           <div
-            className="absolute right-0 top-16 w-96 max-h-[80vh] bg-white rounded-2xl shadow-2xl border overflow-hidden"
+            className="absolute right-0 top-16 w-96 max-h-[85vh] bg-white rounded-2xl shadow-2xl border overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="p-6 bg-gradient-to-b from-gray-50 to-white">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-2xl font-bold flex items-center gap-2">
-                  <IoBagHandleOutline /> My Cart
+            <div className="p-6 bg-gradient-to-b from-gray-50 to-white flex flex-col h-full">
+              {/* Header */}
+              <div className="flex justify-between items-center mb-5">
+                <h3 className="text-2xl font-bold flex items-center gap-2.5">
+                  <IoBagHandleOutline className="text-2xl" />
+                  My Cart ({cartCount})
                 </h3>
                 <button
                   onClick={() => setIsCartOpen(false)}
-                  className="text-gray-500 hover:text-black text-2xl"
+                  className="text-gray-500 hover:text-gray-900 text-3xl leading-none p-1"
+                  aria-label="Close cart"
                 >
                   ×
                 </button>
               </div>
 
               {cart.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-20 px-6 text-center">
-                  {/* Simple icon */}
-                  <ShoppingBag className="w-24 h-24 text-gray-300 mb-8" />
-
-                  {/* Clear message */}
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                    Your bag is empty
+                <div className="flex-1 flex flex-col items-center justify-center py-16 px-6 text-center">
+                  <ShoppingBag
+                    className="w-20 h-20 text-gray-300 mb-6"
+                    strokeWidth={1.2}
+                  />
+                  <h2 className="text-2xl font-bold text-gray-900 mb-3">
+                    Your cart is empty
                   </h2>
-                  <p className="text-gray-600 mb-10 max-w-sm">
-                    Looks like you haven't added anything yet. Start exploring
-                    our latest styles!
+                  <p className="text-gray-600 mb-8 max-w-xs">
+                    Discover something you'll love — start shopping now!
                   </p>
-
-                  {/* Simple buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4 w-full max-w-xs">
+                  <div className="flex flex-col sm:flex-row gap-4 w-full max-w-sm">
                     <Link
                       to="/men"
-                      className="px-8 py-4 bg-black text-white rounded-lg font-medium hover:bg-gray-800 transition"
+                      className="flex-1 px-6 py-3.5 bg-black text-white rounded-lg font-medium hover:bg-gray-900 transition text-center"
+                      onClick={() => setIsCartOpen(false)}
                     >
                       Shop Men
                     </Link>
                     <Link
                       to="/women"
-                      className="px-8 py-4 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-700 transition"
+                      className="flex-1 px-6 py-3.5 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-700 transition text-center"
+                      onClick={() => setIsCartOpen(false)}
                     >
                       Shop Women
                     </Link>
@@ -528,42 +549,96 @@ const Navbar = () => {
                 </div>
               ) : (
                 <>
-                  <div className="space-y-4 max-h-96 overflow-y-auto">
+                  {/* Items list */}
+                  <div className="flex-1 overflow-y-auto space-y-5 pr-1 -mr-1">
                     {cart.map((item) => (
-                      <div key={item.id} className="flex gap-4 pb-4 border-b">
+                      <div
+                        key={`${item.id}-${item.color || ""}-${item.size || ""}`}
+                        className="flex gap-4 pb-5 border-b border-gray-100 last:border-b-0 last:pb-0"
+                      >
                         <img
-                          src={item.img1 || item.img}
+                          src={
+                            item.img ||
+                            item.img1 ||
+                            item.image ||
+                            "https://via.placeholder.com/96?text=Product"
+                          }
                           alt={item.name}
-                          className="w-20 h-20 object-cover rounded-xl shadow-md"
+                          className="w-24 h-24 object-cover rounded-xl shadow-sm flex-shrink-0 bg-gray-50"
                         />
-                        <div className="flex-1">
-                          <h4 className="font-semibold">{item.name}</h4>
-                          <p className="text-gray-600">
-                            ${item.price} × {item.quantity}
+
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-semibold text-gray-900 line-clamp-2 mb-1">
+                            {item.name}
+                          </h4>
+
+                          <div className="text-sm space-y-0.5 text-gray-600 mb-2">
+                            {item.color && (
+                              <p>
+                                Color:{" "}
+                                <span className="font-medium text-gray-800">
+                                  {item.color}
+                                </span>
+                              </p>
+                            )}
+                            {item.size && (
+                              <p>
+                                Size:{" "}
+                                <span className="font-medium uppercase">
+                                  {item.size}
+                                </span>
+                              </p>
+                            )}
+                          </div>
+
+                          <p className="font-medium mb-3">
+                            ${Number(item.price).toFixed(2)}
+                            {item.quantity > 1 && (
+                              <span className="text-gray-500 ml-1.5">
+                                × {item.quantity}
+                              </span>
+                            )}
                           </p>
-                          <div className="flex items-center gap-2 mt-2">
+
+                          <div className="flex items-center gap-4">
+                            <div className="flex items-center border border-gray-200 rounded-full overflow-hidden font-medium">
+                              <button
+                                onClick={() =>
+                                  updateQuantity(
+                                    item.id,
+                                    item.color,
+                                    item.size,
+                                    Math.max(1, item.quantity - 1),
+                                  )
+                                }
+                                className="w-9 h-9 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 transition-colors"
+                                disabled={item.quantity <= 1}
+                              >
+                                −
+                              </button>
+                              <span className="w-10 text-center">
+                                {item.quantity}
+                              </span>
+                              <button
+                                onClick={() =>
+                                  updateQuantity(
+                                    item.id,
+                                    item.color,
+                                    item.size,
+                                    item.quantity + 1,
+                                  )
+                                }
+                                className="w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition-colors"
+                              >
+                                +
+                              </button>
+                            </div>
+
                             <button
                               onClick={() =>
-                                updateQuantity(item.id, item.quantity - 1)
+                                removeFromCart(item.id, item.color, item.size)
                               }
-                              className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-lg"
-                            >
-                              -
-                            </button>
-                            <span className="w-10 text-center font-medium">
-                              {item.quantity}
-                            </span>
-                            <button
-                              onClick={() =>
-                                updateQuantity(item.id, item.quantity + 1)
-                              }
-                              className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-lg"
-                            >
-                              +
-                            </button>
-                            <button
-                              onClick={() => removeFromCart(item.id)}
-                              className="ml-auto text-red-500 hover:text-red-700 font-medium"
+                              className="text-red-600 hover:text-red-700 text-sm font-medium ml-auto transition-colors"
                             >
                               Remove
                             </button>
@@ -573,15 +648,125 @@ const Navbar = () => {
                     ))}
                   </div>
 
-                  <div className="mt-6 pt-4 border-t">
-                    <div className="flex justify-between text-xl font-bold mb-4">
-                      <span>Total</span>
+                  {/* Footer / Summary */}
+                  <div className="mt-6 pt-5 border-t border-gray-200">
+                    <div className="flex justify-between items-center text-xl font-bold mb-5">
+                      <span>Subtotal</span>
                       <span className="text-pink-600">
                         ${cartTotal.toFixed(2)}
                       </span>
                     </div>
-                    <button className="w-full bg-black text-white py-4 rounded-xl font-semibold hover:bg-gray-900 transition">
+
+                    <Link
+                      to="/cart"
+                      className="block w-full bg-black text-white py-4 cursor-pointer rounded-xl font-semibold text-center hover:bg-gray-900 transition duration-200"
+                      onClick={() => setIsCartOpen(false)}
+                    >
                       Proceed to Checkout
+                    </Link>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+      {/* WISHLIST DROPDOWN */}
+      {isWishlistOpen && (
+        <div
+          className="fixed inset-0 z-50"
+          onClick={() => setIsWishlistOpen(false)}
+        >
+          <div
+            className="absolute right-0 top-16 w-96 max-h-[80vh] bg-white rounded-2xl shadow-2xl border overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="p-6 bg-gradient-to-b from-gray-50 to-white">
+              <div className="flex justify-between items-center mb-5">
+                <h3 className="text-2xl font-bold flex items-center gap-2">
+                  <Heart className="text-red-500" fill="red" /> My Wishlist
+                </h3>
+                <button
+                  onClick={() => setIsWishlistOpen(false)}
+                  className="text-gray-500 hover:text-black text-2xl"
+                >
+                  ×
+                </button>
+              </div>
+
+              {wishlist.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-20 px-6 text-center">
+                  <Heart
+                    className="w-24 h-24 text-gray-300 mb-8"
+                    strokeWidth={1.5}
+                  />
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                    Your wishlist is empty
+                  </h2>
+                  <p className="text-gray-600 mb-10 max-w-sm">
+                    Save products you love for later — they'll be waiting for
+                    you!
+                  </p>
+                  <Link
+                    to="/"
+                    onClick={() => setIsWishlistOpen(false)}
+                    className="px-10 py-4 bg-black text-white rounded-xl font-medium hover:bg-gray-800 transition"
+                  >
+                    Continue Shopping
+                  </Link>
+                </div>
+              ) : (
+                <>
+                  <div className="space-y-5 max-h-96 overflow-y-auto pb-2">
+                    {wishlist.map((item) => (
+                      <div
+                        key={item.id}
+                        className="flex gap-4 pb-4 border-b last:border-0"
+                      >
+                        <img
+                          src={item.img1 || item.img || item.image}
+                          alt={item.name}
+                          className="w-20 h-20 object-cover rounded-xl shadow-sm"
+                        />
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-gray-900">
+                            {item.name}
+                          </h4>
+                          <p className="text-gray-600 mt-1">
+                            ${item.price}
+                            {item.oldPrice && (
+                              <span className="ml-2 text-sm line-through text-gray-400">
+                                ${item.oldPrice}
+                              </span>
+                            )}
+                          </p>
+
+                          <div className="mt-3 flex items-center gap-4">
+                            <button
+                              onClick={() => {
+                                // Optional: move to cart + remove from wishlist
+                                // addToCart(item);
+                                removeFromWishlist(item.id);
+                              }}
+                              className="text-sm text-blue-600 hover:text-blue-800 font-medium cursor-pointer"
+                            >
+                              MOVE TO CART
+                            </button>
+                            <button
+                              onClick={() => removeFromWishlist(item.id)}
+                              className="text-sm text-red-600 hover:text-red-800 font-medium cursor-pointer"
+                            >
+                              REMOVE
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t">
+                    <button className="w-full cursor-pointer bg-black text-white py-4 rounded-xl font-semibold hover:bg-gray-900 transition">
+                      <Link to="/">Back To Shopping</Link>
                     </button>
                   </div>
                 </>

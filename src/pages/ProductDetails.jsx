@@ -73,22 +73,22 @@ export default function ProductDetails() {
     product.img2,
     product.frontImg,
     product.backImg,
-  ].filter(Boolean); // remove undefined/null
+  ].filter(Boolean);
 
   if (images.length === 0) {
     images.push(
-      "https://via.placeholder.com/800x1000/f5f5f5/cccccc?text=No+Image"
+      "https://via.placeholder.com/800x1000/f5f5f5/cccccc?text=No+Image",
     );
   }
 
-  const colors = [
-    { name: "Black", hex: "bg-black" },
-    { name: "White", hex: "bg-white border border-gray-300" },
-    { name: "Gray", hex: "bg-gray-400" },
-    { name: "Navy", hex: "bg-blue-900" },
+  const availableColors = product.colors || [
+    { name: "Black", hex: "#000000" },
+    { name: "White", hex: "#ffffff" },
+    { name: "Gray", hex: "#a0a0a0" },
+    { name: "Navy", hex: "#1e3a8a" },
   ];
 
-  const sizes = ["XXS", "XS", "S", "M", "L", "XL", "XXL"];
+  const availableSizes = product.sizes || ["XS", "S", "M", "L", "XL", "XXL"];
 
   const discountPercentage = product.oldPrice
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
@@ -103,10 +103,18 @@ export default function ProductDetails() {
     }
 
     addToCart({
-      ...product,
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      oldPrice: product.oldPrice,
+      img: product.img || product.img1 || product.frontImg,
+      // variant fields – pick ONE naming convention
+      color: selectedColor,
+      size: selectedSize,
+      // optional but useful
       quantity,
-      selectedSize,
-      selectedColor,
+      // keep original product data if needed
+      ...product, // ← spreads all other fields (description, category, etc.)
     });
 
     // Optional: nice feedback
@@ -173,7 +181,6 @@ export default function ProductDetails() {
               </Link>{" "}
               / {product.name}
             </nav>
-
             <div className="flex justify-between items-start gap-4">
               <h1 className="text-3xl lg:text-4xl font-light leading-tight">
                 {product.name}
@@ -195,7 +202,6 @@ export default function ProductDetails() {
                 />
               </button>
             </div>
-
             {/* Price & Discount */}
             <div className="flex items-center gap-4 flex-wrap">
               <span className="text-3xl lg:text-4xl font-medium">
@@ -213,9 +219,8 @@ export default function ProductDetails() {
                 </>
               )}
             </div>
-
             {/* Colors */}
-            <div className="space-y-3">
+            {/* <div className="space-y-3">
               <p className="text-sm font-medium">
                 Color: <span className="text-gray-700">{selectedColor}</span>
               </p>
@@ -235,10 +240,9 @@ export default function ProductDetails() {
                   />
                 ))}
               </div>
-            </div>
-
+            </div> */}
             {/* Sizes */}
-            <div className="space-y-3">
+            {/* <div className="space-y-3">
               <div className="flex justify-between text-sm font-medium">
                 <span>Size</span>
                 <button className="text-blue-600 hover:underline">
@@ -260,8 +264,39 @@ export default function ProductDetails() {
                   </button>
                 ))}
               </div>
+            </div> */}
+            {/* <p className="font-bole text-xl">Color</p> */}
+            <div className="flex flex-wrap gap-3">
+              {availableColors.map((color) => (
+                <button
+                  key={color.name}
+                  onClick={() => setSelectedColor(color.name)}
+                  className={`w-8 h-8 rounded-full transition-all ${
+                    selectedColor === color.name
+                      ? "ring-2 ring-black ring-offset-2 scale-110"
+                      : "ring-1 ring-gray-300 hover:ring-gray-400"
+                  }`}
+                  style={{ backgroundColor: color.hex }}
+                  title={color.name}
+                />
+              ))}
             </div>
-
+          
+            <div className="grid grid-cols-5 sm:grid-cols-7 gap-2.5">
+              {availableSizes.map((size) => (
+                <button
+                  key={size}
+                  onClick={() => setSelectedSize(size)}
+                  className={`py-3 text-sm font-medium border rounded-lg transition-all ${
+                    selectedSize === size
+                      ? "border-black bg-black text-white"
+                      : "border-gray-300 hover:border-gray-600 hover:bg-gray-50"
+                  }`}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
             <div className="flex flex-col sm:flex-row gap-5 pt-4">
               <div className="flex items-center border border-gray-300 rounded-lg w-full sm:w-auto">
                 <button
@@ -285,7 +320,7 @@ export default function ProductDetails() {
               <button
                 onClick={handleAddToCart}
                 disabled={!selectedSize}
-                className={`flex-1 py-4 rounded-lg font-medium transition flex items-center justify-center gap-3 text-lg ${
+                className={`flex-1 py-4 cursor-pointer rounded-lg font-medium transition flex items-center justify-center gap-3 text-lg ${
                   selectedSize
                     ? "bg-black text-white hover:bg-gray-800"
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -295,7 +330,6 @@ export default function ProductDetails() {
                 ADD TO CART
               </button>
             </div>
-
             <div className="pt-10 border-t border-gray-200 space-y-6">
               <div>
                 <h3 className="font-medium mb-3">Description</h3>

@@ -8,7 +8,7 @@ import { CartProvider } from "./context/CartContext";
 import { WishlistProvider } from "./context/WishlistContext";
 import ProductDetails from "./pages/ProductDetails";
 import CategoryPage from "./pages/CategoryPage";
-// import Hero from "./components/Hero"; // Uncomment only if needed as a standalone page
+import CartPage from "./pages/CartPage";
 
 const App = () => {
   return (
@@ -29,8 +29,11 @@ const App = () => {
                 <Route path="/product/:id" element={<ProductDetails />} />
                 <Route path="/:gender" element={<CategoryPage />} />
                 <Route path="/:gender/:section" element={<CategoryPage />} />
-                <Route path="/:gender/:section/:subcategory" element={<CategoryPage />} />
-
+                <Route
+                  path="/:gender/:section/:subcategory"
+                  element={<CategoryPage />}
+                />
+                <Route path="/CartPage" element={<CartPage />}></Route>
                 {/* <Route path="/hero" element={<Hero />} /> */}
               </Routes>
             </main>

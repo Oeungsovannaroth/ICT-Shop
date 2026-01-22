@@ -105,7 +105,7 @@ export default function CartPage() {
       <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-10 text-center">
-            Shopping Cart
+              SHOPPING CART
           </h1>
 
           <div className="bg-white rounded-xl shadow-lg p-10 text-center">
@@ -134,7 +134,7 @@ export default function CartPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-4">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Shopping Cart ({cart.length} {cart.length === 1 ? "item" : "items"})
+            SHOPPING CART ({cart.length} {cart.length === 1 ? "item" : "items"})
           </h1>
         </div>
 

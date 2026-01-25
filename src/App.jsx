@@ -9,7 +9,8 @@ import { WishlistProvider } from "./context/WishlistContext";
 import ProductDetails from "./pages/ProductDetails";
 import CategoryPage from "./pages/CategoryPage";
 import CartPage from "./pages/CartPage";
-
+import Checkout from "./pages/Checkout";
+import ThankYou from  "./pages/ThankYou"; 
 const App = () => {
   return (
     <BrowserRouter>
@@ -34,6 +35,8 @@ const App = () => {
                   element={<CategoryPage />}
                 />
                 <Route path="/CartPage" element={<CartPage />}></Route>
+                <Route path="/Checkout" element={<Checkout/>}></Route>
+                <Route path="/ThankYou" element={<ThankYou/>}></Route>
                 {/* <Route path="/hero" element={<Hero />} /> */}
               </Routes>
             </main>

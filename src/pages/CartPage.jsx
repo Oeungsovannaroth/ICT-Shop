@@ -1,6 +1,6 @@
 // src/pages/Cart.jsx
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Trash2,
   Plus,
@@ -11,11 +11,17 @@ import {
   X,
   Check,
 } from "lucide-react";
-import { useCart } from "../context/CartContext"; // your existing context
+import { useCart } from "../context/CartContext";
 
 export default function CartPage() {
-  const { cart, removeFromCart, updateQuantity, cartTotal, clearCart } =
-    useCart();
+  const {
+    cart,
+    removeFromCart,
+    updateQuantity,
+    addToCart,
+    cartTotal,
+    clearCart,
+  } = useCart();
 
   const [shippingMethod, setShippingMethod] = useState("standard");
   const [promoCode, setPromoCode] = useState("");
@@ -23,7 +29,6 @@ export default function CartPage() {
   const [promoValid, setPromoValid] = useState(false);
   const [discount, setDiscount] = useState(0);
 
-  // Track which items are showing/editing description
   const [descriptionStates, setDescriptionStates] = useState(
     cart.reduce((acc, item) => {
       acc[item.id] = {
@@ -42,26 +47,65 @@ export default function CartPage() {
     }));
   };
 
-  const subtotal = cartTotal; // already calculated in context
-
+  const subtotal = cartTotal;
   const shippingCosts = {
     standard: 5,
     express: 15,
     overnight: 25,
   };
-
+  const navigate = useNavigate();
   const shippingCost = shippingCosts[shippingMethod] || 5;
-
   const taxRate = 0.075;
   const tax = (subtotal - discount) * taxRate;
-
   const total = subtotal + shippingCost + tax - discount;
+
+  const availableColors = ["Black", "Silver", "Red", "White", "Navy", "Gray"];
+  const availableSizes = ["XS", "S", "M", "L", "XL", "XXL"];
+
+  const getColorHex = (color) => {
+    const map = {
+      Black: "#000000",
+      Silver: "#C0C0C0",
+
+      Red: "#FF0000",
+      White: "#FFFFFF",
+      Navy: "#000080",
+      Gray: "#808080",
+    };
+    return map[color] || "#000000";
+  };
+
+  const handleVariantChange = (item, newColor, newSize) => {
+    const updatedColor = newColor || item.color;
+    const updatedSize = newSize || item.size;
+
+    if (updatedColor === item.color && updatedSize === item.size) {
+      return; // no change
+    }
+
+    // Remove old variant
+    removeFromCart(item.id, item.color, item.size);
+
+    // Add new variant with same quantity
+    addToCart({
+      ...item,
+      color: updatedColor,
+      size: updatedSize,
+      // quantity remains the same
+    });
+
+    // Optional feedback (replace with toast later)
+    alert(`Updated to ${updatedColor || "—"} / ${updatedSize || "—"}`);
+  };
+
+  const hasMissingVariant = cart.some((item) => !item.color || !item.size);
 
   const applyPromoCode = () => {
     const codes = {
       SAVE10: { discount: 0.1, message: "10% discount applied!" },
       FREESHIP: { discount: 0, message: "Free shipping!", freeShipping: true },
       WELCOME20: { discount: 0.2, message: "20% discount applied!" },
+      NEW: { discount: 0.3, message: "30% discount applied!" },
     };
 
     const code = promoCode.trim().toUpperCase();
@@ -76,10 +120,7 @@ export default function CartPage() {
       setPromoValid(true);
       setPromoMessage(promo.message);
       setDiscount(promo.discount ? subtotal * promo.discount : 0);
-
-      if (promo.freeShipping) {
-        setShippingMethod("standard");
-      }
+      if (promo.freeShipping) setShippingMethod("standard");
     } else {
       setPromoValid(false);
       setPromoMessage("Invalid promo code");
@@ -87,27 +128,13 @@ export default function CartPage() {
     }
   };
 
-  const getColorHex = (color) => {
-    const map = {
-      Black: "#000000",
-      Silver: "#C0C0C0",
-      Blue: "#0047AB",
-      Red: "#FF0000",
-      White: "#FFFFFF",
-      Navy: "#000080",
-      Gray: "#808080",
-    };
-    return map[color] || "#000000";
-  };
-
   if (cart.length === 0) {
     return (
       <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-10 text-center">
-              SHOPPING CART
+            SHOPPING CART
           </h1>
-
           <div className="bg-white rounded-xl shadow-lg p-10 text-center">
             <Trash2 className="mx-auto h-20 w-20 text-gray-300 mb-6" />
             <h2 className="text-2xl font-semibold text-gray-700 mb-4">
@@ -131,7 +158,6 @@ export default function CartPage() {
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-4">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
             SHOPPING CART ({cart.length} {cart.length === 1 ? "item" : "items"})
@@ -152,7 +178,7 @@ export default function CartPage() {
 
                 return (
                   <div
-                    key={`${item.id}-${item.color}-${item.size}`}
+                    key={`${item.id}-${item.color || ""}-${item.size || ""}`}
                     className="bg-white rounded-xl shadow-md p-5"
                   >
                     <div className="flex justify-between items-start mb-4">
@@ -185,37 +211,64 @@ export default function CartPage() {
                       </button>
                     </div>
 
-                    {/* Details */}
                     <div className="space-y-3 text-sm">
+                      {/* Color Dropdown */}
                       <div className="flex justify-between items-center">
                         <span className="text-gray-600">Color:</span>
                         <div className="flex items-center gap-2">
                           <select
                             value={item.color || ""}
-                            onChange={(e) => {
-                              // If you want to support color change → you would need updateVariant function in context
-                              // For now just display
-                            }}
-                            className="border rounded px-2 py-1 text-sm"
+                            onChange={(e) =>
+                              handleVariantChange(
+                                item,
+                                e.target.value,
+                                item.size,
+                              )
+                            }
+                            className="border rounded px-2 py-1 text-sm min-w-[130px]"
                           >
-                            <option value="Black">Black</option>
-                            <option value="Silver">Silver</option>
-                            <option value="Blue">Blue</option>
-                            <option value="Red">Red</option>
-                            <option value="White">White</option>
+                            <option value="">Select color</option>
+                            {availableColors.map((c) => (
+                              <option key={c} value={c}>
+                                {c}
+                              </option>
+                            ))}
                           </select>
-                          <div
-                            className="w-5 h-5 rounded-full border"
-                            style={{ backgroundColor: getColorHex(item.color) }}
-                          />
+                          {item.color && (
+                            <div
+                              className="w-5 h-5 rounded-full border shadow-sm"
+                              style={{
+                                backgroundColor: getColorHex(item.color),
+                              }}
+                            />
+                          )}
                         </div>
                       </div>
 
+                      {/* Size Dropdown */}
                       <div className="flex justify-between items-center">
                         <span className="text-gray-600">Size:</span>
-                        <span className="font-medium">{item.size || "—"}</span>
+                        <select
+                          value={item.size || ""}
+                          onChange={(e) =>
+                            handleVariantChange(
+                              item,
+                              item.color,
+                              e.target.value,
+                            )
+                          }
+                          className="border rounded px-2 py-1 text-sm min-w-[130px]"
+                        >
+                          <option value="">Select size</option>
+                          {availableSizes.map((s) => (
+                            <option key={s} value={s}>
+                              {s}
+                            </option>
+                          ))}
+                        </select>
                       </div>
 
+                      {/* Quantity, Price, Total, Description ... */}
                       <div className="flex justify-between items-center">
                         <span className="text-gray-600">Quantity:</span>
                         <div className="flex items-center border rounded">
@@ -286,10 +339,7 @@ export default function CartPage() {
                               <div>
                                 <textarea
                                   value={item.description || ""}
-                                  onChange={(e) => {
-                                    // If you want real-time save → update cart item
-                                    // For simplicity we just show editing UI
-                                  }}
+                                  onChange={() => {}}
                                   className="w-full border rounded p-2 text-sm min-h-[80px]"
                                 />
                                 <div className="flex justify-end gap-2 mt-2">
@@ -342,7 +392,9 @@ export default function CartPage() {
               })}
             </div>
 
+            {/* ────────────────────────────────────────────── */}
             {/* Desktop Table View */}
+            {/* ────────────────────────────────────────────── */}
             <div className="hidden lg:block bg-white rounded-xl shadow-md overflow-hidden">
               <table className="w-full">
                 <thead className="bg-gray-50">
@@ -376,7 +428,7 @@ export default function CartPage() {
 
                     return (
                       <React.Fragment
-                        key={`${item.id}-${item.color}-${item.size}`}
+                        key={`${item.id}-${item.color || ""}-${item.size || ""}`}
                       >
                         <tr className="border-t hover:bg-gray-50 transition">
                           <td className="py-5 px-6">
@@ -400,13 +452,31 @@ export default function CartPage() {
                               </div>
                             </div>
                           </td>
+
                           <td className="py-5 px-6">
-                            <div className="space-y-2 text-sm">
+                            <div className="space-y-3 text-sm">
                               <div className="flex items-center gap-2">
-                                <span className="text-gray-600">Color:</span>
-                                <span className="font-medium">
-                                  {item.color || "—"}
+                                <span className="text-gray-600 w-16">
+                                  Color:
                                 </span>
+                                <select
+                                  value={item.color || ""}
+                                  onChange={(e) =>
+                                    handleVariantChange(
+                                      item,
+                                      e.target.value,
+                                      item.size,
+                                    )
+                                  }
+                                  className="border rounded px-2 py-1 text-sm"
+                                >
+                                  <option value="">Select</option>
+                                  {availableColors.map((c) => (
+                                    <option key={c} value={c}>
+                                      {c}
+                                    </option>
+                                  ))}
+                                </select>
                                 {item.color && (
                                   <div
                                     className="w-4 h-4 rounded-full border"
@@ -416,14 +486,33 @@ export default function CartPage() {
                                   />
                                 )}
                               </div>
-                              <div>
-                                <span className="text-gray-600">Size: </span>
-                                <span className="font-medium">
-                                  {item.size || "—"}
+
+                              <div className="flex items-center gap-2">
+                                <span className="text-gray-600 w-16">
+                                  Size:
                                 </span>
+                                <select
+                                  value={item.size || ""}
+                                  onChange={(e) =>
+                                    handleVariantChange(
+                                      item,
+                                      item.color,
+                                      e.target.value,
+                                    )
+                                  }
+                                  className="border rounded px-2 py-1 text-sm"
+                                >
+                                  <option value="">Select</option>
+                                  {availableSizes.map((s) => (
+                                    <option key={s} value={s}>
+                                      {s}
+                                    </option>
+                                  ))}
+                                </select>
                               </div>
                             </div>
                           </td>
+
                           <td className="py-5 px-6 text-center">
                             <div className="inline-flex items-center border rounded">
                               <button
@@ -458,12 +547,15 @@ export default function CartPage() {
                               </button>
                             </div>
                           </td>
+
                           <td className="py-5 px-6 text-right font-medium">
                             ${Number(item.price).toFixed(2)}
                           </td>
+
                           <td className="py-5 px-6 text-right font-bold">
                             ${(item.price * item.quantity).toFixed(2)}
                           </td>
+
                           <td className="py-5 px-6 text-center">
                             <button
                               onClick={() =>
@@ -541,7 +633,9 @@ export default function CartPage() {
           {/* Order Summary Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl shadow-md p-6 sticky top-6">
-              <h2 className="text-xl font-bold mb-6">Order Summary</h2>
+              <h2 className="text-xl font-bold mb-6 text-center">
+                ORDER SUMMARY
+              </h2>
 
               <div className="space-y-4 mb-8">
                 <div className="flex justify-between text-gray-700">
@@ -576,7 +670,6 @@ export default function CartPage() {
                 </div>
               </div>
 
-              {/* Shipping Options */}
               <div className="mb-8">
                 <h3 className="font-semibold mb-3">Shipping Method</h3>
                 <div className="space-y-3">
@@ -613,7 +706,6 @@ export default function CartPage() {
                 </div>
               </div>
 
-              {/* Promo Code */}
               <div className="mb-8">
                 <h3 className="font-semibold mb-3">Promo Code</h3>
                 <div className="flex">
@@ -642,8 +734,26 @@ export default function CartPage() {
                 )}
               </div>
 
-              <button className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700 transition mb-6">
-                Proceed to Checkout
+              <button
+                disabled={hasMissingVariant}
+                onClick={() =>
+                  navigate("/checkout", {
+                    state: {
+                      shippingMethod,
+                      discount, // optional but recommended
+                      promoCode, // optional
+                    },
+                  })
+                }
+                className={`w-full py-4 rounded-xl font-semibold transition mb-6 ${
+                  hasMissingVariant
+                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                    : "bg-blue-600 text-white hover:bg-blue-700"
+                }`}
+              >
+                {hasMissingVariant
+                  ? "Please select color & size for all items"
+                  : "Proceed to Checkout"}
               </button>
 
               <div className="flex flex-col sm:flex-row justify-between text-sm text-gray-600">

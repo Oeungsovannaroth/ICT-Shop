@@ -86,6 +86,8 @@ export default function ProductDetails() {
     { name: "White", hex: "#ffffff" },
     { name: "Gray", hex: "#a0a0a0" },
     { name: "Navy", hex: "#1e3a8a" },
+    { name: "Silver", hex: "#C0C0C0" },
+    { name: "Red", hex: "#FF0000" },
   ];
 
   const availableSizes = product.sizes || ["XS", "S", "M", "L", "XL", "XXL"];
@@ -281,7 +283,7 @@ export default function ProductDetails() {
                 />
               ))}
             </div>
-          
+
             <div className="grid grid-cols-5 sm:grid-cols-7 gap-2.5">
               {availableSizes.map((size) => (
                 <button

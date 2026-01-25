@@ -183,12 +183,12 @@ const Home = () => {
       <section className="mt-25 max-w-7xl mx-auto">
         <div className="flex justify-between font-bold mb-5">
           <span className="lg:text-4xl">DAILY SHOES ESSENTIALS</span>
-          <Link
-            to="#"
+          {/* <Link
+            to=""
             className="text-blue-500 font-semibold hover:underline hover:text-pink-500"
           >
             Shop More
-          </Link>
+          </Link> */}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {homeData.shoes.map((shoe) => (
@@ -234,12 +234,12 @@ const Home = () => {
       <section className="w-full py-10">
         <div className="flex justify-between items-center max-w-7xl mx-auto px-4">
           <h2 className="text-4xl font-bold">LIFESTYLE MUST-HAVES</h2>
-          <Link
+          {/* <Link
             to="#"
             className="text-blue-500 font-semibold hover:underline hover:text-pink-500"
           >
             Shop More
-          </Link>
+          </Link> */}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto px-4 mt-6">
           {homeData.lifestyleProducts.map((item) => (
@@ -276,12 +276,12 @@ const Home = () => {
       <section className="w-full py-10">
         <div className="flex justify-between items-center max-w-7xl mx-auto px-4">
           <h2 className="text-4xl font-bold">Q-DRIFT URBAN MOTION</h2>
-          <Link
+          {/* <Link
             to="#"
             className="text-blue-500 font-semibold hover:underline hover:text-pink-500"
           >
             Shop More
-          </Link>
+          </Link> */}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto px-4 mt-6">
           {homeData.driftProducts.map((item) => (

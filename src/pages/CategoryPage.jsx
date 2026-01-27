@@ -19,7 +19,7 @@ const CategoryPage = () => {
     );
   }
 
-  // ── Title formatting ───────────────────────────────────────────────────────
+
   const formatTitle = (str = "") => {
     if (!str) return "";
     return str
@@ -128,7 +128,7 @@ const CategoryPage = () => {
       (p) => p?.gender?.toLowerCase() === gender.toLowerCase()
     );
   }
-  
+   
   return (
     <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-10 md:py-12 bg-gray-50 min-h-screen">
       {/* Breadcrumb */}

@@ -9,6 +9,12 @@ import GridDataWomen from "../data/GridDataWomen";
 import GridDataMen from "../data/GridDataMen";
 import GridDataBoys from "../data/GridDataBoys";
 import GridDataGirls from "../data/GridDataGirls";
+import ZandoData from "../data/zandoData";
+import ten11Data from "../data/ten11Data";
+import gatoniData from "../data/gatoniData";
+import sportData from "../data/sportData";
+import sisburmaData from "../data/sisburmaData";
+import pomeloData from "../data/pomeloData";
 export default function ProductDetails() {
   const { id } = useParams();
   const { addToCart } = useCart();
@@ -24,6 +30,12 @@ export default function ProductDetails() {
     product = product || GridDataMen.All?.find((p) => p.id === numericId);
     product = product || GridDataBoys.All?.find((p) => p.id === numericId);
     product = product || GridDataGirls.All?.find((p) => p.id === numericId);
+    product = product || ZandoData.All?.find((p) => p.id === numericId);
+    product = product || ten11Data.All?.find((p) => p.id === numericId);
+    product = product || gatoniData.All?.find((p) => p.id === numericId);
+    product = product || sportData.All?.find((p) => p.id === numericId);
+    product = product || sisburmaData.All?.find((p) => p.id === numericId);
+    product = product || pomeloData.All?.find((p) => p.id === numericId);
   }
 
   // 2. Fallback to homeData categories (string IDs like "cat-xxx")

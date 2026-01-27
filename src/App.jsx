@@ -11,6 +11,7 @@ import CategoryPage from "./pages/CategoryPage";
 import CartPage from "./pages/CartPage";
 import Checkout from "./pages/Checkout";
 import ThankYou from  "./pages/ThankYou"; 
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -30,6 +31,7 @@ const App = () => {
                 <Route path="/product/:id" element={<ProductDetails />} />
                 <Route path="/:gender" element={<CategoryPage />} />
                 <Route path="/:gender/:section" element={<CategoryPage />} />
+                
                 <Route
                   path="/:gender/:section/:subcategory"
                   element={<CategoryPage />}
@@ -37,6 +39,7 @@ const App = () => {
                 <Route path="/CartPage" element={<CartPage />}></Route>
                 <Route path="/Checkout" element={<Checkout/>}></Route>
                 <Route path="/ThankYou" element={<ThankYou/>}></Route>
+                
                 {/* <Route path="/hero" element={<Hero />} /> */}
               </Routes>
             </main>

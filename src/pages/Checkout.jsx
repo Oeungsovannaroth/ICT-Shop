@@ -270,7 +270,7 @@ ${itemsText || "(no items listed)"}
                     <div className="text-xs text-gray-500 capitalize mt-0.5">
                       {shippingMethod} •{" "}
                       {shippingMethod === "standard"
-                        ? "5–7 business days"
+                        ? "5–7 business days" 
                         : shippingMethod === "express"
                           ? "1–3 business days"
                           : "Next business day"}

@@ -1,4 +1,3 @@
-// src/pages/Cart.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -31,19 +30,19 @@ export default function CartPage() {
 
   const [descriptionStates, setDescriptionStates] = useState(
     cart.reduce((acc, item) => {
-      acc[item.id] = {
+      acc[`${item.id}-${item.color || ""}-${item.size || ""}`] = {
         show: false,
         editing: false,
         original: item.description || "",
       };
       return acc;
-    }, {}),
+    }, {})
   );
 
-  const updateDescriptionState = (itemId, updates) => {
+  const updateDescriptionState = (key, updates) => {
     setDescriptionStates((prev) => ({
       ...prev,
-      [itemId]: { ...prev[itemId], ...updates },
+      [key]: { ...prev[key], ...updates },
     }));
   };
 
@@ -59,14 +58,16 @@ export default function CartPage() {
   const tax = (subtotal - discount) * taxRate;
   const total = subtotal + shippingCost + tax - discount;
 
-  const availableColors = ["Black", "Silver", "Red", "White", "Navy", "Gray"];
-  const availableSizes = ["XS", "S", "M", "L", "XL", "XXL"];
+  // ── Variant helpers ──────────────────────────────────────────────────────────
+  const getAvailableColors = (item) => {
+    // You can later use item.colors if you pass it from product
+    return ["Black", "Silver", "Red", "White", "Navy", "Gray"];
+  };
 
   const getColorHex = (color) => {
     const map = {
       Black: "#000000",
       Silver: "#C0C0C0",
-
       Red: "#FF0000",
       White: "#FFFFFF",
       Navy: "#000080",
@@ -75,27 +76,38 @@ export default function CartPage() {
     return map[color] || "#000000";
   };
 
+  const getAvailableSizes = (item) => {
+    if (item.sizeType === "shoes") {
+      return [
+        "36", "37", "38", "39", "40",
+        "41", "42", "43", "44", "45",
+      ];
+    }
+
+    // Fallback / clothing / default
+    if (item.availableSizes && Array.isArray(item.availableSizes)) {
+      return item.availableSizes;
+    }
+
+    return ["XS", "S", "M", "L", "XL", "XXL"];
+  };
+
   const handleVariantChange = (item, newColor, newSize) => {
     const updatedColor = newColor || item.color;
     const updatedSize = newSize || item.size;
 
     if (updatedColor === item.color && updatedSize === item.size) {
-      return; // no change
+      return;
     }
 
-    // Remove old variant
     removeFromCart(item.id, item.color, item.size);
 
-    // Add new variant with same quantity
     addToCart({
       ...item,
       color: updatedColor,
       size: updatedSize,
-      // quantity remains the same
+      quantity: item.quantity,
     });
-
-    // Optional feedback (replace with toast later)
-    alert(`Updated to ${updatedColor || "—"} / ${updatedSize || "—"}`);
   };
 
   const hasMissingVariant = cart.some((item) => !item.color || !item.size);
@@ -170,15 +182,15 @@ export default function CartPage() {
             {/* Mobile / Card View */}
             <div className="lg:hidden space-y-5">
               {cart.map((item) => {
-                const state = descriptionStates[item.id] || {
+                const key = `${item.id}-${item.color || ""}-${item.size || ""}`;
+                const state = descriptionStates[key] || {
                   show: false,
                   editing: false,
-                  original: "",
                 };
 
                 return (
                   <div
-                    key={`${item.id}-${item.color || ""}-${item.size || ""}`}
+                    key={key}
                     className="bg-white rounded-xl shadow-md p-5"
                   >
                     <div className="flex justify-between items-start mb-4">
@@ -212,7 +224,7 @@ export default function CartPage() {
                     </div>
 
                     <div className="space-y-3 text-sm">
-                      {/* Color Dropdown */}
+                      {/* Color */}
                       <div className="flex justify-between items-center">
                         <span className="text-gray-600">Color:</span>
                         <div className="flex items-center gap-2">
@@ -222,13 +234,13 @@ export default function CartPage() {
                               handleVariantChange(
                                 item,
                                 e.target.value,
-                                item.size,
+                                item.size
                               )
                             }
                             className="border rounded px-2 py-1 text-sm min-w-[130px]"
                           >
                             <option value="">Select color</option>
-                            {availableColors.map((c) => (
+                            {getAvailableColors(item).map((c) => (
                               <option key={c} value={c}>
                                 {c}
                               </option>
@@ -237,15 +249,13 @@ export default function CartPage() {
                           {item.color && (
                             <div
                               className="w-5 h-5 rounded-full border shadow-sm"
-                              style={{
-                                backgroundColor: getColorHex(item.color),
-                              }}
+                              style={{ backgroundColor: getColorHex(item.color) }}
                             />
                           )}
                         </div>
                       </div>
 
-                      {/* Size Dropdown */}
+                      {/* Size – now dynamic */}
                       <div className="flex justify-between items-center">
                         <span className="text-gray-600">Size:</span>
                         <select
@@ -254,13 +264,13 @@ export default function CartPage() {
                             handleVariantChange(
                               item,
                               item.color,
-                              e.target.value,
+                              e.target.value
                             )
                           }
                           className="border rounded px-2 py-1 text-sm min-w-[130px]"
                         >
                           <option value="">Select size</option>
-                          {availableSizes.map((s) => (
+                          {getAvailableSizes(item).map((s) => (
                             <option key={s} value={s}>
                               {s}
                             </option>
@@ -268,7 +278,7 @@ export default function CartPage() {
                         </select>
                       </div>
 
-                      {/* Quantity, Price, Total, Description ... */}
+                      {/* Quantity */}
                       <div className="flex justify-between items-center">
                         <span className="text-gray-600">Quantity:</span>
                         <div className="flex items-center border rounded">
@@ -278,7 +288,7 @@ export default function CartPage() {
                                 item.id,
                                 item.color,
                                 item.size,
-                                item.quantity - 1,
+                                item.quantity - 1
                               )
                             }
                             className="px-3 py-1 hover:bg-gray-100"
@@ -295,7 +305,7 @@ export default function CartPage() {
                                 item.id,
                                 item.color,
                                 item.size,
-                                item.quantity + 1,
+                                item.quantity + 1
                               )
                             }
                             className="px-3 py-1 hover:bg-gray-100"
@@ -315,13 +325,11 @@ export default function CartPage() {
                         <span>${(item.price * item.quantity).toFixed(2)}</span>
                       </div>
 
-                      {/* Description toggle */}
+                      {/* Description */}
                       <div className="pt-2 border-t">
                         <button
                           onClick={() =>
-                            updateDescriptionState(item.id, {
-                              show: !state.show,
-                            })
+                            updateDescriptionState(key, { show: !state.show })
                           }
                           className="text-blue-600 text-sm flex items-center"
                         >
@@ -345,7 +353,7 @@ export default function CartPage() {
                                 <div className="flex justify-end gap-2 mt-2">
                                   <button
                                     onClick={() =>
-                                      updateDescriptionState(item.id, {
+                                      updateDescriptionState(key, {
                                         editing: false,
                                       })
                                     }
@@ -355,7 +363,7 @@ export default function CartPage() {
                                   </button>
                                   <button
                                     onClick={() =>
-                                      updateDescriptionState(item.id, {
+                                      updateDescriptionState(key, {
                                         editing: false,
                                       })
                                     }
@@ -373,7 +381,7 @@ export default function CartPage() {
                                 </p>
                                 <button
                                   onClick={() =>
-                                    updateDescriptionState(item.id, {
+                                    updateDescriptionState(key, {
                                       editing: true,
                                     })
                                   }
@@ -392,9 +400,7 @@ export default function CartPage() {
               })}
             </div>
 
-            {/* ────────────────────────────────────────────── */}
             {/* Desktop Table View */}
-            {/* ────────────────────────────────────────────── */}
             <div className="hidden lg:block bg-white rounded-xl shadow-md overflow-hidden">
               <table className="w-full">
                 <thead className="bg-gray-50">
@@ -421,15 +427,14 @@ export default function CartPage() {
                 </thead>
                 <tbody>
                   {cart.map((item) => {
-                    const state = descriptionStates[item.id] || {
+                    const key = `${item.id}-${item.color || ""}-${item.size || ""}`;
+                    const state = descriptionStates[key] || {
                       show: false,
                       editing: false,
                     };
 
                     return (
-                      <React.Fragment
-                        key={`${item.id}-${item.color || ""}-${item.size || ""}`}
-                      >
+                      <React.Fragment key={key}>
                         <tr className="border-t hover:bg-gray-50 transition">
                           <td className="py-5 px-6">
                             <div className="flex items-center space-x-4">
@@ -456,22 +461,20 @@ export default function CartPage() {
                           <td className="py-5 px-6">
                             <div className="space-y-3 text-sm">
                               <div className="flex items-center gap-2">
-                                <span className="text-gray-600 w-16">
-                                  Color:
-                                </span>
+                                <span className="text-gray-600 w-16">Color:</span>
                                 <select
                                   value={item.color || ""}
                                   onChange={(e) =>
                                     handleVariantChange(
                                       item,
                                       e.target.value,
-                                      item.size,
+                                      item.size
                                     )
                                   }
                                   className="border rounded px-2 py-1 text-sm"
                                 >
                                   <option value="">Select</option>
-                                  {availableColors.map((c) => (
+                                  {getAvailableColors(item).map((c) => (
                                     <option key={c} value={c}>
                                       {c}
                                     </option>
@@ -480,30 +483,26 @@ export default function CartPage() {
                                 {item.color && (
                                   <div
                                     className="w-4 h-4 rounded-full border"
-                                    style={{
-                                      backgroundColor: getColorHex(item.color),
-                                    }}
+                                    style={{ backgroundColor: getColorHex(item.color) }}
                                   />
                                 )}
                               </div>
 
                               <div className="flex items-center gap-2">
-                                <span className="text-gray-600 w-16">
-                                  Size:
-                                </span>
+                                <span className="text-gray-600 w-16">Size:</span>
                                 <select
                                   value={item.size || ""}
                                   onChange={(e) =>
                                     handleVariantChange(
                                       item,
                                       item.color,
-                                      e.target.value,
+                                      e.target.value
                                     )
                                   }
                                   className="border rounded px-2 py-1 text-sm"
                                 >
                                   <option value="">Select</option>
-                                  {availableSizes.map((s) => (
+                                  {getAvailableSizes(item).map((s) => (
                                     <option key={s} value={s}>
                                       {s}
                                     </option>
@@ -521,7 +520,7 @@ export default function CartPage() {
                                     item.id,
                                     item.color,
                                     item.size,
-                                    item.quantity - 1,
+                                    item.quantity - 1
                                   )
                                 }
                                 className="px-3 py-2 hover:bg-gray-100"
@@ -538,7 +537,7 @@ export default function CartPage() {
                                     item.id,
                                     item.color,
                                     item.size,
-                                    item.quantity + 1,
+                                    item.quantity + 1
                                   )
                                 }
                                 className="px-3 py-2 hover:bg-gray-100"
@@ -580,7 +579,7 @@ export default function CartPage() {
                                   <div className="flex justify-end gap-3 mt-3">
                                     <button
                                       onClick={() =>
-                                        updateDescriptionState(item.id, {
+                                        updateDescriptionState(key, {
                                           editing: false,
                                         })
                                       }
@@ -590,7 +589,7 @@ export default function CartPage() {
                                     </button>
                                     <button
                                       onClick={() =>
-                                        updateDescriptionState(item.id, {
+                                        updateDescriptionState(key, {
                                           editing: false,
                                         })
                                       }
@@ -608,7 +607,7 @@ export default function CartPage() {
                                   </p>
                                   <button
                                     onClick={() =>
-                                      updateDescriptionState(item.id, {
+                                      updateDescriptionState(key, {
                                         editing: true,
                                       })
                                     }
@@ -740,8 +739,8 @@ export default function CartPage() {
                   navigate("/checkout", {
                     state: {
                       shippingMethod,
-                      discount, // optional but recommended
-                      promoCode, // optional
+                      discount,
+                      promoCode,
                     },
                   })
                 }

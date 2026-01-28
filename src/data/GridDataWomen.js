@@ -1633,6 +1633,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/736x/e0/ca/b5/e0cab5e81540a8c632ba0816ca88a543.jpg",
             gender: "Women",
             category: "Sneakers",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -1646,6 +1647,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/1200x/4b/4f/84/4b4f84842fc3b763a2518697a23c76fc.jpg",
             gender: "Women",
             category: "Sneakers",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -1660,6 +1662,7 @@ const GridDataWomen = {
             gender: "Women",
             category: "Sneakers",
             isNew: true,
+            sizeType: "Shoes",
         },
         {
             id: 228,
@@ -1673,6 +1676,7 @@ const GridDataWomen = {
             gender: "Women",
             category: "Sneakers",
             isNew: false,
+            sizeType: "Shoes",
         },
         {
             id: 229,
@@ -1686,6 +1690,7 @@ const GridDataWomen = {
             gender: "Women",
             category: "Sneakers",
             isNew: true,
+            sizeType: "Shoes",
         },
         {
             id: 230,
@@ -1698,6 +1703,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/1200x/f0/06/cb/f006cbb39caa61c7e50c119daf053f3a.jpg",
             gender: "Women",
             category: "Sneakers",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -1710,6 +1716,7 @@ const GridDataWomen = {
             img2: "https://i.pinimg.com/1200x/22/cd/13/22cd13d208ed28f16e3c89d7fbc62c12.jpg",
             img3: "https://i.pinimg.com/1200x/21/68/e1/2168e141ed8428ae0717cb2362f07900.jpg",
             gender: "Women",
+            sizeType: "Shoes",
             category: "Sneakers",
             isNew: true,
         },
@@ -1724,6 +1731,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/1200x/49/f5/66/49f5666dacf8b04807ab5fcf892234ed.jpg",
             gender: "Women",
             category: "Sneakers",
+            sizeType: "Shoes",
             isNew: false,
         },
         {
@@ -1737,6 +1745,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/736x/2b/39/91/2b3991ee82cf2185929371ba0342af08.jpg",
             gender: "Women",
             category: "Sandals",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -1750,6 +1759,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/1200x/0b/15/9f/0b159f92504d6e08d416ce2085feef73.jpg",
             gender: "Women",
             category: "Sandals",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -1763,6 +1773,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/736x/c2/91/01/c29101cdba81d10e4e5968249053fb76.jpg",
             gender: "Women",
             category: "Sandals",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -1776,6 +1787,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/1200x/80/90/62/809062a841796c4c47b2286367801a0f.jpg",
             gender: "Women",
             category: "Sandals",
+            sizeType: "Shoes",
             isNew: false,
         },
         {
@@ -1790,6 +1802,7 @@ const GridDataWomen = {
             gender: "Women",
             category: "Loafers",
             isNew: false,
+            sizeType: "Shoes",
         },
         {
             id: 238,
@@ -1802,6 +1815,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/736x/04/bf/c1/04bfc141dc571a3f106dd43c47707e63.jpg",
             gender: "Women",
             category: "Loafers",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -1815,6 +1829,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/1200x/2e/71/06/2e7106315a2f909066eb97ec58a1bc93.jpg",
             gender: "Women",
             category: "Loafers",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -2205,6 +2220,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/736x/e0/ca/b5/e0cab5e81540a8c632ba0816ca88a543.jpg",
             gender: "Women",
             category: "Shoes",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -2219,6 +2235,7 @@ const GridDataWomen = {
             gender: "Women",
             category: "Shoes",
             isNew: true,
+            sizeType: "Shoes",
         },
         {
             id: 227,
@@ -2232,6 +2249,7 @@ const GridDataWomen = {
             gender: "Women",
             category: "Shoes",
             isNew: true,
+            sizeType: "Shoes",
         },
         {
             id: 228,
@@ -2244,6 +2262,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/1200x/d7/a2/4a/d7a24a7fee2f32793aad6ed76ea423fc.jpg",
             gender: "Women",
             category: "Shoes",
+            sizeType: "Shoes",
             isNew: false,
         },
         {
@@ -2257,6 +2276,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/1200x/e5/41/7b/e5417b157e3dc7d6e2eb30864a6512a9.jpg",
             gender: "Women",
             category: "Shoes",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -2270,6 +2290,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/1200x/f0/06/cb/f006cbb39caa61c7e50c119daf053f3a.jpg",
             gender: "Women",
             category: "Shoes",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -2283,6 +2304,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/1200x/21/68/e1/2168e141ed8428ae0717cb2362f07900.jpg",
             gender: "Women",
             category: "Shoes",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -2297,6 +2319,7 @@ const GridDataWomen = {
             gender: "Women",
             category: "Shoes",
             isNew: false,
+            sizeType: "Shoes",
         },
         {
             id: 233,
@@ -2309,6 +2332,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/736x/2b/39/91/2b3991ee82cf2185929371ba0342af08.jpg",
             gender: "Women",
             category: "Shoes",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -2322,6 +2346,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/1200x/0b/15/9f/0b159f92504d6e08d416ce2085feef73.jpg",
             gender: "Women",
             category: "Shoes",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -2335,6 +2360,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/736x/c2/91/01/c29101cdba81d10e4e5968249053fb76.jpg",
             gender: "Women",
             category: "Shoes",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -2348,6 +2374,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/1200x/80/90/62/809062a841796c4c47b2286367801a0f.jpg",
             gender: "Women",
             category: "Shoes",
+            sizeType: "Shoes",
             isNew: false,
         },
         {
@@ -2361,6 +2388,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/1200x/e6/d9/52/e6d95209b3a6e13542e86a1fd124065d.jpg",
             gender: "Women",
             category: "Shoes",
+            sizeType: "Shoes",
             isNew: false,
         },
         {
@@ -2374,6 +2402,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/736x/04/bf/c1/04bfc141dc571a3f106dd43c47707e63.jpg",
             gender: "Women",
             category: "Shoes",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -2387,6 +2416,7 @@ const GridDataWomen = {
             img3: "https://i.pinimg.com/1200x/2e/71/06/2e7106315a2f909066eb97ec58a1bc93.jpg",
             gender: "Women",
             category: "Shoes",
+            sizeType: "Shoes",
             isNew: true,
         },
 

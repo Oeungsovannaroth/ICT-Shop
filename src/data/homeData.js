@@ -86,7 +86,7 @@ const homeData = {
             img1: "https://i.pinimg.com/1200x/b1/a7/72/b1a772da1e9773d88421b1e2d0758629.jpg", // alternative front-ish
             img2: "https://i.pinimg.com/1200x/ae/a2/d0/aea2d0420f89b065a11d0f69a386b9fe.jpg", // top view for hover effect
             gender: "Women",
-            category: "Sneakers",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -98,7 +98,7 @@ const homeData = {
             img1: "https://i.pinimg.com/1200x/46/40/47/46404775dbacfe81a80e22dbae3351f0.jpg",
             img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike02b.png",
             gender: "Men",
-            category: "Sneakers",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -110,7 +110,7 @@ const homeData = {
             img1: "https://i.pinimg.com/1200x/36/f7/c4/36f7c4b74bf69cba7223103d871157ff.jpg",
             img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike03b.png",
             gender: "Women",
-            category: "Sneakers",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -122,7 +122,7 @@ const homeData = {
             img1: "https://i.pinimg.com/736x/37/61/3a/37613a7aa636a17f62690e744a591c30.jpg",
             img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike04b.png",
             gender: "Women",
-            category: "Sneakers",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -134,7 +134,7 @@ const homeData = {
             img1: "https://i.pinimg.com/1200x/e1/9c/d1/e19cd1f62816bfba748a2827f43be1d9.jpg",
             img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike05b.png",
             gender: "Men",
-            category: "Sneakers",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -146,7 +146,7 @@ const homeData = {
             img1: "https://i.pinimg.com/736x/b7/a4/28/b7a4287753027e1c87fc9b4428177a25.jpg",
             img2: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/881020/nike06b.png",
             gender: "Women",
-            category: "Sneakers",
+            sizeType: "Shoes",
             isNew: true,
         },
     ],

@@ -611,19 +611,19 @@ const GridDataMen = {
             category: "Boxers",
             isNew: true,
         },
-        {
-            id: 1046,
-            name: "Comfort Core",
-            price: 289,
-            oldPrice: 450,
-            img: "https://i.pinimg.com/1200x/b8/a0/fe/b8a0fed544e51a0e9c1f9eb0734c2dfa.jpg",
-            img1: "https://i.pinimg.com/1200x/df/01/20/df01204900cc71ec91fa936ff1154e20.jpg",
-            img2: "https://i.pinimg.com/1200x/95/6a/15/956a15249e5f020010c126340ef4a5ba.jpg",
-            img3: "https://i.pinimg.com/736x/b7/36/58/b7365892b9b5f92316bd651d162ac474.jpg",
-            gender: "Men",
-            category: "Boxers",
-            isNew: true,
-        },
+        // {
+        //     id: 1046,
+        //     name: "Comfort Core",
+        //     price: 289,
+        //     oldPrice: 450,
+        //     img: "https://i.pinimg.com/1200x/b8/a0/fe/b8a0fed544e51a0e9c1f9eb0734c2dfa.jpg",
+        //     img1: "https://i.pinimg.com/1200x/df/01/20/df01204900cc71ec91fa936ff1154e20.jpg",
+        //     img2: "https://i.pinimg.com/1200x/95/6a/15/956a15249e5f020010c126340ef4a5ba.jpg",
+        //     img3: "https://i.pinimg.com/736x/b7/36/58/b7365892b9b5f92316bd651d162ac474.jpg",
+        //     gender: "Men",
+        //     category: "Boxers",
+        //     isNew: true,
+        // },
         {
             id: 1046,
             name: "Street Core",
@@ -636,6 +636,7 @@ const GridDataMen = {
             gender: "Men",
             category: "Sneakers",
             isNew: true,
+            sizeType: "Shoes",
         },
         {
             id: 1047,
@@ -649,6 +650,7 @@ const GridDataMen = {
             gender: "Men",
             category: "Sneakers",
             isNew: true,
+            sizeType: "Shoes",
         },
         {
             id: 1048,
@@ -662,6 +664,7 @@ const GridDataMen = {
             gender: "Men",
             category: "Sneakers",
             isNew: true,
+            sizeType: "Shoes",
         },
         {
             id: 1049,
@@ -675,6 +678,7 @@ const GridDataMen = {
             gender: "Men",
             category: "Sneakers",
             isNew: true,
+            sizeType: "Shoes",
         },
         {
             id: 1050,
@@ -688,6 +692,7 @@ const GridDataMen = {
             gender: "Men",
             category: "Sneakers",
             isNew: true,
+            sizeType: "Shoes",
         },
         {
             id: 1051,
@@ -701,6 +706,7 @@ const GridDataMen = {
             gender: "Men",
             category: "Sandals",
             isNew: true,
+            sizeType: "Shoes",
         },
         {
             id: 1052,
@@ -713,6 +719,7 @@ const GridDataMen = {
             img3: "https://i.pinimg.com/736x/68/18/2b/68182bdb569bb806fc6c2b3df7a0ea68.jpg",
             gender: "Men",
             category: "Sandals",
+            sizeType: "Shoes",
             isNew: true,
         },
         {
@@ -726,6 +733,7 @@ const GridDataMen = {
             img3: "https://i.pinimg.com/736x/58/6b/8c/586b8ce04bee0a1cf533385a861e14d1.jpg",
             gender: "Men",
             category: "Sandals",
+            sizeType: "Shoes",
             isNew: true,
         },
         {

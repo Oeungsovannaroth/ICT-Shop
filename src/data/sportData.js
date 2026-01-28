@@ -10,6 +10,7 @@ const sportData = {
             img3: "https://i.pinimg.com/736x/2f/39/34/2f3934fda55f89caa9fc7c7398762d6c.jpg",
             gender: "361-sport",
             isNew: false,
+            sizeType: "Shoes",
         },
         {
             id: 9002,
@@ -22,6 +23,7 @@ const sportData = {
             img3: "https://i.pinimg.com/1200x/68/73/58/6873581d3b39c956caa5e97214613c6f.jpg",
             gender: "361-sport",
             isNew: true,
+            sizeType: "Shoes",
         },
 
 

@@ -301,7 +301,7 @@ ${itemsText || "(no items listed)"}
               <button
                 onClick={handlePlaceOrder}
                 disabled={isProcessing}
-                className={`w-full mt-8 py-4 rounded-xl font-semibold text-white transition-all flex items-center justify-center gap-2 shadow-md ${
+                className={`w-full mt-8 cursor-pointer py-4 rounded-xl font-semibold text-white transition-all flex items-center justify-center gap-2 shadow-md ${
                   isProcessing
                     ? "bg-green-400 cursor-wait"
                     : "bg-green-600 hover:bg-green-700 active:bg-green-800"

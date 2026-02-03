@@ -75,7 +75,7 @@ export default function ProductDetails() {
   const [isAdding, setIsAdding] = useState(false);
   const [isFullView, setIsFullView] = useState(false);
 
-  // ── Images ───────────────────────────────────────────────────────────────────
+  
   const images = [
     product.img,
     product.img1,
@@ -342,7 +342,7 @@ export default function ProductDetails() {
                     w-full py-4.5 px-8 rounded-xl font-semibold text-base sm:text-lg
                     flex items-center justify-center gap-3 transition-all duration-300
                     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900
-                    shadow-lg hover:shadow-xl active:scale-[0.98]
+                    shadow-lg hover:shadow-xl active:scale-[0.98] cursor-pointer
                     ${
                       !canAddToCart
                         ? "bg-gray-200 text-gray-500 cursor-not-allowed shadow-none"

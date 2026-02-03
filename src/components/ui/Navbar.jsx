@@ -193,12 +193,16 @@ const Navbar = () => {
         </div>
 
         {/* Logo */}
-        <h1 className="text-sm lg:text-3xl font-extrabold tracking-[1px]">
-          <Link to="/">ICT SHOP</Link>
+        <h1 className="text-sm lg:text-3xl font-bold tracking-[1px]">
+          <Link to="/">MONOWEAR</Link>
         </h1>
 
         {/* Desktop Icons */}
         <div className="hidden lg:flex items-center gap-4">
+          <MdOutlineSearch
+            className="text-3xl cursor-pointer hover:text-gray-700 transition"
+            onClick={() => setSearchOpen(true)}
+          />
           <div
             className="relative cursor-pointer"
             onClick={() => setIsWishlistOpen(!isWishlistOpen)} // ← changed
@@ -756,7 +760,7 @@ const Navbar = () => {
                           <h4 className="font-semibold text-gray-900">
                             {item.name}
                           </h4>
-                           <div className="mb-2 flex flex-wrap gap-x-4 gap-y-0.5 text-sm text-gray-600">
+                          <div className="mb-2 flex flex-wrap gap-x-4 gap-y-0.5 text-sm text-gray-600">
                             {item.color && (
                               <div>
                                 Color:{" "}

@@ -170,6 +170,7 @@ export default function CartPage() {
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
+        
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-4">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
             SHOPPING CART ({cart.length} {cart.length === 1 ? "item" : "items"})
@@ -717,7 +718,7 @@ export default function CartPage() {
                   />
                   <button
                     onClick={applyPromoCode}
-                    className="bg-blue-600 text-white px-5 rounded-r-lg hover:bg-blue-700 transition"
+                    className="bg-blue-600 cursor-pointer text-white px-5 rounded-r-lg hover:bg-blue-700 transition"
                   >
                     Apply
                   </button>
@@ -744,7 +745,7 @@ export default function CartPage() {
                     },
                   })
                 }
-                className={`w-full py-4 rounded-xl font-semibold transition mb-6 ${
+                className={`w-full py-4 rounded-xl font-semibold transition cursor-pointer mb-6 ${
                   hasMissingVariant
                     ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                     : "bg-blue-600 text-white hover:bg-blue-700"
@@ -763,7 +764,7 @@ export default function CartPage() {
                   onClick={() => {
                     if (window.confirm("Clear entire cart?")) clearCart();
                   }}
-                  className="text-red-600 hover:text-red-800 flex items-center mt-3 sm:mt-0"
+                  className="text-red-600 cursor-pointer hover:text-red-800 flex items-center mt-3 sm:mt-0"
                 >
                   <Trash2 size={16} className="mr-1" /> Clear Cart
                 </button>

@@ -75,7 +75,6 @@ export default function ProductDetails() {
   const [isAdding, setIsAdding] = useState(false);
   const [isFullView, setIsFullView] = useState(false);
 
-  
   const images = [
     product.img,
     product.img1,
@@ -108,9 +107,21 @@ export default function ProductDetails() {
     false;
 
   const defaultClothingSizes = ["XS", "S", "M", "L", "XL", "XXL"];
-  const defaultShoeSizes = ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"];
+  const defaultShoeSizes = [
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45",
+  ];
 
-  const availableSizes = product.sizes || (isFootwear ? defaultShoeSizes : defaultClothingSizes);
+  const availableSizes =
+    product.sizes || (isFootwear ? defaultShoeSizes : defaultClothingSizes);
 
   // Auto-select first size (optional - uncomment if you want)
   // useEffect(() => {
@@ -142,10 +153,8 @@ export default function ProductDetails() {
         quantity,
         category: product.category,
         gender: product.gender,
-        // ── Important additions for better variant handling ───────────────
         sizeType: isFootwear ? "shoes" : "clothing",
         availableSizes: availableSizes,
-        // You can also pass product.colors if it exists
       });
     } catch (err) {
       console.error("Add to cart failed", err);
@@ -155,7 +164,6 @@ export default function ProductDetails() {
     }
   };
 
-  // ── Render ───────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-10 lg:py-16">
@@ -347,8 +355,8 @@ export default function ProductDetails() {
                       !canAddToCart
                         ? "bg-gray-200 text-gray-500 cursor-not-allowed shadow-none"
                         : isAdding
-                        ? "bg-gray-800 text-white cursor-wait shadow-lg"
-                        : "bg-black text-white hover:bg-gray-950"
+                          ? "bg-gray-800 text-white cursor-wait shadow-lg"
+                          : "bg-black text-white hover:bg-gray-950"
                     }
                   `}
                 >

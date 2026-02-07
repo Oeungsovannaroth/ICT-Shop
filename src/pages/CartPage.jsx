@@ -77,7 +77,7 @@ export default function CartPage() {
   };
 
   const getAvailableSizes = (item) => {
-    if (item.sizeType === "shoes") {
+    if (item.sizeType === "Shoes") {
       return [
         "36", "37", "38", "39", "40",
         "41", "42", "43", "44", "45",

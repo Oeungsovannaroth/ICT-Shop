@@ -414,6 +414,7 @@ const GridDataBoys = {
             gender: "Boys",
             category: "Sandals",
             isNew: true,
+            sizeType: "Shoes",
         },
         {
             id: 2026,
@@ -427,6 +428,7 @@ const GridDataBoys = {
             gender: "Boys",
             category: "Sandals",
             isNew: true,
+            sizeType: "Shoes",
         },
         {
             id: 2022,
